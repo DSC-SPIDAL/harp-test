@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="harp" default="dist">
+	<property name="lib.dir" value="${basedir}"/>
+	<import file="${basedir}/tasks.xml"/>
+</project>
