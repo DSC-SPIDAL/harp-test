@@ -28,7 +28,6 @@
       <include name="edu/iu/benchmark/**" />
       <include name="edu/iu/dymoro/**" />
       <include name="edu/iu/kmeans/**" />
-      <include name="edu/iu/kmmoro/**" />
       <include name="edu/iu/lda/**" />
       <include name="edu/iu/sgd/**" />
       <include name="edu/iu/ccd/**" />
