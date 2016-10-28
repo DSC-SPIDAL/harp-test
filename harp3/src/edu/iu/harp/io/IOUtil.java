@@ -51,7 +51,7 @@ public class IOUtil {
     Socket socket) throws SocketException {
     socket.setKeepAlive(true);
     socket.setReuseAddress(true);
-    socket.setTcpNoDelay(true);
+    // socket.setTcpNoDelay(true);
     // int sendSize1 = socket.getSendBufferSize();
     // int recvSize1 =
     // socket.getReceiveBufferSize();

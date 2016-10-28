@@ -69,6 +69,7 @@ public class StaticScheduler<I, O, T extends Task<I, O>> {
       if (isPausing) {
         isPausing = false;
         for (TaskMonitor<I, O, T> monitor : taskMonitors) {
+          monitor.start();
           monitor.release();
         }
       } else {
@@ -76,6 +77,7 @@ public class StaticScheduler<I, O, T extends Task<I, O>> {
         int i = 0;
         for (TaskMonitor<I, O, T> monitor : taskMonitors) {
           threads[i] = new Thread(monitor);
+          monitor.start();
           threads[i].start();
           i++;
         }

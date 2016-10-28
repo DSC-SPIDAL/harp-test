@@ -95,10 +95,10 @@ public class DynamicScheduler<I, O, T extends Task<I, O>> {
   public synchronized void submitAll(I[] inputs) {
     // Submit inputs
     int submitCount = 0;
-    for (I input : inputs) {
-      if (input != null) {
-        inputQueue.add(new Input<I>(input, false,
-          false));
+    for (int i = 0; i < inputs.length; i++) {
+      if (inputs[i] != null) {
+        inputQueue.add(new Input<I>(inputs[i],
+          false, false));
         submitCount++;
       }
     }

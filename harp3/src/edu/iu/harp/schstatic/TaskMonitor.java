@@ -63,7 +63,7 @@ public class TaskMonitor<I, O, T extends Task<I, O>>
     return taskObject;
   }
 
-  private synchronized void start() {
+  synchronized void start() {
     if (!isRunning) {
       isRunning = true;
       inputCount += inputQueue.size();
@@ -72,7 +72,8 @@ public class TaskMonitor<I, O, T extends Task<I, O>>
 
   synchronized void submit(Input<I> input) {
     inputQueue.add(input);
-    if (isRunning) {
+    if (isRunning && !input.isPause()
+      && !input.isStop()) {
       inputCount++;
     }
   }
@@ -132,7 +133,6 @@ public class TaskMonitor<I, O, T extends Task<I, O>>
 
   @Override
   public void run() {
-    start();
     while (true) {
       try {
         Input<I> input = inputQueue.take();
@@ -145,7 +145,6 @@ public class TaskMonitor<I, O, T extends Task<I, O>>
             pauseOrStop();
             barrier1.release();
             ComputeUtil.acquire(barrier2);
-            start();
           } else {
             O output = null;
             boolean isFailed = false;
