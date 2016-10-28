@@ -3,6 +3,8 @@ HARP PROJECT
 Copyright 2013-2016 Inidana University
 Apache License 2.0
 
+Author: Bingjing Zhang
+
 WHAT IS HARP?
 Harp is a framework for machine learning applications.
 
@@ -37,5 +39,5 @@ hadoop-2.6.0
 7. Copy build/harp-app-hadoop-2.6.0.jar to hadoop-2.6.0/
 8. Start Hadoop environment
 9. Run Kmeans job 
-   hadoop jar harp3-app-hadoop-2.6.0.jar edu.iu.kmeans.KMeansLauncher <num of points> <num of centroids> <vector size> <num of point files per worker> <number of map tasks> <num threads> <number of iteration> <work dir> <local points dir>
-   e.g. hadoop jar harp3-app-hadoop-2.6.0.jar edu.iu.kmeans.KMeansLauncher 1000 10 100 5 2 2 10 /kmeans /tmp/kmeans
+   hadoop jar harp3-app-hadoop-2.6.0.jar edu.iu.kmeans.regroupallgather.KMeansLauncher <num of points> <num of centroids> <vector size> <num of point files per worker> <number of map tasks> <num threads> <number of iteration> <work dir> <local points dir>
+   e.g. bin/hadoop jar harp3-app-hadoop-2.6.0.jar edu.iu.kmeans.regroupallgather.KMeansLauncher 1000 10 100 5 2 2 10 /kmeans /tmp/kmeans
