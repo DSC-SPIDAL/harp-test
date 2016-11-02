@@ -23,7 +23,7 @@ package edu.iu.harp.resource;
  *
  * @param <T>
  */
-abstract class Array<T> extends Simple {
+public abstract class Array<T> extends Simple {
   /** Array */
   protected T array = null;
   /** Start position in the array data */
