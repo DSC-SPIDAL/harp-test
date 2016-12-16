@@ -396,6 +396,8 @@ public class CCDMPCollectiveMapper
     Int2ObjectOpenHashMap<VRowCol> testVHMap,
     Int2ObjectOpenHashMap<VRowCol>[] vHSplitMap,
     int numVHSplits) {
+    // TODO filter the test points without row or
+    // column in the training dataset
     ObjectIterator<Int2ObjectMap.Entry<VRowCol>> iterator =
       testVHMap.int2ObjectEntrySet()
         .fastIterator();

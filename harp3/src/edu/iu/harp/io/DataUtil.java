@@ -198,8 +198,7 @@ public class DataUtil {
       className = din.readUTF();
     } catch (Exception e) {
       LOG.error(
-        "Fail to deserialize the class name "
-          + "of struct object", e);
+        "Fail to deserialize the class name", e);
       return null;
     }
     Writable obj =

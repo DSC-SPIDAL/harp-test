@@ -42,6 +42,7 @@ import edu.iu.harp.partition.Partitioner;
 import edu.iu.harp.partition.Table;
 import edu.iu.harp.resource.DoubleArray;
 import edu.iu.harp.resource.IntArray;
+import edu.iu.harp.resource.LongArray;
 import edu.iu.harp.schdynamic.DynamicScheduler;
 
 public class SGDCollectiveMapper
@@ -174,19 +175,14 @@ public class SGDCollectiveMapper
     final LinkedList<String> vFilePaths,
     final Configuration configuration,
     final Context context) throws Exception {
-    LOG.info("Use Model Parallelism");
     Int2ObjectOpenHashMap<VRowCol> vRowMap =
-      SGDUtil.loadVWMap(vFilePaths, numThreads,
+      SGDUtil.loadVWMap(vFilePaths, Runtime
+        .getRuntime().availableProcessors(),
         configuration);
     Int2ObjectOpenHashMap<VRowCol> testVColMap =
       SGDUtil.loadTestVHMap(testFilePath,
-        configuration, numThreads);
-    int totalNumTestV = 0;
-    for (VRowCol vRowCol : testVColMap.values()) {
-      totalNumTestV += vRowCol.numV;
-    }
-    LOG.info("Total num of test V: "
-      + totalNumTestV);
+        configuration, Runtime.getRuntime()
+          .availableProcessors());
     // ---------------------------------------------
     // Create vHMap and W model
     int numSplits =
@@ -206,13 +202,23 @@ public class SGDCollectiveMapper
         vRowMap, r, oneOverSqrtR, numThreads,
         random);
     vRowMap = null;
-    // Trim Test VHMap
-    SGDUtil.trimTestVHMap(testVColMap, wMap);
     // Create H model
+    Table<IntArray> vHSumTable =
+      new Table<>(0, new IntArrPlus());
     Table<DoubleArray>[] hTableMap =
       new Table[numModelSlices];
-    createHModel(hTableMap, numModelSlices,
-      vWHMap, oneOverSqrtR, random);
+    createHModel(hTableMap, vHSumTable,
+      numModelSlices, vWHMap, oneOverSqrtR,
+      random);
+    // Trim Test VHMap
+    SGDUtil.trimTestVHMap(testVColMap, wMap,
+      vHSumTable);
+    int totalNumTestV =
+      getTotalNumTestV(testVColMap);
+    LOG.info("Total num of test V: "
+      + totalNumTestV);
+    vHSumTable.release();
+    vHSumTable = null;
     this.freeMemory();
     this.freeConn();
     System.gc();
@@ -321,6 +327,7 @@ public class SGDCollectiveMapper
     // Organize vWMap
     Table<VSet> vSetTable =
       new Table<>(0, new VSetCombiner());
+    int maxRowID = Integer.MIN_VALUE;
     ObjectIterator<Int2ObjectMap.Entry<VRowCol>> iterator =
       vRowMap.int2ObjectEntrySet().fastIterator();
     while (iterator.hasNext()) {
@@ -331,17 +338,49 @@ public class SGDCollectiveMapper
       vSetTable.addPartition(new Partition<>(
         rowID, new VSet(vRowCol.id, vRowCol.ids,
           vRowCol.v, vRowCol.numV)));
+      if (rowID > maxRowID) {
+        maxRowID = rowID;
+      }
     }
     // Clean the data
     vRowMap.clear();
+    // Randomize the row distribution among
+    // workers
     long start = System.currentTimeMillis();
-    regroup("sgd", "regroup-vw", vSetTable,
-      new Partitioner(this.getNumWorkers()));
+    int oldNumRows = vSetTable.getNumPartitions();
+    Table<LongArray> seedTable =
+      new Table<>(0, new LongArrMax());
+    long seed = System.currentTimeMillis();
+    LongArray seedArray =
+      LongArray.create(2, false);
+    seedArray.get()[0] = (long) maxRowID;
+    seedArray.get()[1] = seed;
+    seedTable.addPartition(new Partition<>(0,
+      seedArray));
+    this.allreduce("sgd", "get-row-seed",
+      seedTable);
+    maxRowID =
+      (int) seedTable.getPartition(0).get().get()[0];
+    seed =
+      seedTable.getPartition(0).get().get()[1];
+    seedTable.release();
+    seedTable = null;
+    regroup(
+      "sgd",
+      "regroup-vw",
+      vSetTable,
+      new RandomPartitioner(maxRowID, seed, this
+        .getNumWorkers())
+    // new Partitioner(this.getNumWorkers())
+    );
     long end = System.currentTimeMillis();
     LOG.info("Regroup data by rows took: "
       + (end - start)
-      + ", number of rows in local: "
-      + vSetTable.getNumPartitions());
+      + ", number of rows in local(o/n): "
+      + oldNumRows + " "
+      + vSetTable.getNumPartitions()
+      + ", maxRowID " + maxRowID + ", seed: "
+      + seed + " modulo distribution");
     this.freeMemory();
     // Create a local V Map indexed by H columns
     // Create W model
@@ -370,7 +409,10 @@ public class SGDCollectiveMapper
           oneOverSqrtR);
         wMap.put(rowID, rRow);
       }
-      int splitID = i % vWHMap.length;
+      // int splitID = i % vWHMap.length;
+      // Randomize the row partitioning inside a
+      // worker
+      int splitID = random.nextInt(vWHMap.length);
       vSetList[splitID].list.add(vSet);
       workerNumV += vSet.getNumV();
     }
@@ -401,6 +443,7 @@ public class SGDCollectiveMapper
 
   private long createHModel(
     Table<DoubleArray>[] hTableMap,
+    Table<IntArray> vHSumTable,
     int numModelSlices,
     Int2ObjectOpenHashMap<VRowCol>[] vWHMap,
     double oneOverSqrtR, Random random)
@@ -411,8 +454,6 @@ public class SGDCollectiveMapper
       hTableMap[i] =
         new Table<>(i, new DoubleArrPlus());
     }
-    Table<IntArray> vHSumTable =
-      new Table<>(0, new IntArrPlus());
     for (int i = 0; i < vWHMap.length; i++) {
       ObjectIterator<Int2ObjectMap.Entry<VRowCol>> iterator =
         vWHMap[i].int2ObjectEntrySet()
@@ -447,16 +488,35 @@ public class SGDCollectiveMapper
       idArray.get());
     IntArrays.quickSort(idArray.get(), 0,
       idArray.size());
+    // Get the seed
+    // Randomize the H model distribution
+    Table<LongArray> seedTable =
+      new Table<>(0, new LongArrMax());
+    long seed = System.currentTimeMillis();
+    LongArray seedArray =
+      LongArray.create(1, false);
+    seedArray.get()[0] = seed;
+    seedTable.addPartition(new Partition<>(0,
+      seedArray));
+    this.allreduce("sgd", "get-col-seed",
+      seedTable);
+    seed =
+      seedTable.getPartition(0).get().get()[0];
+    seedTable.release();
+    seedTable = null;
     int selfID = this.getSelfID();
-    int workerIndex = 0;
+    // int workerIndex = 0;
     int sliceIndex = 0;
     int[] ids = idArray.get();
+    Random idRandom = new Random(seed);
     for (int i = 0; i < idArray.size(); i++) {
       Partition<IntArray> partition =
         vHSumTable.getPartition(ids[i]);
       totalNumV +=
         (long) partition.get().get()[0];
-      if (workerIndex % numWorkers == selfID) {
+      if (idRandom.nextInt(numWorkers) == selfID) {
+        // if (workerIndex % numWorkers == selfID)
+        // {
         // This h column
         // will be created by this worker
         int colID = partition.id();
@@ -464,15 +524,17 @@ public class SGDCollectiveMapper
           DoubleArray.create(r, false);
         SGDUtil.randomize(random, rCol.get(), r,
           oneOverSqrtR);
-        hTableMap[sliceIndex % numModelSlices]
+        // Also do randomization for slicing?
+        // hTableMap[sliceIndex % numModelSlices]
+        // .addPartition(new Partition<>(colID,
+        // rCol));
+        hTableMap[random.nextInt(numModelSlices)]
           .addPartition(new Partition<>(colID,
             rCol));
         sliceIndex++;
       }
-      workerIndex++;
+      // workerIndex++;
     }
-    vHSumTable.release();
-    vHSumTable = null;
     idArray.release();
     idArray = null;
     this.freeMemory();
@@ -482,6 +544,25 @@ public class SGDCollectiveMapper
       + totalNumV + " " + totalNumCols + " "
       + sliceIndex + " took " + (t2 - t1));
     return totalNumV;
+  }
+
+  private int getTotalNumTestV(
+    Int2ObjectOpenHashMap<VRowCol> testVColMap) {
+    int totalNumTestV = 0;
+    for (VRowCol vRowCol : testVColMap.values()) {
+      totalNumTestV += vRowCol.numV;
+    }
+    Table<IntArray> table =
+      new Table<>(0, new IntArrPlus());
+    IntArray array = IntArray.create(1, false);
+    array.get()[0] = totalNumTestV;
+    table.addPartition(new Partition<>(0, array));
+    this.allreduce("sgd", "get-num-testv", table);
+    totalNumTestV =
+      table.getPartition(0).get().get()[0];
+    table.release();
+    table = null;
+    return totalNumTestV;
   }
 
   private long adjustMiniBatch(int selfID,
@@ -512,24 +593,25 @@ public class SGDCollectiveMapper
     }
     arrTable.release();
     arrTable = null;
-    double ratio =
-      Constants.COMM_VS_COMPUTE
-        * (double) numWorkers
-        * (double) numThreads
-        * (double) totalNumCols
-        / (double) totalNumV / 2.0;
-    if (ratio < Constants.MIN_RATIO) {
-      double tmp = ratio;
-      double delta = 0.0;
-      while (tmp < Constants.MIN_RATIO) {
-        delta += 0.1;
-        tmp = (1.0 + delta) * ratio;
-      }
-      ratio = tmp;
-    }
-    if (ratio > Constants.MAX_RATIO) {
-      ratio = Constants.MAX_RATIO;
-    }
+    // double ratio =
+    // Constants.COMM_VS_COMPUTE
+    // * (double) numWorkers
+    // * (double) numThreads
+    // * (double) totalNumCols
+    // / (double) totalNumV / 2.0;
+    // if (ratio < Constants.MIN_RATIO) {
+    // double tmp = ratio;
+    // double delta = 0.0;
+    // while (tmp < Constants.MIN_RATIO) {
+    // delta += 0.1;
+    // tmp = (1.0 + delta) * ratio;
+    // }
+    // ratio = tmp;
+    // }
+    // if (ratio > Constants.MAX_RATIO) {
+    // ratio = Constants.MAX_RATIO;
+    // }
+    double ratio = Constants.GOLDEN_RATIO;
     double percentage =
       (double) totalNumVTrained
         / (double) totalNumV;

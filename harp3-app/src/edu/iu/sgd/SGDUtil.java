@@ -18,6 +18,7 @@ package edu.iu.sgd;
 
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
+import it.unimi.dsi.fastutil.ints.IntArrayList;
 import it.unimi.dsi.fastutil.objects.ObjectIterator;
 
 import java.io.IOException;
@@ -32,6 +33,9 @@ import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.LocatedFileStatus;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.fs.RemoteIterator;
+
+import edu.iu.harp.partition.Table;
+import edu.iu.harp.resource.IntArray;
 
 public class SGDUtil {
   protected static final Log LOG = LogFactory
@@ -78,17 +82,27 @@ public class SGDUtil {
 
   static void trimTestVHMap(
     Int2ObjectOpenHashMap<VRowCol> testVHMap,
-    Int2ObjectOpenHashMap<double[]> wMap) {
+    Int2ObjectOpenHashMap<double[]> wMap,
+    Table<IntArray> vHSumTable) {
     // Trim testVHMap
+    LOG.info("Total Number of H partitions: "
+      + vHSumTable.getNumPartitions());
     ObjectIterator<Int2ObjectMap.Entry<VRowCol>> iterator =
       testVHMap.int2ObjectEntrySet()
         .fastIterator();
+    IntArrayList rmColIDs = new IntArrayList();
     while (iterator.hasNext()) {
       Int2ObjectMap.Entry<VRowCol> entry =
         iterator.next();
       // Only record test V related to the local W
       // model
+      int colID = entry.getIntKey();
       VRowCol vRowCol = entry.getValue();
+      if (vHSumTable.getPartition(colID) == null) {
+        // LOG.info("remove col ID " + colID);
+        rmColIDs.add(colID);
+        continue;
+      }
       double[] v = new double[vRowCol.numV];
       double[][] m2 = new double[vRowCol.numV][];
       int index = 0;
@@ -109,6 +123,9 @@ public class SGDUtil {
       vRowCol.m1 = null;
       vRowCol.m2 = newM2;
       vRowCol.numV = index;
+    }
+    for (int colID : rmColIDs) {
+      testVHMap.remove(colID);
     }
     testVHMap.trim();
   }

@@ -17,6 +17,7 @@
 package edu.iu.harp.partition;
 
 import it.unimi.dsi.fastutil.ints.Int2IntOpenHashMap;
+import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
 import it.unimi.dsi.fastutil.ints.IntArrayList;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 
@@ -86,8 +87,8 @@ public class PartitionUtil {
     addPartitionsToTable(
       List<Transferable> partitions,
       Table<P> table) {
-    List<Partition<P>> combineList =
-      new ObjectArrayList<>();
+    Int2ObjectOpenHashMap<List<Partition<P>>> combineMap =
+      new Int2ObjectOpenHashMap<>();
     for (Transferable obj : partitions) {
       Partition<P> partition = (Partition<P>) obj;
       Partition<P> curPar =
@@ -95,27 +96,34 @@ public class PartitionUtil {
       if (curPar == null) {
         table.addPartition(partition);
       } else {
-        combineList.add(partition);
+        List<Partition<P>> list =
+          combineMap.get(partition.id());
+        if (list == null) {
+          list = new ObjectArrayList<>();
+          combineMap.put(partition.id(), list);
+        }
+        list.add(partition);
       }
     }
-    if (!combineList.isEmpty()) {
+    if (!combineMap.isEmpty()) {
       PartitionCombiner<P> combiner =
         table.getCombiner();
-      table
-        .getPartitions()
+      combineMap
+        .int2ObjectEntrySet()
         .parallelStream()
         .forEach(
           e -> {
-            for (Partition<P> partition : combineList) {
-              if (partition.id() == e.id()) {
-                combiner.combine(e.get(),
-                  partition.get());
-              }
+            int id = e.getIntKey();
+            List<Partition<P>> list =
+              e.getValue();
+            Partition<P> partition =
+              table.getPartition(id);
+            for (Partition<P> p : list) {
+              combiner.combine(partition.get(),
+                p.get());
+              p.release();
             }
           });
-      for (Partition<P> partition : combineList) {
-        partition.release();
-      }
     }
     partitions.clear();
   }
