@@ -17,7 +17,10 @@
 package edu.iu.harp.partition;
 
 import edu.iu.harp.resource.Transferable;
-
+/*******************************************************
+ * The abstract class defining function which can be 
+ * applied to partitions
+ ******************************************************/
 public abstract class PartitionFunction<T extends Transferable> {
   public abstract void apply(T partition)
     throws Exception;
