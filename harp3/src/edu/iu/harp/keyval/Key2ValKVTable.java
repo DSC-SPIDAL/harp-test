@@ -30,6 +30,10 @@ import edu.iu.harp.partition.PartitionCombiner;
 import edu.iu.harp.partition.PartitionStatus;
 import edu.iu.harp.resource.Writable;
 
+/*******************************************************
+ * Key2ValKVPartitionCombiner defines
+ * how to merge Key2ValKVPartitions
+ ******************************************************/
 class Key2ValKVPartitionCombiner<K extends Key, V extends Value, P extends Key2ValKVPartition<K, V>>
   extends PartitionCombiner<P> {
 
@@ -40,6 +44,9 @@ class Key2ValKVPartitionCombiner<K extends Key, V extends Value, P extends Key2V
     this.valCombiner = combiner;
   }
 
+  /**
+   * Combine two partitions
+   */
   @Override
   public PartitionStatus combine(P op, P np) {
     // remove method in iterator has a bug
@@ -77,16 +84,13 @@ class Key2ValKVPartitionCombiner<K extends Key, V extends Value, P extends Key2V
   }
 }
 
-/**
- * a key-value table with int as key and a float
- * array as value
- * 
- * @author zhangbj
- */
+
+/*******************************************************
+ * An abstract class of Key-Vale tables
+ ******************************************************/
 public abstract class Key2ValKVTable<K extends Key, V extends Value, P extends Key2ValKVPartition<K, V>>
   extends KVTable<P> {
 
-  /** Class logger */
   @SuppressWarnings("unused")
   private static final Logger LOG = Logger
     .getLogger(Key2ValKVTable.class);
@@ -108,17 +112,39 @@ public abstract class Key2ValKVTable<K extends Key, V extends Value, P extends K
     this.valCombiner = combiner;
   }
 
+  /**
+   * Add a new key-value pair to the table.
+   * If the key exists, combine the old one 
+   * and the new one,
+   * else, create a new partition and then add
+   * the new key-value pair to it.
+   * @param key the key
+   * @param val the value
+   * @return the ValStatus
+   */
   public ValStatus addKeyVal(K key, V val) {
     P partition = getOrCreateKVPartition(key);
     return addKVInPartition(partition, key, val);
   }
 
+  /**
+   * Add the key-value pair to the partition
+   * @param partition the partition
+   * @param key the key
+   * @param val the value
+   * @return the ValStatus
+   */
   private ValStatus addKVInPartition(P partition,
     K key, V val) {
     return partition.putKeyVal(key, val,
       valCombiner);
   }
 
+  /**
+   * Get the value associated with the key
+   * @param key the key
+   * @return the value, or null if not exists
+   */
   public V getVal(K key) {
     Partition<P> partition = getKVPartition(key);
     if (partition != null) {
@@ -128,6 +154,11 @@ public abstract class Key2ValKVTable<K extends Key, V extends Value, P extends K
     }
   }
 
+  /**
+   * Remove the value associated with the key
+   * @param key the key
+   * @return the value, or null if not exists
+   */
   public V removeVal(K key) {
     Partition<P> partition = getKVPartition(key);
     if (partition != null) {
@@ -137,6 +168,12 @@ public abstract class Key2ValKVTable<K extends Key, V extends Value, P extends K
     }
   }
 
+  /**
+   * Get a partition by key if exists, or
+   * create a new partition if not.
+   * @param key the key
+   * @return the partition
+   */
   private P getOrCreateKVPartition(K key) {
     int partitionID = getKVPartitionID(key);
     Partition<P> partition =
@@ -151,11 +188,21 @@ public abstract class Key2ValKVTable<K extends Key, V extends Value, P extends K
     return partition.get();
   }
 
+  /**
+   * Get the partition by key
+   * @param key the key
+   * @return the partition, or null if it doesn't exist
+   */
   private Partition<P> getKVPartition(K key) {
     int partitionID = getKVPartitionID(key);
     return this.getPartition(partitionID);
   }
 
+  /**
+   * Get the partition Id by key
+   * @param key the key
+   * @return the partition id
+   */
   protected int getKVPartitionID(K key) {
     return key.hashCode();
   }
