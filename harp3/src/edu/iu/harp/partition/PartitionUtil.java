@@ -260,6 +260,11 @@ public class PartitionUtil {
     return !isFailed;
   }
 
+  /**
+   * Get the partition ID set from the table
+   * @param table a Table
+   * @return the partition ID set
+   */
   public static <P extends Simple> IntArrayList
     getPartitionSet(Table<P> table) {
     IntArrayList parIDCount = new IntArrayList();
@@ -373,6 +378,16 @@ public class PartitionUtil {
     }
   }
 
+  /**
+   * Allgather the PartitionSet among workers
+   * @param contextName
+   * @param operationName
+   * @param table
+   * @param recvPSet
+   * @param dataMap
+   * @param workers
+   * @return true if succeeded, false if failed
+   */
   public static <P extends Simple> boolean
     allgatherPartitionSet(String contextName,
       String operationName, Table<P> table,
@@ -392,6 +407,16 @@ public class PartitionUtil {
     return isSuccess;
   }
 
+  /**
+   * Gather the PartitionSet from workers
+   * @param contextName
+   * @param operationName
+   * @param table
+   * @param recvPSets
+   * @param dataMap
+   * @param workers
+   * @return true if succeeded, false if failed
+   */
   public static <P extends Simple> boolean
     gatherPartitionSet(String contextName,
       String operationName, Table<P> table,
