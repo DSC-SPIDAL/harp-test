@@ -20,7 +20,9 @@ import java.io.DataOutput;
 import java.io.IOException;
 
 import edu.iu.harp.io.DataType;
-
+/*******************************************************
+ * ByteArray class for managing byte[] data.
+ ******************************************************/
 public final class ByteArray extends
   Array<byte[]> {
 
@@ -28,12 +30,22 @@ public final class ByteArray extends
     super(arr, start, size);
   }
 
+  /**
+   * Get the number of Bytes of 
+   * encoded data.
+   * One byte for storing DataType,
+   * four bytes for storing the size,
+   * size bytes for storing the data.
+   */
   @Override
   public int getNumEnocdeBytes() {
     // array type, array length, array body
     return size + 5;
   }
 
+  /**
+   * Encode the array to DataOutPut
+   */
   @Override
   public void encode(DataOutput out)
     throws IOException {
@@ -42,6 +54,14 @@ public final class ByteArray extends
     out.write(array, start, size);
   }
 
+  /**
+   * Create an array. 
+   * Firstly try to get an array from ResourcePool;
+   * if failed, new an array.
+   * @param len
+   * @param approximate
+   * @return
+   */
   public static ByteArray create(int len,
     boolean approximate) {
     if (len > 0) {
@@ -58,6 +78,9 @@ public final class ByteArray extends
     }
   }
 
+  /**
+   * Release the array from the ResourcePool
+   */
   @Override
   public void release() {
     ResourcePool.get().getBytesPool()
@@ -65,6 +88,9 @@ public final class ByteArray extends
     this.reset();
   }
 
+  /**
+   * Free the array from the ResourcePool
+   */
   @Override
   public void free() {
     ResourcePool.get().getBytesPool()
