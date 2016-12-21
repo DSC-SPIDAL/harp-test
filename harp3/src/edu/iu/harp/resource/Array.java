@@ -16,19 +16,16 @@
 
 package edu.iu.harp.resource;
 
-/**
- * The abstract class of arrays
- * 
- * @author zhangbj
- *
- * @param <T>
- */
+/*******************************************************
+ * The abstract class of arrays. 
+ * It's used for managing real array data.
+ ******************************************************/
 public abstract class Array<T> extends Simple {
-  /** Array */
+  /** The array */
   protected T array = null;
-  /** Start position in the array data */
+  /** Start position in the array data, -1 by default*/
   protected int start = -1;
-  /** Default is -1 */
+  /** Size of the array data, -1 by default*/
   protected int size = -1;
 
   public Array(T arr, int start, int size) {
@@ -39,7 +36,6 @@ public abstract class Array<T> extends Simple {
 
   /**
    * Get the array body.
-   * 
    * @return the array
    */
   public T get() {
@@ -47,8 +43,7 @@ public abstract class Array<T> extends Simple {
   }
 
   /**
-   * The start index of the array
-   * 
+   * Get the start index of the array
    * @return start index
    */
   public int start() {
@@ -56,14 +51,15 @@ public abstract class Array<T> extends Simple {
   }
 
   /**
-   * The size of the array.
-   * 
+   * Get the size of the array.
    * @return array size
    */
   public int size() {
     return size;
   }
-
+  /**
+   * Reset the array
+   */
   protected void reset() {
     array = null;
     start = -1;
