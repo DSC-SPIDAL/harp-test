@@ -141,7 +141,7 @@ public class Long2DoubleKVPartition extends
   }
   
   /**
-   * Read this from DataOutput
+   * Read this from DataInput
    */
   @Override
   public void read(DataInput in)

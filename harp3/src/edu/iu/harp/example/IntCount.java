@@ -22,6 +22,10 @@ import java.io.IOException;
 
 import edu.iu.harp.keyval.Value;
 
+/*******************************************************
+ * IntCount-type Value, storing the count of the 
+ * associate int value.
+ ******************************************************/
 public class IntCount extends Value {
 
   private int val;
@@ -35,22 +39,41 @@ public class IntCount extends Value {
     this.count = c;
   }
 
+  /**
+   * Set the value
+   * @param val the value
+   */
   public void setInt(int val) {
     this.val = val;
   }
 
+  /**
+   * Get the value
+   * @return the value
+   */
   public int getInt() {
     return this.val;
   }
 
+  /**
+   * Get the count
+   * @return the count
+   */
   public int getCount() {
     return count;
   }
 
+  /**
+   * Set the count
+   * @param count the count
+   */
   public void setCount(int count) {
     this.count = count;
   }
 
+  /**
+   * Write the data to DataOutput
+   */
   @Override
   public void write(DataOutput out)
     throws IOException {
@@ -58,6 +81,9 @@ public class IntCount extends Value {
     out.writeInt(count);
   }
 
+  /**
+   * Read the data from DataInput
+   */
   @Override
   public void read(DataInput in)
     throws IOException {
@@ -65,11 +91,17 @@ public class IntCount extends Value {
     this.count = in.readInt();
   }
 
+  /**
+   * Get the number of bytes of encoded data
+   */
   @Override
   public int getNumWriteBytes() {
     return 8;
   }
 
+  /**
+   * Clear the data
+   */
   @Override
   public void clear() {
   }

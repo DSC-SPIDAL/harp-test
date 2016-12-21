@@ -21,7 +21,9 @@ import java.io.DataOutput;
 import java.io.IOException;
 
 import edu.iu.harp.keyval.Key;
-
+/*******************************************************
+ * String-type Key
+ ******************************************************/
 public class StringKey extends Key {
 
   private String str;
@@ -33,14 +35,25 @@ public class StringKey extends Key {
     this.str = str;
   }
 
+  /**
+   * Set string
+   * @param str the string
+   */
   public void setStringKey(String str) {
     this.str = str;
   }
 
+  /**
+   * Get the string
+   * @return the string
+   */
   public String getStringKey() {
     return this.str;
   }
 
+  /**
+   * The overridden equals function
+   */
   @Override
   public boolean equals(Object object) {
     if (object.getClass().equals(StringKey.class)) {
@@ -51,23 +64,35 @@ public class StringKey extends Key {
     }
   }
 
+  /**
+   * The overridden hashCode function
+   */
   @Override
   public int hashCode() {
     return str.hashCode();
   }
 
+  /**
+   * Write the string to DataOutput
+   */
   @Override
   public void write(DataOutput out)
     throws IOException {
     out.writeUTF(str);
   }
 
+  /**
+   * Read the string from DataInput
+   */
   @Override
   public void read(DataInput in)
     throws IOException {
     this.str = in.readUTF();
   }
 
+  /**
+   * Get the number of bytes of encoded data
+   */
   @Override
   public int getNumWriteBytes() {
     if (str == null) {
@@ -77,6 +102,9 @@ public class StringKey extends Key {
     }
   }
 
+  /**
+   * Clear the string
+   */
   @Override
   public void clear() {
     this.str = null;

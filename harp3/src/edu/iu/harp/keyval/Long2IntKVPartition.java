@@ -140,7 +140,7 @@ public class Long2IntKVPartition extends
   }
   
   /**
-   * Read this from DataOutput
+   * Read this from DataInput
    */
   @Override
   public void read(DataInput in)

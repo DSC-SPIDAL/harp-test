@@ -195,7 +195,7 @@ public abstract class Int2ValKVPartition<V extends Value>
   }
   
   /**
-   * Read this from DataOutput
+   * Read this from DataInput
    */
   @Override
   public void read(DataInput in)

@@ -121,7 +121,7 @@ public abstract class Writable extends Simple {
     throws IOException;
 
   /**
-   * Abstract method for reading Writable data to DataOutPut
+   * Abstract method for reading Writable data from DataInput
    * @param in
    * @throws IOException
    */
