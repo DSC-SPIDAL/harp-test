@@ -15,6 +15,8 @@
  */
 
 package edu.iu.harp.resource;
-
+/*******************************************************
+ * The abstract class of data structures.
+ ******************************************************/
 public abstract class Simple extends Transferable {
 }
