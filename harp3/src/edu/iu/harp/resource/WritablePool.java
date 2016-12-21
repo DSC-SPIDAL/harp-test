@@ -25,18 +25,25 @@ import java.util.LinkedList;
 
 import org.apache.log4j.Logger;
 
-/**
- * Create and manage writable objects
- * 
- */
+/*******************************************************
+ * A pool used for caching writable objects
+ ******************************************************/
 public class WritablePool {
-  /** Class logger */
+
   private static final Logger LOG = Logger
     .getLogger(WritablePool.class);
 
-  /** A map between ref, and writable objects */
-  private Object2ObjectOpenHashMap<Class<? extends Writable>, WritableStore> writableMap;
+  /** A map from ref to writable objects */
+  private Object2ObjectOpenHashMap
+  <Class<? extends Writable>, WritableStore>writableMap;
 
+  /**
+   * WritableStore is used for buffering writables.
+   * freeQueue stores not-in-use writables,
+   * which can be used as required to avoid
+   * reallocating writables.
+   * inUseMap stores in-use writables. 
+   */
   private class WritableStore {
     private IdentityHashMap<Writable, Object> inUseMap;
     private LinkedList<Writable> freeQueue;
@@ -47,8 +54,8 @@ public class WritablePool {
     }
   }
 
-  // Dummy value to associate with an Object in
-  // the backing Map
+  /* Dummy value to associate with an Object in
+   the backing Map */
   private static final Object PRESENT =
     new Object();
 
@@ -57,6 +64,14 @@ public class WritablePool {
       new Object2ObjectOpenHashMap<>();
   }
 
+  /**
+   * Get an writable object of the required class. 
+   * If a not-in-use writable of the required class
+   * is already cached, use this writable directly.
+   * Else, new a writable
+   * @param clazz
+   * @return
+   */
   synchronized <W extends Writable> W
     getWritable(Class<W> clazz) {
     WritableStore writableStore =
@@ -83,6 +98,13 @@ public class WritablePool {
     }
   }
 
+  /**
+   * Release the writable by moving the writable 
+   * from inUseMap to freeQueue. The writable 
+   * can be used as a new writable later.
+   * @param obj
+   * @return
+   */
   synchronized <W extends Writable> boolean
     releaseWritable(W obj) {
     if (obj == null) {
@@ -106,6 +128,12 @@ public class WritablePool {
     }
   }
 
+  /**
+   * Free the writable by removing it from
+   * the inUseMap. It is no longer available. 
+   * @param obj the writable to remove
+   * @return true if succeeded, false if failed
+   */
   public synchronized <W extends Writable>
     boolean freeWritable(W obj) {
     if (obj == null) {
@@ -126,13 +154,20 @@ public class WritablePool {
     }
   }
 
+  /**
+   * Clean all writables in freeQueue, namely remove 
+   * all not-in-use writables.
+   */
   public synchronized void clean() {
     for (WritableStore store : writableMap
       .values()) {
       store.freeQueue.clear();
     }
   }
-
+  
+  /**
+   * Logging the usage of the writables. 
+   */
   synchronized void log() {
     ObjectIterator<Object2ObjectMap.Entry<Class<? extends Writable>, WritableStore>> iterator =
       writableMap.object2ObjectEntrySet()

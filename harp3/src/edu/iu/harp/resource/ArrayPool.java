@@ -33,7 +33,7 @@ import edu.iu.harp.io.Constant;
  * longer used, will be cached for reuse.
  ******************************************************/
 public abstract class ArrayPool<T> {
-  /** Class logger */
+
   private static final Logger LOG = Logger
     .getLogger(ArrayPool.class);
   /* A map from size to ArrayStore*/
