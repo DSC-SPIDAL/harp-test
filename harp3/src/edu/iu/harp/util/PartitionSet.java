@@ -24,7 +24,9 @@ import java.io.IOException;
 
 import edu.iu.harp.io.Constant;
 import edu.iu.harp.resource.Writable;
-
+/*******************************************************
+ * PartitionSet is the set of partition IDs on the worker
+ ******************************************************/
 public class PartitionSet extends Writable {
   private int workerID;
   private IntArrayList parIDs;
@@ -34,23 +36,45 @@ public class PartitionSet extends Writable {
     parIDs = null;
   }
 
+  /**
+   * Set the worker ID
+   * @param id woker ID to set
+   */
   public void setWorkerID(int id) {
     this.workerID = id;
   }
 
+  /**
+   * Get the worker ID
+   * @return worker ID
+   */
   public int getWorkerID() {
     return workerID;
   }
 
+  /**
+   * Set the partition ID set
+   * @param partitionSet partition ID set
+   */
   public void
     setParSet(IntArrayList partitionSet) {
     parIDs = partitionSet;
   }
 
+  /**
+   * Get the partition ID set
+   * @return partition ID set
+   */
   public IntArrayList getParSet() {
     return parIDs;
   }
 
+  /**
+   * Get the number of bytes of encoded data
+   * 4 for storing worker ID,
+   * 4 for storing the size of parIDs,
+   * the rest for storing the parIDs
+   */
   @Override
   public int getNumWriteBytes() {
     // Worker ID + map size
@@ -61,6 +85,9 @@ public class PartitionSet extends Writable {
     }
   }
 
+  /**
+   * Write the PartitionSet to DataOutput
+   */
   @Override
   public void write(DataOutput out)
     throws IOException {
@@ -75,6 +102,9 @@ public class PartitionSet extends Writable {
     }
   }
 
+  /**
+   * Read PartitionSet from DataInput
+   */
   @Override
   public void read(DataInput in)
     throws IOException {
@@ -90,6 +120,9 @@ public class PartitionSet extends Writable {
     }
   }
 
+  /**
+   * Clear the parIDs
+   */
   @Override
   public void clear() {
     parIDs = null;

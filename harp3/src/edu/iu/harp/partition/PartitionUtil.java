@@ -42,10 +42,12 @@ import edu.iu.harp.util.PartitionCount;
 import edu.iu.harp.util.PartitionSet;
 import edu.iu.harp.worker.WorkerInfo;
 import edu.iu.harp.worker.Workers;
-
+/*******************************************************
+ * Utils used on partitions, including receive, regroup,
+ * rotate, gather, allgather operations and etc.
+ ******************************************************/
 public class PartitionUtil {
 
-  /** Class logger */
   @SuppressWarnings("unused")
   private static final Logger LOG = Logger
     .getLogger(PartitionUtil.class);
@@ -83,6 +85,11 @@ public class PartitionUtil {
     return true;
   }
 
+  /**
+   * Add a list of partitions to table in parallel
+   * @param partitions the list of partitions
+   * @param table the table to be added partitions
+   */
   public static <P extends Simple> void
     addPartitionsToTable(
       List<Transferable> partitions,
@@ -263,6 +270,8 @@ public class PartitionUtil {
     return parIDCount;
   }
 
+  /**The status indicates the failure of regrouping 
+   * partition set*/
   public static int FAIL_TO_REGROUP_PARTITION_SET =
     -1;
 
@@ -406,6 +415,11 @@ public class PartitionUtil {
     return isSuccess;
   }
 
+  /**
+   * Define the order of workers to send.
+   * @param workers Workers
+   * @return the order of sending operation
+   */
   public static int[] createSendOrder(
     Workers workers) {
     Random random =
