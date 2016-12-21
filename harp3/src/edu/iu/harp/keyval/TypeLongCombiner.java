@@ -16,8 +16,17 @@
 
 package edu.iu.harp.keyval;
 
+/*******************************************************
+ * Combiner for merging long-type Values
+ ******************************************************/
 public class TypeLongCombiner {
 
+  /**
+   * Merge two long-type values
+   * @param curVal the current value
+   * @param newVal the new value
+   * @return the merged value
+   */
   public long combine(long curVal, long newVal) {
     return curVal + newVal;
   }

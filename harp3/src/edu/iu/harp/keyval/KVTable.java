@@ -19,6 +19,9 @@ package edu.iu.harp.keyval;
 import edu.iu.harp.partition.PartitionCombiner;
 import edu.iu.harp.partition.Table;
 
+/*******************************************************
+ * KVTable is a table storing key-value pairs
+ ******************************************************/
 public abstract class KVTable<P extends KVPartition>
   extends Table<P> {
 

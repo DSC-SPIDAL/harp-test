@@ -18,6 +18,9 @@ package edu.iu.harp.keyval;
 
 import edu.iu.harp.resource.Writable;
 
+/*******************************************************
+ * KVPartition is a partition storing key-value pairs
+ ******************************************************/
 public abstract class KVPartition extends
   Writable {
 }

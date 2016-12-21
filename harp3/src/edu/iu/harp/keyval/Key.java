@@ -18,17 +18,20 @@ package edu.iu.harp.keyval;
 
 import edu.iu.harp.resource.Writable;
 
-/**
- * "equals" and "hashCode" has to be overridden.
- * 
- * @author zhangbj
- *
- * @param <T>
- */
+/*******************************************************
+ * The abstract class of Key
+ ******************************************************/
+
 public abstract class Key extends Writable {
 
+  /**
+   * The equals function to be overridden
+  */
   @Override
   public abstract boolean equals(Object obj);
 
+  /**
+   * The hashCode function to be overridden
+   */
   public abstract int hashCode();
 }

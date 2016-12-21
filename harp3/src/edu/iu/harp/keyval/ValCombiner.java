@@ -16,8 +16,17 @@
 
 package edu.iu.harp.keyval;
 
+/*******************************************************
+ * The abstract class of Combiners for Values
+ ******************************************************/
 public abstract class ValCombiner<V extends Value> {
 
+  /**
+   * Combine two Values
+   * @param curVal the current Value
+   * @param newVal the new Value
+   * @return ValStatus
+   */
   public abstract ValStatus combine(V curVal,
     V newVal);
 }

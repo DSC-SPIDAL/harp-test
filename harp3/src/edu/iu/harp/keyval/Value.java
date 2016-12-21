@@ -18,5 +18,8 @@ package edu.iu.harp.keyval;
 
 import edu.iu.harp.resource.Writable;
 
+/*******************************************************
+ * The abstract class of Value
+ ******************************************************/
 public abstract class Value extends Writable {
 }

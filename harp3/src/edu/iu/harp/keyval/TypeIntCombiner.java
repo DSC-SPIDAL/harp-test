@@ -15,9 +15,17 @@
  */
 
 package edu.iu.harp.keyval;
-
+/*******************************************************
+ * Combiner for merging int-type Values
+ ******************************************************/
 public class TypeIntCombiner {
 
+  /**
+   * Merge two int-type values
+   * @param curVal the current value
+   * @param newVal the new value
+   * @return the merged value
+   */
   public int combine(int curVal, int newVal) {
     return curVal + newVal;
   }
