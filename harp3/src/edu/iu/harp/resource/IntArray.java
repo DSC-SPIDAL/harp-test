@@ -43,7 +43,7 @@ public final class IntArray extends Array<int[]> {
   }
 
   /**
-   * Encode the array as DataOutPut
+   * Encode the array as DataOutput
    */
   @Override
   public void encode(DataOutput out)

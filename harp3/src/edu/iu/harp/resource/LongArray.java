@@ -43,7 +43,7 @@ public final class LongArray extends
   }
 
   /**
-   * Encode the array as DataOutPut
+   * Encode the array as DataOutput
    */
   @Override
   public void encode(DataOutput out)

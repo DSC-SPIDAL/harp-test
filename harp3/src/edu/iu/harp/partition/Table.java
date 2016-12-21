@@ -21,17 +21,15 @@ import it.unimi.dsi.fastutil.ints.IntSet;
 import it.unimi.dsi.fastutil.objects.ObjectCollection;
 import edu.iu.harp.resource.Simple;
 
-/**
- * The abstraction of distributed dataset
- * 
- * @author zhangbj
- *
- * @param <P>
- */
+/*******************************************************
+ * The abstraction of distributed dataset. A table is
+ * assigned with an ID for reference.
+ ******************************************************/
 public class Table<P extends Simple> {
 
   private final int tableID;
   private final Int2ObjectOpenHashMap<Partition<P>> partitions;
+  /*Combiner defines how to merge two partitions*/
   private final PartitionCombiner<P> combiner;
 
   /**
@@ -52,32 +50,55 @@ public class Table<P extends Simple> {
     this.combiner = combiner;
   }
 
+  /**
+   * Get the table ID
+   * @return table ID
+   */
   public int getTableID() {
     return tableID;
   }
 
+  /**
+   * Get the combiner
+   * @return combiner
+   */
   public PartitionCombiner<P> getCombiner() {
     return this.combiner;
   }
 
+  /**
+   * Get the number of partitions in this table
+   * @return number of partitions
+   */
   public final int getNumPartitions() {
     return partitions.size();
   }
 
+  /**
+   * Get the IDs of the partitions in this table
+   * @return ID set
+   */
   public final IntSet getPartitionIDs() {
     return partitions.keySet();
   }
 
+  /**
+   * Get the partitions in this table
+   * @return partition collection
+   */
   public final ObjectCollection<Partition<P>>
     getPartitions() {
     return partitions.values();
   }
 
   /**
-   * Add a partition into a table
-   * 
+   * Add a partition into a table. If the ID of
+   * the partition already exists in this table,
+   * combine this new partition with the partition
+   * of the same ID in this table. Otherwise, insert
+   * this new partition to the table.
    * @param partition
-   * @return
+   * @return partition status
    */
   public final PartitionStatus addPartition(
     Partition<P> partition) {
@@ -94,26 +115,50 @@ public class Table<P extends Simple> {
     }
   }
 
+  /**
+   * Insert a partition to this table
+   * @param partition
+   * @return PartitionStatus.ADDED
+   */
   protected final PartitionStatus
     insertPartition(Partition<P> partition) {
     partitions.put(partition.id(), partition);
     return PartitionStatus.ADDED;
   }
 
+  /**
+   * Get the partition by partitionID
+   * @param partitionID
+   * @return the partition associated with the
+   * partitionID
+   */
   public final Partition<P> getPartition(
     int partitionID) {
     return partitions.get(partitionID);
   }
 
+  /**
+   * Remove the partition from this table
+   * @param partitionID
+   * @return the removed partition 
+   */
   public final Partition<P> removePartition(
     int partitionID) {
     return partitions.remove(partitionID);
   }
 
+  /**
+   * If this table is empty, return true;
+   * else, return false.
+   * @return true or false
+   */
   public final boolean isEmpty() {
     return partitions.isEmpty();
   }
 
+  /**
+   * Release the partitions
+   */
   public final void release() {
     for (Partition<P> partition : partitions
       .values()) {
@@ -122,6 +167,9 @@ public class Table<P extends Simple> {
     partitions.clear();
   }
 
+  /**
+   * Free the partitions
+   */
   public final void free() {
     for (Partition<P> partition : partitions
       .values()) {

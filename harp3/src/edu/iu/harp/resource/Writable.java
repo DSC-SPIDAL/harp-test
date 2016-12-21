@@ -40,7 +40,7 @@ public abstract class Writable extends Simple {
   }
 
   /**
-   * Encode the writable as DataOutPut
+   * Encode the writable as DataOutput
    */
   @Override
   public final void encode(DataOutput out)
