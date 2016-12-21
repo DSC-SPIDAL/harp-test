@@ -56,22 +56,15 @@ import edu.iu.harp.resource.Simple;
 import edu.iu.harp.server.Server;
 import edu.iu.harp.worker.Workers;
 
-/**
+/*******************************************************
  * CollectiveMapper is extended from original
  * mapper in Hadoop. It includes new APIs for
  * in-memory collective communication.
- * 
- * @author zhangbj
- * 
- * @param <KEYIN>
- *          Input key
- * @param <VALUEIN>
- *          Input value
- * @param <KEYOUT>
- *          Output key
- * @param <VALUEOUT>
- *          Output value
- */
+ * @param <KEYIN> Input key
+ * @param <VALUEIN> Input value
+ * @param <KEYOUT> Output key
+ * @param <VALUEOUT> Output value
+ ******************************************************/
 public class CollectiveMapper<KEYIN, VALUEIN, KEYOUT, VALUEOUT>
   extends
   Mapper<KEYIN, VALUEIN, KEYOUT, VALUEOUT> {
