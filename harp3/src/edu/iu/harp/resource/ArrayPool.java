@@ -26,15 +26,26 @@ import java.util.LinkedList;
 import org.apache.log4j.Logger;
 
 import edu.iu.harp.io.Constant;
-
+/*******************************************************
+ * The abstract class if pools.
+ * An ArrayPool is used for caching arrays.
+ * The arrays, which were allocated before and are no 
+ * longer used, will be cached for reuse.
+ ******************************************************/
 public abstract class ArrayPool<T> {
   /** Class logger */
   private static final Logger LOG = Logger
     .getLogger(ArrayPool.class);
-  // A map between size and buffer array (2
-  // hashset. 0: free 1: in-use)
+  /* A map from size to ArrayStore*/
   private Int2ObjectOpenHashMap<ArrayStore> arrayMap;
-
+  
+  /**
+   * ArrayStore is used for buffering Arrays.
+   * freeQueue stores not-in-use Arrays,
+   * which can be used as required to avoid
+   * reallocating Arrays.
+   * inUseSet stores in-use arrays. 
+   */
   private class ArrayStore {
     private LinkedList<T> freeQueue;
     private HashSet<T> inUseSet;
@@ -49,6 +60,15 @@ public abstract class ArrayPool<T> {
     arrayMap = new Int2ObjectOpenHashMap<>();
   }
 
+  /**
+   * If approximate is true, the return value is 
+   * the smallest power of 2 which is no less than size,
+   * else, the return value is the minimum of 
+   * Constant.MAX_ARRAY_SIZE and size.
+   * @param size the size of array required
+   * @param approximate true or false
+   * @return the adjusted size
+   */
   private int getAdjustedArraySize(int size,
     boolean approximate) {
     if (approximate) {
@@ -63,10 +83,30 @@ public abstract class ArrayPool<T> {
     }
   }
 
+  /**
+   * Create a new array of the size.
+   * @param size
+   * @return a new array
+   */
   protected abstract T createNewArray(int size);
 
+  /**
+   * Get the length of the array
+   * @param array
+   * @return length of the array
+   */
   protected abstract int getLength(T array);
 
+  /**
+   * If approximate is false, get an array of required size. 
+   * else, get an array of adjusted size. 
+   * If a not-in-use array of adjusted size is already cached, 
+   * use this array directly.
+   * Else, create a new array.
+   * @param size
+   * @param approximate
+   * @return an array
+   */
   synchronized T getArray(int size,
     boolean approximate) {
     int originSize = size;
@@ -120,7 +160,13 @@ public abstract class ArrayPool<T> {
       return array;
     }
   }
-
+  /**
+   * Release the array by moving the array 
+   * from inUseSet to freeQueue. The array 
+   * can be used as a new array later.
+   * @param array the array to release
+   * @return true if succeeded, false if failed.
+   */
   synchronized boolean releaseArray(T array) {
     if (array == null) {
       return false;
@@ -150,7 +196,12 @@ public abstract class ArrayPool<T> {
       }
     }
   }
-
+  /**
+   * Free the array by removing it from
+   * the inUseSet. It is no longer available. 
+   * @param array the array to be freed
+   * @return true if succeeded, false if failed
+   */
   synchronized boolean freeArray(T array) {
     int size = getLength(array);
     // LOG.info("Free an array with size: " + size
@@ -163,13 +214,18 @@ public abstract class ArrayPool<T> {
       return arrayStore.inUseSet.remove(array);
     }
   }
-
+  /**
+   * Clean all arrays in freeQueue, namely remove 
+   * all not-in-use arrays.
+   */
   synchronized void clean() {
     for (ArrayStore store : arrayMap.values()) {
       store.freeQueue.clear();
     }
   }
-
+  /**
+   * Logging the usage of the arrays. 
+   */
   synchronized void log() {
     ObjectIterator<Int2ObjectMap.Entry<ArrayStore>> iterator =
       arrayMap.int2ObjectEntrySet()
