@@ -23,7 +23,10 @@ import edu.iu.harp.partition.Partition;
 import edu.iu.harp.partition.PartitionCombiner;
 import edu.iu.harp.partition.PartitionStatus;
 import edu.iu.harp.resource.Writable;
-
+/*******************************************************
+ * Long2IntKVPartitionCombiner defines
+ * how to merge Long2IntKVPartition
+ ******************************************************/
 class Long2IntKVPartitionCombiner extends
   PartitionCombiner<Long2IntKVPartition> {
 
@@ -34,6 +37,9 @@ class Long2IntKVPartitionCombiner extends
     this.valCombiner = combiner;
   }
 
+  /**
+   * Combine two partitions
+   */
   @Override
   public PartitionStatus
     combine(Long2IntKVPartition op,
@@ -50,6 +56,10 @@ class Long2IntKVPartitionCombiner extends
   }
 }
 
+
+/*******************************************************
+ * A KVTable manages Long2IntKVPartition
+ ******************************************************/
 public class Long2IntKVTable extends
   KVTable<Long2IntKVPartition> {
 
@@ -62,12 +72,26 @@ public class Long2IntKVTable extends
     this.valCombiner = combiner;
   }
 
+  /**
+   * Add a new key-value pair to the table.
+   * If the key exists, combine the old one 
+   * and the new one,
+   * else, create a new partition and then add
+   * the new key-value pair to it.
+   * @param key the key
+   * @param val the value
+   */
   public void addKeyVal(long key, int val) {
     Long2IntKVPartition partition =
       getOrCreateKVPartition(key);
     partition.putKeyVal(key, val, valCombiner);
   }
 
+  /**
+   * Get the value associated with the key
+   * @param key the key
+   * @return the value 
+   */
   public int getVal(long key) {
     Partition<Long2IntKVPartition> partition =
       getKVPartition(key);
@@ -78,6 +102,12 @@ public class Long2IntKVTable extends
     }
   }
 
+  /**
+   * Get a partition by key if exists, or
+   * create a new partition if not.
+   * @param key the key
+   * @return the partition
+   */
   private Long2IntKVPartition
     getOrCreateKVPartition(long key) {
     int partitionID = getKVPartitionID(key);
@@ -94,12 +124,23 @@ public class Long2IntKVTable extends
     return partition.get();
   }
 
+  /**
+   * Get the partition by key
+   * @param key the key
+   * @return the partition 
+   */
   private Partition<Long2IntKVPartition>
     getKVPartition(long key) {
     int partitionID = getKVPartitionID(key);
     return this.getPartition(partitionID);
   }
 
+
+  /**
+   * Get the partition Id by key
+   * @param key the key
+   * @return the partition id
+   */
   private int getKVPartitionID(long key) {
     return (int) key;
   }
