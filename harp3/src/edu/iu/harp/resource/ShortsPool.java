@@ -15,7 +15,9 @@
  */
 
 package edu.iu.harp.resource;
-
+/*******************************************************
+ * A pool used for caching short-type arrays.
+ ******************************************************/
 public class ShortsPool extends
   ArrayPool<short[]> {
 
@@ -23,11 +25,17 @@ public class ShortsPool extends
     super();
   }
 
+  /**
+   * New a short-type array of the size
+   */
   @Override
   protected short[] createNewArray(int size) {
     return new short[size];
   }
 
+  /**
+   * Get the length of the array
+   */
   @Override
   protected int getLength(short[] array) {
     return array.length;

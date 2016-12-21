@@ -15,7 +15,9 @@
  */
 
 package edu.iu.harp.resource;
-
+/*******************************************************
+ * A pool used for caching float arrays.
+ ******************************************************/
 public class FloatsPool extends
   ArrayPool<float[]> {
 
@@ -23,11 +25,17 @@ public class FloatsPool extends
     super();
   }
 
+  /**
+   * New a float array of the size
+   */
   @Override
   protected float[] createNewArray(int size) {
     return new float[size];
   }
 
+  /**
+   * Get the length of the array
+   */
   @Override
   protected int getLength(float[] array) {
     return array.length;

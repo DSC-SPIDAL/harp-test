@@ -15,7 +15,9 @@
  */
 
 package edu.iu.harp.resource;
-
+/*******************************************************
+ * A pool used for caching double arrays.
+ ******************************************************/
 public class DoublesPool extends
   ArrayPool<double[]> {
 
@@ -23,11 +25,17 @@ public class DoublesPool extends
     super();
   }
 
+  /**
+   * New a double array of the size
+   */
   @Override
   protected double[] createNewArray(int size) {
     return new double[size];
   }
 
+  /**
+   * Get the length of the array
+   */
   @Override
   protected int getLength(double[] array) {
     return array.length;

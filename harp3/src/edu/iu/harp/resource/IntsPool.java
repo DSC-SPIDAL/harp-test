@@ -15,18 +15,26 @@
  */
 
 package edu.iu.harp.resource;
-
+/*******************************************************
+ * A pool used for caching int arrays.
+ ******************************************************/
 public class IntsPool extends ArrayPool<int[]> {
 
   public IntsPool() {
     super();
   }
 
+  /**
+   * New a int array of the size
+   */
   @Override
   protected int[] createNewArray(int size) {
     return new int[size];
   }
 
+  /**
+   * Get the length of the array
+   */
   @Override
   protected int getLength(int[] array) {
     return array.length;
