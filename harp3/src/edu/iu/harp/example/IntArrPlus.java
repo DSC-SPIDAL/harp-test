@@ -20,9 +20,15 @@ import edu.iu.harp.partition.PartitionCombiner;
 import edu.iu.harp.partition.PartitionStatus;
 import edu.iu.harp.resource.IntArray;
 
+/*******************************************************
+ * Combiner for IntArray
+ ******************************************************/
 public class IntArrPlus extends
   PartitionCombiner<IntArray> {
 
+  /**
+   * Combine two DoubleArrays
+   */
   @Override
   public PartitionStatus combine(IntArray curPar,
     IntArray newPar) {

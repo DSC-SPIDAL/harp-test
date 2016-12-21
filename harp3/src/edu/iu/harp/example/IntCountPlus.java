@@ -19,9 +19,15 @@ package edu.iu.harp.example;
 import edu.iu.harp.keyval.ValCombiner;
 import edu.iu.harp.keyval.ValStatus;
 
+/*******************************************************
+ * Combiner for IntCount
+ ******************************************************/
 public class IntCountPlus extends
   ValCombiner<IntCount> {
 
+  /**
+   * Combine two IntCountss
+   */
   @Override
   public ValStatus combine(IntCount curVal,
     IntCount newVal) {

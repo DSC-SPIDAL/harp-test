@@ -20,9 +20,15 @@ import edu.iu.harp.partition.PartitionCombiner;
 import edu.iu.harp.partition.PartitionStatus;
 import edu.iu.harp.resource.LongArray;
 
+/*******************************************************
+ * Combiner for LongArray 
+ ******************************************************/
 public class LongArrPlus extends
   PartitionCombiner<LongArray> {
 
+  /**
+   * Combine two LongArrays
+   */
   @Override
   public PartitionStatus combine(
     LongArray curPar, LongArray newPar) {
