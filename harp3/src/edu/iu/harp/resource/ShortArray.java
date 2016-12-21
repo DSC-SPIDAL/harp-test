@@ -20,7 +20,9 @@ import java.io.DataOutput;
 import java.io.IOException;
 
 import edu.iu.harp.io.DataType;
-
+/*******************************************************
+ * ByteArray class for managing short[] data.
+ ******************************************************/
 public final class ShortArray extends
   Array<short[]> {
 
@@ -29,11 +31,21 @@ public final class ShortArray extends
     super(arr, start, size);
   }
 
+  /**
+   * Get the number of Bytes of 
+   * encoded data.
+   * One byte for storing DataType,
+   * four bytes for storing the size,
+   * size*2 bytes for storing the data.
+   */
   @Override
   public int getNumEnocdeBytes() {
     return size * 2 + 5;
   }
 
+  /**
+   * Encode the array as DataOutPut
+   */
   @Override
   public void encode(DataOutput out)
     throws IOException {
@@ -45,6 +57,15 @@ public final class ShortArray extends
     }
   }
 
+
+  /**
+   * Create an array. 
+   * Firstly try to get an array from ResourcePool;
+   * if failed, new an array.
+   * @param len
+   * @param approximate
+   * @return
+   */
   public static ShortArray create(int len,
     boolean approximate) {
     if (len > 0) {
@@ -61,6 +82,9 @@ public final class ShortArray extends
     }
   }
 
+  /**
+   * Release the array from the ResourcePool
+   */
   @Override
   public void release() {
     ResourcePool.get().getShortsPool()
@@ -68,6 +92,9 @@ public final class ShortArray extends
     this.reset();
   }
 
+  /**
+   * Free the array from the ResourcePool
+   */
   @Override
   public void free() {
     ResourcePool.get().getShortsPool()

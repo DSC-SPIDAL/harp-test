@@ -21,7 +21,9 @@ import java.io.IOException;
 
 import edu.iu.harp.io.DataType;
 import edu.iu.harp.resource.Array;
-
+/*******************************************************
+ * ByteArray class for managing float[] data.
+ ******************************************************/
 public final class FloatArray extends
   Array<float[]> {
 
@@ -30,11 +32,21 @@ public final class FloatArray extends
     super(arr, start, size);
   }
 
+  /**
+   * Get the number of Bytes of 
+   * encoded data.
+   * One byte for storing DataType,
+   * four bytes for storing the size,
+   * size*4 bytes for storing the data.
+   */
   @Override
   public int getNumEnocdeBytes() {
     return size * 4 + 5;
   }
 
+  /**
+   * Encode the array as DataOutPut
+   */
   @Override
   public void encode(DataOutput out)
     throws IOException {
@@ -45,7 +57,15 @@ public final class FloatArray extends
       out.writeFloat(array[i]);
     }
   }
-
+  
+  /**
+   * Create an array. 
+   * Firstly try to get an array from ResourcePool;
+   * if failed, new an array.
+   * @param len
+   * @param approximate
+   * @return
+   */
   public static FloatArray create(int len,
     boolean approximate) {
     if (len > 0) {
@@ -62,6 +82,9 @@ public final class FloatArray extends
     }
   }
 
+  /**
+   * Release the array from the ResourcePool
+   */
   @Override
   public void release() {
     ResourcePool.get().getFloatsPool()
@@ -69,6 +92,9 @@ public final class FloatArray extends
     this.reset();
   }
 
+  /**
+   * Free the array from the ResourcePool
+   */
   @Override
   public void free() {
     ResourcePool.get().getFloatsPool()

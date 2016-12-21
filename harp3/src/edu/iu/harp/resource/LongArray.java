@@ -20,7 +20,9 @@ import java.io.DataOutput;
 import java.io.IOException;
 
 import edu.iu.harp.io.DataType;
-
+/*******************************************************
+ * ByteArray class for managing long[] data.
+ ******************************************************/
 public final class LongArray extends
   Array<long[]> {
 
@@ -28,11 +30,21 @@ public final class LongArray extends
     super(arr, start, size);
   }
 
+  /**
+   * Get the number of Bytes of 
+   * encoded data.
+   * One byte for storing DataType,
+   * four bytes for storing the size,
+   * size*8 bytes for storing the data.
+   */
   @Override
   public int getNumEnocdeBytes() {
     return size * 8 + 5;
   }
 
+  /**
+   * Encode the array as DataOutPut
+   */
   @Override
   public void encode(DataOutput out)
     throws IOException {
@@ -44,6 +56,14 @@ public final class LongArray extends
     }
   }
 
+  /**
+   * Create an array. 
+   * Firstly try to get an array from ResourcePool;
+   * if failed, new an array.
+   * @param len
+   * @param approximate
+   * @return
+   */
   public static LongArray create(int len,
     boolean approximate) {
     if (len > 0) {
@@ -60,13 +80,19 @@ public final class LongArray extends
     }
   }
 
+  /**
+   * Release the array from the ResourcePool
+   */
   @Override
   public void release() {
     ResourcePool.get().getLongsPool()
       .releaseArray(array);
     this.reset();
   }
-
+  
+  /**
+   * Free the array from the ResourcePool
+   */
   @Override
   public void free() {
     ResourcePool.get().getLongsPool()
