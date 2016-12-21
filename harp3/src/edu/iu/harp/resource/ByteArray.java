@@ -44,7 +44,7 @@ public final class ByteArray extends
   }
 
   /**
-   * Encode the array to DataOutPut
+   * Encode the array as DataOutPut
    */
   @Override
   public void encode(DataOutput out)
