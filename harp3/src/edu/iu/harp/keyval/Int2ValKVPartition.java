@@ -30,13 +30,11 @@ import org.apache.log4j.Logger;
 
 import edu.iu.harp.resource.Writable;
 
-/**
- * Each value is a double array... We assume it is
- * not big, each of them just have few elements.
- * 
- * @author zhangbj
- * 
- */
+
+/*******************************************************
+ * Int2ValKVPartition manages key-value pairs in which 
+ * the key is int-type and the value is object
+ ******************************************************/
 public abstract class Int2ValKVPartition<V extends Value>
   extends KVPartition {
 
@@ -45,7 +43,9 @@ public abstract class Int2ValKVPartition<V extends Value>
     .getLogger(Int2ValKVPartition.class);
 
   private Int2ObjectOpenHashMap<V> kvMap;
+  /**The class of the values*/
   private Class<V> vClass;
+  /**Value objects for reuse*/
   private LinkedList<V> freeVals;
 
   public Int2ValKVPartition() {
@@ -53,7 +53,10 @@ public abstract class Int2ValKVPartition<V extends Value>
     vClass = null;
     freeVals = new LinkedList<>();
   }
-
+  
+  /**
+   * Initialization
+   */
   public void initialize(Class<V> vClass) {
     if (this.kvMap == null) {
       this.kvMap = new Int2ObjectOpenHashMap<>();
@@ -61,7 +64,17 @@ public abstract class Int2ValKVPartition<V extends Value>
     }
     this.vClass = vClass;
   }
-
+  
+  /**
+   * Put the new key-value pair to the partition.
+   * If the key already exists in the partition,
+   * combine the original value with the new value;
+   * else, add the new key-value pair to the partition
+   * @param key the new key
+   * @param val the new value
+   * @param combiner the combiner
+   * @return the ValStatus
+   */
   public ValStatus putKeyVal(int key, V val,
     ValCombiner<V> combiner) {
     if (val == null) {
@@ -76,26 +89,54 @@ public abstract class Int2ValKVPartition<V extends Value>
     }
   }
 
+  /**
+   * Removes this key and the associated value 
+   * from this function if it is present.
+   * @param key the key
+   * @return the associated value 
+   */
   public V removeVal(int key) {
     return this.kvMap.remove(key);
   }
 
+  /**
+   * Get the associated value of the key
+   * @param key the key
+   * @return the associated value
+   */
   public V getVal(int key) {
     return this.kvMap.get(key);
   }
 
+  /**
+   * Get the Int2ObjectOpenHashMap
+   * @return the Int2ObjectOpenHashMap
+   */
   public Int2ObjectOpenHashMap<V> getKVMap() {
     return kvMap;
   }
-
+  
+  /**
+   * Get the class of the values
+   * @return the class of the values
+   */
   public Class<V> getVClass() {
     return this.vClass;
   }
 
+  /**
+   * Get the available Value objects to reuse
+   * @return Value objects for reuse
+   */
   List<V> getFreeVals() {
     return freeVals;
   }
-
+  
+  /**
+   * Clear the partition. 
+   * All Value objects will be cached
+   * in and freeVales for later reuse
+   */
   @Override
   public void clear() {
     if (!this.kvMap.isEmpty()) {
@@ -111,7 +152,10 @@ public abstract class Int2ValKVPartition<V extends Value>
       this.kvMap.clear();
     }
   }
-
+  
+  /**
+   * Get the number of bytes of encoded data
+   */
   @Override
   public int getNumWriteBytes() {
     // mapSize
@@ -130,7 +174,10 @@ public abstract class Int2ValKVPartition<V extends Value>
     }
     return size;
   }
-
+  
+  /**
+   * Write this to DataOutput
+   */
   @Override
   public void write(DataOutput out)
     throws IOException {
@@ -146,7 +193,10 @@ public abstract class Int2ValKVPartition<V extends Value>
       entry.getValue().write(out);
     }
   }
-
+  
+  /**
+   * Read this from DataOutput
+   */
   @Override
   public void read(DataInput in)
     throws IOException {

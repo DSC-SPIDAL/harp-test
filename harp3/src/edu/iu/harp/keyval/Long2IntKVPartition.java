@@ -24,6 +24,10 @@ import java.io.DataInput;
 import java.io.DataOutput;
 import java.io.IOException;
 
+/*******************************************************
+ * Long2IntKVPartition manages key-value pairs in which 
+ * the key is long-type and the value is int-type
+ ******************************************************/
 public class Long2IntKVPartition extends
   KVPartition {
 
@@ -35,7 +39,10 @@ public class Long2IntKVPartition extends
     super();
     kvMap = null;
   }
-
+  
+  /**
+   * Initialization
+   */
   public void initialize() {
     if (kvMap != null) {
       kvMap.clear();
@@ -44,7 +51,17 @@ public class Long2IntKVPartition extends
       kvMap.defaultReturnValue(defaultReturnVal);
     }
   }
-
+  
+  /**
+   * Put the new key-value pair to the partition.
+   * If the key already exists in the partition,
+   * combine the original value with the new value;
+   * else, add the new key-value pair to the partition
+   * @param key the new key
+   * @param val the new value
+   * @param combiner the combiner
+   * @return the ValStatus
+   */
   public ValStatus putKeyVal(long key, int val,
     TypeIntCombiner combiner) {
     int curVal = kvMap.put(key, val);
@@ -57,32 +74,58 @@ public class Long2IntKVPartition extends
     }
   }
 
+  /**
+   * Get the associated value of the key
+   * @param key the key
+   * @return the associated value
+   */
   public int getVal(long key) {
     return this.kvMap.get(key);
   }
 
+  /**
+   * Get the Long2IntOpenHashMap
+   * @return the Long2IntOpenHashMap
+   */
   public Long2IntOpenHashMap getKVMap() {
     return kvMap;
   }
 
+  /**
+   * Get the number of key-value pairs
+   * @return the number of key-value pairs
+   */
   public int size() {
     return this.kvMap.size();
   }
-
+  
+  /**
+   * Indicates if the partition is empty or not
+   * @return true if empty, false if not
+   */
   public boolean isEmpty() {
     return this.kvMap.isEmpty();
   }
 
+  /**
+   * Clear the partition. 
+   */
   @Override
   public void clear() {
     this.kvMap.clear();
   }
-
+  
+  /**
+   * Get the number of bytes of encoded data
+   */
   @Override
   public int getNumWriteBytes() {
     return 4 + kvMap.size() * 12;
   }
-
+  
+  /**
+   * Write this to DataOutput
+   */
   @Override
   public void write(DataOutput out)
     throws IOException {
@@ -95,7 +138,10 @@ public class Long2IntKVPartition extends
       out.writeInt(entry.getIntValue());
     }
   }
-
+  
+  /**
+   * Read this from DataOutput
+   */
   @Override
   public void read(DataInput in)
     throws IOException {

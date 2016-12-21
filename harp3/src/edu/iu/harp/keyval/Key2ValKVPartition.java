@@ -32,7 +32,8 @@ import edu.iu.harp.resource.Writable;
 
 
 /*******************************************************
- * Key2ValKVPartition manages key-value pairs
+ * Key2ValKVPartition manages key-value pairs 
+ * in which the key and the value are objects
  ******************************************************/
 public abstract class Key2ValKVPartition<K extends Key, V extends Value>
   extends KVPartition {
@@ -146,8 +147,8 @@ public abstract class Key2ValKVPartition<K extends Key, V extends Value>
   }
 
   /**
-   * Get the size of key-value pairs
-   * @return the size of key-value pairs
+   * Get the number of key-value pairs
+   * @return the number of key-value pairs
    */
   public int size() {
     return this.kvMap.size();
