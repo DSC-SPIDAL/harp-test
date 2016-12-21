@@ -27,7 +27,7 @@ import org.apache.log4j.Logger;
 
 import edu.iu.harp.io.Constant;
 /*******************************************************
- * The abstract class if pools.
+ * The abstract class of pools.
  * An ArrayPool is used for caching arrays.
  * The arrays, which were allocated before and are no 
  * longer used, will be cached for reuse.
