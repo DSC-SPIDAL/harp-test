@@ -32,8 +32,11 @@ import org.apache.log4j.Logger;
 
 import edu.iu.harp.depl.Depl;
 
+/*******************************************************
+ * The information of the nodes
+ ******************************************************/
 public class Nodes {
-  /** Class logger */
+ 
   private static final Logger LOG = Logger
     .getLogger(Nodes.class);
 
@@ -67,6 +70,11 @@ public class Nodes {
     }
   }
 
+  /**
+   * Initialization 
+   * @param reader the BufferedReader
+   * @throws Exception
+   */
   private void initializeNodes(
     BufferedReader reader) throws Exception {
     nodes = new HashMap<Integer, List<String>>();
@@ -100,6 +108,11 @@ public class Nodes {
     }
   }
 
+  /**
+   * Add the node to the rack
+   * @param rackID the ID of the rack
+   * @param line the string of the node
+   */
   private void addNode(int rackID, String line) {
     List<String> nodeList = nodes.get(rackID);
     // Add list
@@ -116,18 +129,34 @@ public class Nodes {
     }
   }
 
+  /**
+   * Get the number of physical nodes
+   * @return
+   */
   public int getNumPhysicalNodes() {
     return numPhysicalNodes;
   }
 
+  /**
+   * Get the map from rackID to its associated nodes
+   * @return
+   */
   protected Map<Integer, List<String>> getNodes() {
     return nodes;
   }
 
+  /**
+   * Get the list of the racks
+   * @return the ID list of the racks
+   */
   protected List<Integer> getRackList() {
     return this.nodeRackIDs;
   }
 
+  /**
+   * Get the list of all the nodes
+   * @return the list of all the nodes
+   */
   public List<String> getNodeList() {
     List<String> nodeList =
       new LinkedList<String>();
@@ -138,6 +167,11 @@ public class Nodes {
     return nodeList;
   }
 
+  /**
+   * Sorting the racks based on the number
+   * of the nodes associated with the racks
+   * in descending order
+   */
   public void sortRacks() {
     SortedMap<Integer, Integer> sortedRacks =
       new TreeMap<>();
@@ -158,6 +192,10 @@ public class Nodes {
     }
   }
 
+  /**
+   * print the rack and the nodes information
+   * @return the rack and the nodes information
+   */
   public List<String> printToNodesFile() {
     List<String> rackNodeList =
       new LinkedList<String>();

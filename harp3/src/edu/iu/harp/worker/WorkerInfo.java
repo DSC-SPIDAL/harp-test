@@ -16,6 +16,10 @@
 
 package edu.iu.harp.worker;
 
+
+/*******************************************************
+ * The information of the worker
+ ******************************************************/
 public class WorkerInfo {
 
   private final int id;
@@ -32,18 +36,34 @@ public class WorkerInfo {
     this.rack = rack;
   }
 
+  /**
+   * Get the id
+   * @return the id
+   */
   public int getID() {
     return id;
   }
 
+  /**
+   * Get the hostname or IP
+   * @return the hostname or IP
+   */
   public String getNode() {
     return node;
   }
 
+  /**
+   * Get the port
+   * @return the port
+   */
   public int getPort() {
     return port;
   }
 
+  /**
+   * Get the rack id
+   * @return the rack id
+   */
   public int getRack() {
     return rack;
   }
