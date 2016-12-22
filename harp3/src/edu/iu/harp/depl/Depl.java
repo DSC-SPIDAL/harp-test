@@ -30,8 +30,12 @@ import org.apache.log4j.Logger;
 
 import edu.iu.harp.worker.Nodes;
 
+/*******************************************************
+ * Some tools including command execution, and getting
+ * rack information
+ ******************************************************/
 public class Depl {
-  /** Class logger */
+
   private static final Logger LOG = Logger
     .getLogger(Depl.class);
 
@@ -42,7 +46,11 @@ public class Depl {
   public final static String nodes_file =
     prjt_home + bin_directory + "nodes";
 
-  // retrieve output of the command execution
+  /**
+   * Execute the command and get the output
+   * @param cmd the command
+   * @return the output from the command execution
+   */
   private static Output executeCMDandReturn(
     String[] cmd) {
     Output cmdOutput = new Output();
@@ -78,7 +86,7 @@ public class Depl {
    * Just do execution. The output is not
    * returned, it shows on the screen directly
    * 
-   * @param cmd
+   * @param cmd the command
    */
   public static Output executeCMDandForward(
     String[] cmd) {
@@ -96,6 +104,12 @@ public class Depl {
     return cmdOutput;
   }
 
+  /**
+   * Execute the command and doesn't wait for
+   * outputs
+   * @param cmd the command
+   * @return the Output
+   */
   public static Output executeCMDandNoWait(
     String[] cmd) {
     Output cmdOutput = new Output();
@@ -109,6 +123,10 @@ public class Depl {
     return cmdOutput;
   }
 
+  /**
+   * Get the JAVA home directory from the system
+   * @return the JAVA home directory
+   */
   private static String getJavaHome() {
     // It seems the only way to execute echo
     // command
@@ -128,6 +146,10 @@ public class Depl {
     return java_home;
   }
 
+  /**
+   * Get the project home directory from the system
+   * @return the project home directory
+   */
   private static String getProjectHome() {
     // It seems the only way to execute echo
     // command
@@ -147,14 +169,26 @@ public class Depl {
     return harp_home;
   }
 
+  /**
+   * Return the java home path
+   * @return the java home path
+   */
   public static String getJavaHomePath() {
     return java_home;
   }
 
+  /**
+   * Return the project home path
+   * @return the project home path
+   */
   public static String getProjectHomePath() {
     return prjt_home;
   }
 
+  /**
+   * Return the bin directory
+   * @return the bin directory
+   */
   public static String getBinDirectory() {
     return bin_directory;
   }
@@ -162,8 +196,8 @@ public class Depl {
   /**
    * Write a list of strings to lines
    * 
-   * @param filePath
-   * @param contents
+   * @param filePath the file to be written into
+   * @param contents the contents to write
    */
   static boolean writeToFile(String filePath,
     List<String> contents) {
@@ -196,10 +230,9 @@ public class Depl {
   }
 
   /**
-   * Is this line a tag of rack?
-   * 
-   * @param line
-   * @return
+   * Check if this string is a tag of rack or not
+   * @param line the string
+   * @return true if this string is a tag of rack
    */
   public static boolean isRack(String line) {
     Pattern p = Pattern.compile("#[0-9]*");
@@ -207,6 +240,11 @@ public class Depl {
     return m.matches();
   }
 
+  /**
+   * Get the rack ID from the string
+   * @param line the string
+   * @return the rack ID
+   */
   public static int getRackID(String line) {
     return Integer.parseInt(line.substring(1));
   }
