@@ -25,8 +25,11 @@ import edu.iu.harp.io.DataStatus;
 import edu.iu.harp.worker.WorkerInfo;
 import edu.iu.harp.worker.Workers;
 
+/*******************************************************
+ * The abstract class for sending the data
+ ******************************************************/
 public abstract class Sender {
-  /** Class logger */
+ 
   private static final Logger LOG = Logger
     .getLogger(Sender.class);
   private final Data data;
@@ -40,10 +43,10 @@ public abstract class Sender {
    * To send data between workers, sender and
    * receiver must both have valid IDs.
    * 
-   * @param d
-   * @param destID
-   * @param w
-   * @param command
+   * @param d the data 
+   * @param destID the ID of the destination
+   * @param w the workers
+   * @param command the command
    */
   public Sender(Data d, int destID, Workers w,
     byte command) {
@@ -75,7 +78,6 @@ public abstract class Sender {
    * If send data from outside, data's worker ID
    * should be unknown
    * 
-   * 
    * @param d
    * @param h
    * @param p
@@ -91,6 +93,10 @@ public abstract class Sender {
     commandType = command;
   }
 
+  /**
+   * Send the data
+   * @return true if succeeded, false if not.
+   */
   public boolean execute() {
     // Check if we can send
     if (data == null || host == null
@@ -139,18 +145,36 @@ public abstract class Sender {
     return !isFailed;
   }
 
+  /**
+   * Get the ID of the destination worker
+   * @return the ID of the destination worker
+   */
   protected int getDestWorkerID() {
     return this.destWorkerID;
   }
 
+  /**
+   * Get the workers
+   * @return the workers
+   */
   protected Workers getWorkers() {
     return this.workers;
   }
 
+  /**
+   * Get the command
+   * @return the command
+   */
   protected byte getCommand() {
     return this.commandType;
   }
 
+  /**
+   * Abstract method for handling the data
+   * @param conn
+   * @param data
+   * @throws Exception
+   */
   protected abstract void handleData(
     final Connection conn, final Data data)
     throws Exception;

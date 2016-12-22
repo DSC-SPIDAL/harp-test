@@ -17,6 +17,8 @@
 package edu.iu.harp.client;
 
 import java.io.IOException;
+
+
 import java.io.OutputStream;
 
 import org.apache.log4j.Logger;
@@ -29,13 +31,13 @@ import edu.iu.harp.io.Serializer;
 import edu.iu.harp.resource.ByteArray;
 import edu.iu.harp.worker.Workers;
 
-/**
+/*******************************************************
+ * The actual sender for sending the data.
  * Different from DataReceiver, we don't release
  * the encoded bytes in failures.
- * 
- */
+ ******************************************************/
 public class DataSender extends Sender {
-  /** Class logger */
+
   @SuppressWarnings("unused")
   private static final Logger LOG = Logger
     .getLogger(DataSender.class);
@@ -50,6 +52,9 @@ public class DataSender extends Sender {
     super(data, host, port, command);
   }
 
+  /**
+   * This method defines how to handle the data
+   */
   @Override
   protected void handleData(
     final Connection conn, final Data data)

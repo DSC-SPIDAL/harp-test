@@ -16,6 +16,10 @@
 
 package edu.iu.harp.io;
 
+/*******************************************************
+ * This class defines the constants used in Harp
+ * 
+ ******************************************************/
 public class Constant {
   // Code
   public static final byte UNKNOWN_CMD = -1;

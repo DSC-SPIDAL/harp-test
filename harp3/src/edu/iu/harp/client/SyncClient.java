@@ -28,15 +28,11 @@ import edu.iu.harp.io.Constant;
 import edu.iu.harp.schdynamic.ComputeUtil;
 import edu.iu.harp.worker.Workers;
 
-/**
- * Synchronous client.
- * 
- * @author zhangbj
- *
- */
+/*******************************************************
+ * Synchronous client
+ ******************************************************/
 public class SyncClient implements Runnable {
 
-  /** Class logger */
   protected static final Logger LOG = Logger
     .getLogger(SyncClient.class);
 

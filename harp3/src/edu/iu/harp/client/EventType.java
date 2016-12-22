@@ -16,15 +16,12 @@
 
 package edu.iu.harp.client;
 
-/**
+/*******************************************************
  * There are three event types. One is for the
  * local event. Another is for the collective
  * event (broadcasting). The third one is the
  * message event (point-to-point).
- * 
- * @author zhangbj
- *
- */
+ ******************************************************/
 public enum EventType {
   MESSAGE_EVENT, COLLECTIVE_EVENT, LOCAL_EVENT
 }

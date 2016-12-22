@@ -18,7 +18,7 @@ package edu.iu.harp.client;
 
 import edu.iu.harp.resource.Simple;
 
-/**
+/*******************************************************
  * An event includes the event type, the context
  * name, the source ID, the target ID and the
  * event body.
@@ -31,9 +31,7 @@ import edu.iu.harp.resource.Simple;
  * (LOCAL_EVENT) or sent to the rest workers
  * (COLLECTIVE_EVENT)
  * 
- * @author zhangbj
- *
- */
+ ******************************************************/
 public class Event {
   private final EventType eventType;
   private final String contextName;
@@ -50,22 +48,42 @@ public class Event {
     body = b;
   }
 
+  /**
+   * Get the type of the event
+   * @return the EventType
+   */
   public EventType getEventType() {
     return eventType;
   }
 
+  /**
+   * Get the name of the context
+   * @return
+   */
   public String getContextName() {
     return contextName;
   }
 
+  /**
+   * Get the ID of the source
+   * @return the ID of the source
+   */
   public int getSourceID() {
     return sourceID;
   }
 
+  /**
+   * Get the ID of the target
+   * @return the ID of the target
+   */
   public int getTargetID() {
     return targetID;
   }
 
+  /**
+   * Get the body of the event
+   * @return the body of the event
+   */
   public Simple getBody() {
     return body;
   }

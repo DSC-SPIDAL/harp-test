@@ -30,7 +30,7 @@ import edu.iu.harp.resource.Transferable;
 import edu.iu.harp.worker.Workers;
 
 public class SyncQueue {
-  /** Class logger */
+
   protected static final Logger LOG = Logger
     .getLogger(SyncQueue.class);
 
@@ -58,10 +58,18 @@ public class SyncQueue {
     this.isConsuming = false;
   }
 
+  /**
+   * Get the context name
+   * @return the context name
+   */
   String getContextName() {
     return contextName;
   }
 
+  /**
+   * Get the ID of the destination
+   * @return the ID of the destination
+   */
   int getDestID() {
     return destID;
   }

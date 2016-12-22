@@ -32,7 +32,7 @@ import edu.iu.harp.resource.Transferable;
  *
  */
 public class Data {
-  /** Class logger */
+
   private static final Logger LOG = Logger
     .getLogger(Data.class);
   /** The type of body data, array or object */
