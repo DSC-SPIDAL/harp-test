@@ -79,12 +79,10 @@ public class CollectiveMapper<KEYIN, VALUEIN, KEYOUT, VALUEOUT>
   private Server server;
   private SyncClient client;
 
-  /**
+  /*******************************************************
    * A Key-Value reader to read key-value inputs
    * for this worker.
-   *
-   * @author zhangbj
-   */
+   ******************************************************/
   protected class KeyValReader {
     private Context context;
 
@@ -92,16 +90,34 @@ public class CollectiveMapper<KEYIN, VALUEIN, KEYOUT, VALUEOUT>
       this.context = context;
     }
 
+    /**
+     * Get the next key-value
+     * @return the next key-value
+     * @throws IOException
+     * @throws InterruptedException
+     */
     public boolean nextKeyValue()
       throws IOException, InterruptedException {
       return this.context.nextKeyValue();
     }
 
+    /**
+     * Get the current key
+     * @return the current key
+     * @throws IOException
+     * @throws InterruptedException
+     */
     public KEYIN getCurrentKey()
       throws IOException, InterruptedException {
       return this.context.getCurrentKey();
     }
 
+    /**
+     * Get the current value
+     * @return the current value
+     * @throws IOException
+     * @throws InterruptedException
+     */
     public VALUEIN getCurrentValue()
       throws IOException, InterruptedException {
       return this.context.getCurrentValue();
@@ -109,11 +125,20 @@ public class CollectiveMapper<KEYIN, VALUEIN, KEYOUT, VALUEOUT>
   }
 
   /**
-   * If lock file couldn't be gotten, quit.
+   * The lock file is used for synchronization.
+   * After launching the job, the applicationMaster
+   * will write a lock file to the file system
+   * if it knows that all the workers are launched 
+   * correctly. Every launched worker will try to 
+   * read this lock file. If it exists in the file 
+   * system, then the worker knows that all other 
+   * workers are also launched. The workers will
+   * also continue to work after all the workers
+   * are launched correctly.
    * 
-   * @param lockFile
-   * @param fs
-   * @return
+   * @param lockFile the lock file
+   * @param fs the file system
+   * @return true if found the lockFile, false if not
    */
   private boolean tryLockFile(String lockFile,
     FileSystem fs) {
@@ -148,6 +173,13 @@ public class CollectiveMapper<KEYIN, VALUEIN, KEYOUT, VALUEOUT>
     return true;
   }
 
+  /**
+   * Load the map from the task file.
+   * The map is from task to worker.
+   * @param tasksFile the tasks file
+   * @param fs the file system
+   * @return the map from task to worker
+   */
   private Map<Integer, Integer> getTaskWorkerMap(
     String tasksFile, FileSystem fs) {
     LOG.info("Get task file " + tasksFile);
@@ -177,6 +209,14 @@ public class CollectiveMapper<KEYIN, VALUEIN, KEYOUT, VALUEOUT>
     return taskWorkerMap;
   }
 
+  /**
+   * Get the BufferedReader for reading the 
+   * "nodes" file
+   * @param nodesFile
+   * @param fs
+   * @return
+   * @throws IOException
+   */
   private BufferedReader getNodesReader(
     String nodesFile, FileSystem fs)
     throws IOException {
@@ -190,6 +230,13 @@ public class CollectiveMapper<KEYIN, VALUEIN, KEYOUT, VALUEOUT>
     return br;
   }
 
+  /**
+   * Initialize collective communication components.
+   * 
+   * @param context the context
+   * @return true if succeeded, false is not
+   * @throws IOException
+   */
   private boolean initCollCommComponents(
     Context context) throws IOException {
     // Get file names
@@ -201,6 +248,7 @@ public class CollectiveMapper<KEYIN, VALUEIN, KEYOUT, VALUEOUT>
       FileSystem.get(context.getConfiguration());
     // Try lock
     boolean isSuccess = tryLockFile(lockFile, fs);
+    
     if (!isSuccess) {
       return false;
     }
@@ -529,6 +577,25 @@ public class CollectiveMapper<KEYIN, VALUEIN, KEYOUT, VALUEOUT>
     return isSuccess;
   }
 
+  /**
+   * The rotation communication. Transfer the
+   * partitions from worker to worker. After 
+   * rotation, every worker sends its partitions
+   * to one of the other worker, and receive 
+   * partitions from one of the other workers
+   * @param contextName
+   *           the name of the operation context
+   * @param operationName
+   *           the name of operation
+   * @param globalTable
+   * 		   the global table which acts like a
+   *           distributed dataset, each partition
+   *           in this table is unique
+   * @param rotateMap
+   * 		   the map from worker to worker, defines
+   *           how to rotate the data 
+   * @return true if succeeded, false if not
+   */
   public <P extends Simple> boolean rotate(
     String contextName, String operationName,
     Table<P> globalTable, Int2IntMap rotateMap) {
@@ -543,7 +610,6 @@ public class CollectiveMapper<KEYIN, VALUEIN, KEYOUT, VALUEOUT>
 
   /**
    * Get an event from the event queue.
-   * 
    * @return an event object, null if the queue is
    *         empty
    */
@@ -553,7 +619,6 @@ public class CollectiveMapper<KEYIN, VALUEIN, KEYOUT, VALUEOUT>
 
   /**
    * Wait for an event from the queue
-   * 
    * @return the event object
    */
   public Event waitEvent() {
@@ -564,11 +629,8 @@ public class CollectiveMapper<KEYIN, VALUEIN, KEYOUT, VALUEOUT>
    * Send an event to the local (local event), to
    * a remote worker (message event), or to the
    * rest workers (collective event).
-   * 
-   * @param event
-   *          an event
-   * @return a boolean tells if the operation
-   *         succeeds
+   * @param event an event
+   * @return true if succeeded, false if not
    */
   public boolean sendEvent(Event event) {
     if (event.getEventType() == EventType.LOCAL_EVENT
@@ -589,7 +651,6 @@ public class CollectiveMapper<KEYIN, VALUEIN, KEYOUT, VALUEOUT>
 
   /**
    * Free the objects cached in the pool.
-   * 
    * @return the resource pool
    */
   protected void freeMemory() {
@@ -598,13 +659,15 @@ public class CollectiveMapper<KEYIN, VALUEIN, KEYOUT, VALUEOUT>
 
   /**
    * Free the connections cached in the pool.
-   * 
    * @return the resource pool
    */
   protected void freeConn() {
     ConnPool.get().clean();
   }
 
+  /**
+   * Log memory usage
+   */
   protected void logMemUsage() {
     LOG.info("Total Memory (bytes): " + " "
       + Runtime.getRuntime().totalMemory()
@@ -612,6 +675,9 @@ public class CollectiveMapper<KEYIN, VALUEIN, KEYOUT, VALUEOUT>
       + Runtime.getRuntime().freeMemory());
   }
 
+  /**
+   * Log Garbage collection time
+   */
   protected void logGCTime() {
     long totalGarbageCollections = 0;
     long garbageCollectionTime = 0;
@@ -640,6 +706,9 @@ public class CollectiveMapper<KEYIN, VALUEIN, KEYOUT, VALUEOUT>
     // NOTHING
   }
 
+  /**
+   * Most applications should override this.
+   */
   protected void mapCollective(
     KeyValReader reader, Context context)
     throws IOException, InterruptedException {
@@ -657,11 +726,10 @@ public class CollectiveMapper<KEYIN, VALUEIN, KEYOUT, VALUEOUT>
   }
 
   /**
-   * Expert users can override this method for
-   * more complete control over the execution of
-   * the Mapper.
+   * Override this method to support collective
+   * communications among Mappers
    * 
-   * @param context
+   * @param context the context
    * @throws IOException
    */
   public void run(Context context)
