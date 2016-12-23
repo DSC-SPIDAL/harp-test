@@ -36,12 +36,20 @@ import edu.iu.harp.resource.ShortArray;
 import edu.iu.harp.resource.Simple;
 import edu.iu.harp.resource.Transferable;
 import edu.iu.harp.resource.Writable;
-
+/*******************************************************
+ * The operations, including deserialization, decoding 
+ * and encoding on various type of data
+ ******************************************************/
 public class DataUtil {
-  /** Class logger */
+  
   private static final Logger LOG = Logger
     .getLogger(DataUtil.class);
 
+  /**
+   * Deserialize the data from a Deserializer as a ByteArray
+   * @param din the Deserializer
+   * @return a ByteArray deserialized from the Deserializer
+   */
   public static ByteArray deserializeByteArray(
     Deserializer din) {
     int bytesSize = 0;
@@ -70,6 +78,11 @@ public class DataUtil {
     }
   }
 
+  /**
+   * Deserialize the data from a Deserializer as a ShortArray
+   * @param din the Deserializer
+   * @return a ShortArray deserialized from the Deserializer
+   */
   public static ShortArray deserializeShortArray(
     Deserializer din) {
     int shortsSize = 0;
@@ -92,6 +105,11 @@ public class DataUtil {
     }
   }
 
+  /**
+   * Deserialize the data from a Deserializer as a IntArray
+   * @param din the Deserializer
+   * @return a IntArray deserialized from the Deserializer
+   */
   public static IntArray deserializeIntArray(
     Deserializer din) {
     int intsSize = 0;
@@ -114,6 +132,11 @@ public class DataUtil {
     }
   }
 
+  /**
+   * Deserialize the data from a Deserializer as a FloatArray
+   * @param din the Deserializer
+   * @return a FloatArray deserialized from the Deserializer
+   */
   public static FloatArray deserializeFloatArray(
     Deserializer din) {
     int floatsSize = 0;
@@ -136,6 +159,11 @@ public class DataUtil {
     }
   }
 
+  /**
+   * Deserialize the data from a Deserializer as a LongArray
+   * @param din the Deserializer
+   * @return a LongArray deserialized from the Deserializer
+   */
   public static LongArray deserializeLongArray(
     Deserializer din) {
     int longsSize = 0;
@@ -162,6 +190,11 @@ public class DataUtil {
     }
   }
 
+  /**
+   * Deserialize the data from a Deserializer as a DoubleArray
+   * @param din the Deserializer
+   * @return a DoubleArray deserialized from the Deserializer
+   */
   public static DoubleArray
     deserializeDoubleArray(Deserializer din) {
     int doublesSize = 0;
@@ -191,6 +224,11 @@ public class DataUtil {
     }
   }
 
+  /**
+   * Deserialize the data from a Deserializer as a Writable
+   * @param din the Deserializer
+   * @return a Writable deserialized from the Deserializer
+   */
   public static Writable deserializeWritable(
     DataInput din) {
     String className = null;
@@ -219,6 +257,11 @@ public class DataUtil {
     }
   }
 
+  /**
+   * Decode the ByteArray as a list of Transferable objects
+   * @param byteArray the ByteArray to be decoded
+   * @return a list of Transferable objects
+   */
   public static List<Transferable>
     decodeSimpleList(final ByteArray byteArray) {
     List<Transferable> objs = new LinkedList<>();
@@ -262,6 +305,11 @@ public class DataUtil {
     return objs;
   }
 
+  /**
+   * Decode the ByteArray as a list of Partitions
+   * @param byteArray the ByteArray to be decoded
+   * @return a list of Partitions
+   */
   public static
     List<Transferable>
     decodePartitionList(final ByteArray byteArray) {
@@ -320,12 +368,10 @@ public class DataUtil {
   }
 
   /**
-   * Serialize multiple transferables with
+   * Serialize multiple Transferable with
    * different data types
-   * 
-   * @param objs
-   * @param pool
-   * @return
+   * @param objs the data to be serialized
+   * @return the ByteArray resulted from serialization
    */
   public static ByteArray encodeTransList(
     List<Transferable> objs) {
@@ -349,6 +395,11 @@ public class DataUtil {
     }
   }
 
+  /**
+   * Get the size in bytes of the encoded data
+   * @param objs the data
+   * @return the size in bytes of the data
+   */
   public static int getNumTransListBytes(
     List<Transferable> objs) {
     int size = 0;
@@ -361,6 +412,13 @@ public class DataUtil {
     return size;
   }
 
+  /**
+   * Encode the data to DataOutput
+   * @param objs the objects to be encoded
+   * @param size the size of the encoded data
+   * @param dataOut the DataOutput
+   * @throws Exception
+   */
   public static void encodeTransList(
     List<Transferable> objs, int size,
     DataOutput dataOut) throws Exception {
@@ -389,6 +447,19 @@ public class DataUtil {
     transList.clear();
   }
 
+  /**
+   * Add the Data to EventQueue or DataMap.
+   * If the Data is operation data, add it
+   * to the DataMap; else if the Data isData,
+   * and the bodyType of the Data is 
+   * DataType.SIMPLE_LIST, add it to the
+   * EventQueue
+   * @param selfID the ID of current worker
+   * @param eventQueue the queue for events
+   * @param eventType the type of the event
+   * @param dataMap the DataMap
+   * @param data the Data
+   */
   public static void addDataToQueueOrMap(
     int selfID, EventQueue eventQueue,
     EventType eventType, DataMap dataMap,

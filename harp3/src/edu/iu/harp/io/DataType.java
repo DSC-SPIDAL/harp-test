@@ -16,6 +16,9 @@
 
 package edu.iu.harp.io;
 
+/*******************************************************
+ * The types of the Data
+ ******************************************************/
 public class DataType {
   // Data Type
   public static final byte UNKNOWN_DATA_TYPE = 0;

@@ -23,9 +23,11 @@ import org.apache.log4j.Logger;
 
 import edu.iu.harp.client.Event;
 
+/*******************************************************
+ * The queue for Events
+ ******************************************************/
 public class EventQueue {
 
-  /** Class logger */
   private static final Logger LOG = Logger
     .getLogger(EventQueue.class);
 
@@ -35,10 +37,20 @@ public class EventQueue {
     eventQueue = new LinkedBlockingQueue<>();
   }
 
+  /**
+   * Add a event to the queue
+   * @param event the event to be added
+   */
   public void addEvent(Event event) {
     this.eventQueue.add(event);
   }
 
+  /**
+   * Retrieves and removes the head of this queue, 
+   * waiting if necessary until an element 
+   * becomes available.
+   * @return the next event
+   */
   public Event waitEvent() {
     try {
       return eventQueue.take();
@@ -48,7 +60,11 @@ public class EventQueue {
     }
     return null;
   }
-
+  
+  /**
+   * Retrieves and removes the head of this queue,
+   * or returns null if this queue is empty.
+   */
   public Event getEvent() {
     return eventQueue.poll();
   }

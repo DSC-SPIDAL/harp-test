@@ -25,12 +25,11 @@ import org.apache.log4j.Logger;
 import edu.iu.harp.resource.ByteArray;
 import edu.iu.harp.resource.Transferable;
 
-/**
- * The fields in data must be consistent.
- * 
- * @author zhangbj
- *
- */
+
+/*******************************************************
+ * The wrapper of the data used in communication.
+ * The fields in data must be consistent
+ ******************************************************/
 public class Data {
 
   private static final Logger LOG = Logger
@@ -143,7 +142,10 @@ public class Data {
     }
   }
 
-  /** Data > Operation Data > Partition Data */
+  /**
+   * Check if this is Data
+   * Data > Operation Data > Partition Data 
+   */
   public boolean isData() {
     if (bodyType == DataType.UNKNOWN_DATA_TYPE
       || contextName == null || bodySize == 0
@@ -154,6 +156,10 @@ public class Data {
     return true;
   }
 
+  /**
+   * Check if this is an operation data
+   * @return true if this is an operation data
+   */
   public boolean isOperationData() {
     if (operationName == null) {
       return false;
@@ -162,6 +168,10 @@ public class Data {
     }
   }
 
+  /**
+   * Check if this is a partition data
+   * @return true if this is a partition data
+   */
   public boolean isPartitionData() {
     if (partitionID == Constant.UNKNOWN_PARTITION_ID) {
       return false;
@@ -170,6 +180,9 @@ public class Data {
     }
   }
 
+  /**
+   * Reset the data
+   */
   private void resetData() {
     bodyType = DataType.UNKNOWN_DATA_TYPE;
     contextName = null;
@@ -180,57 +193,103 @@ public class Data {
     body = null;
   }
 
+  /**
+   * Get the type of the body
+   * @return the type of the body
+   */
   public byte getBodyType() {
     return bodyType;
   }
 
+  /**
+   * Get the name of the context
+   * @return the name of the context
+   */
   public String getContextName() {
     return contextName;
   }
 
+  /**
+   * Get the ID of the Worker
+   * @return the ID of the Worker
+   */
   public int getWorkerID() {
     return workerID;
   }
 
+  /**
+   * Get the name of the operation
+   * @return the name of the operation
+   */
   public String getOperationName() {
     return operationName;
   }
-
+  
+  /**
+   * Get the ID of the partition
+   * @return the ID of the partition
+   */
   public int getPartitionID() {
     return partitionID;
   }
 
+  /**
+   * Get the size of the body
+   * @return the size of the body
+   */
   public int getBodySize() {
     return bodySize;
   }
 
+  /**
+   * Get the body
+   * @return the body
+   */
   public List<Transferable> getBody() {
     return body;
   }
 
+  /**
+   * Get the head array
+   * @return the head array
+   */
   public ByteArray getHeadArray() {
     return headArray;
   }
 
+  /**
+   * Get the body array
+   * @return the body array
+   */
   public ByteArray getBodyArray() {
     return bodyArray;
   }
 
+  /**
+   * Get the DataStatus of the head
+   * @return the DataStatus of the head
+   */
   public DataStatus getHeadStatus() {
     return headStatus;
   }
 
+  /**
+   * Get the DataStatus of the body
+   * @return the DataStatus of the body
+   */
   public DataStatus getBodyStatus() {
     return bodyStatus;
   }
 
+  /**
+   * Release the head array.
+   * If the array is removed without
+   * encode/decode, make sure that the data status
+   * is correct. Other states shouldn't have 
+   * encoded head array
+   */
   public void releaseHeadArray() {
-    // Release the head array
-    // If the array is removed without
-    // encode/decode, make sure if the data status
-    // is correct
-    // Other states shouldn't have encoded head
-    // array
+   
     if (headStatus == DataStatus.ENCODED_ARRAY_DECODED) {
       headArray.release();
       headArray = null;
@@ -246,11 +305,14 @@ public class Data {
     }
   }
 
+  /**
+   * Release the data body array.
+   * If the array is removed without
+   * encode/decode, make sure that the data status
+   * is correct
+   */
   public void releaseBodyArray() {
-    // Release the data array
-    // If the array is removed without
-    // encode/decode, make sure if the data status
-    // is correct
+   
     if (bodyStatus == DataStatus.ENCODED_ARRAY_DECODED) {
       bodyArray.release();
       bodyArray = null;
@@ -266,6 +328,9 @@ public class Data {
     }
   }
 
+  /**
+   * Release the Data
+   */
   public void release() {
     releaseHeadArray();
     releaseBodyArray();
@@ -280,11 +345,19 @@ public class Data {
     bodyStatus = DataStatus.DECODE_FAILED;
   }
 
+  /**
+   * Release the body object
+   * @param trans the body
+   */
   private void releaseBody(
     List<Transferable> trans) {
     DataUtil.releaseTransList(trans);
   }
 
+  /**
+   * Decode the headArray as the head
+   * @return
+   */
   public DataStatus decodeHeadArray() {
     if (headStatus == DataStatus.ENCODED_ARRAY) {
       // Decode head array to fields
@@ -349,6 +422,9 @@ public class Data {
     return headStatus;
   }
 
+  /**
+   * Reset the Head
+   */
   private void resetHead() {
     bodyType = DataType.UNKNOWN_DATA_TYPE;
     contextName = null;
@@ -358,6 +434,10 @@ public class Data {
     partitionID = Constant.UNKNOWN_PARTITION_ID;
   }
 
+  /**
+   * Decode the bodyArray as the body
+   * @return the DataStatus
+   */
   public DataStatus decodeBodyArray() {
     if ((headStatus == DataStatus.DECODED
       || headStatus == DataStatus.ENCODED_ARRAY_DECODED || headStatus == DataStatus.ENCODE_FAILED_DECODED)
@@ -386,6 +466,10 @@ public class Data {
     return bodyStatus;
   }
 
+  /**
+   * Encode the head as a ByteArray
+   * @return the DataStatus
+   */
   public DataStatus encodeHead() {
     if (headStatus == DataStatus.DECODED) {
       // Encode fields to head array
@@ -452,6 +536,10 @@ public class Data {
     return headStatus;
   }
 
+  /**
+   * Encode the body as a ByteArray
+   * @return the DataStatus
+   */
   public DataStatus encodeBody() {
     if (bodyStatus == DataStatus.DECODED) {
       if (headStatus == DataStatus.DECODED

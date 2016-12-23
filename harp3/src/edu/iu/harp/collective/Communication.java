@@ -37,12 +37,12 @@ import edu.iu.harp.util.Barrier;
 import edu.iu.harp.worker.WorkerInfo;
 import edu.iu.harp.worker.Workers;
 
-/**
+/*******************************************************
  * These methods are used for communicating
  * non-partition transferable.
- */
+ ******************************************************/
 public class Communication {
-  /** Class logger */
+
   protected static final Logger LOG = Logger
     .getLogger(Communication.class);
 
@@ -52,10 +52,11 @@ public class Communication {
    * sends true to all workers to leave the
    * barrier. Else it sends false to all the
    * workers.
-   * 
-   * @param workers
-   * @param workerData
-   * @return
+   * @param contextName the name of operation context
+   * @param operationName the name of the operation
+   * @param dataMap the DataMap
+   * @param workers the Workers
+   * @return true if succeeded, false otherwise
    */
   public static boolean barrier(
     String contextName, String operationName,
