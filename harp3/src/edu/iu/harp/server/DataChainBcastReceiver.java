@@ -35,9 +35,13 @@ import edu.iu.harp.resource.ByteArray;
 import edu.iu.harp.worker.WorkerInfo;
 import edu.iu.harp.worker.Workers;
 
+/*******************************************************
+ * The actual receiver for receiving the 
+ * broadcasted data using chain method.
+ ******************************************************/
 public class DataChainBcastReceiver extends
   Receiver {
-  /** Class logger */
+
   @SuppressWarnings("unused")
   private static final Logger LOG = Logger
     .getLogger(DataChainBcastReceiver.class);
@@ -47,12 +51,11 @@ public class DataChainBcastReceiver extends
 
   /**
    * Throw exception when failing to initialize
-   * 
+   * @param selfID
    * @param conn
    * @param queue
    * @param map
    * @param w
-   * @param pool
    * @param commandType
    * @throws Exception
    */
@@ -69,6 +72,10 @@ public class DataChainBcastReceiver extends
     }
   }
 
+
+  /**
+   * Defines how to handle the Data
+   */
   @Override
   protected void handleData(
     final ServerConn conn) throws Exception {
@@ -93,12 +100,10 @@ public class DataChainBcastReceiver extends
   }
 
   /**
-   * Receive 1. command 2. head and body array
-   * size 3. head array 4. body array
+   * Receive the Data
    * 
-   * @param in
-   * @param out
-   * @return
+   * @param in the InputStream
+   * @return the Data received
    * @throws Exception
    */
   private Data receiveData(final InputStream in)
@@ -193,10 +198,19 @@ public class DataChainBcastReceiver extends
     return data;
   }
 
+  /**
+   * Receive bytes data and process
+   * @param in the InputStream
+   * @param out the OutputStream
+   * @param bytes the byte[] to put data received
+   * @param start the offset index
+   * @param size the size of the data
+   * @throws IOException
+   */
   private void receiveBytes(InputStream in,
     OutputStream out, byte[] bytes, int start,
     int size) throws IOException {
-    // Receive bytes data and process
+
     if (out != null) {
       while (size > Constant.PIPELINE_SIZE) {
         int len =

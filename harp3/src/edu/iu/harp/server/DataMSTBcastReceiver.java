@@ -35,10 +35,13 @@ import edu.iu.harp.io.Serializer;
 import edu.iu.harp.resource.ByteArray;
 import edu.iu.harp.worker.WorkerInfo;
 import edu.iu.harp.worker.Workers;
-
+/*******************************************************
+ * The actual receiver for receiving the 
+ * broadcasted data using MST method.
+ ******************************************************/
 public class DataMSTBcastReceiver extends
   Receiver {
-  /** Class logger */
+
   @SuppressWarnings("unused")
   private static final Logger LOG = Logger
     .getLogger(DataMSTBcastReceiver.class);
@@ -48,12 +51,11 @@ public class DataMSTBcastReceiver extends
 
   /**
    * Throw exception when failing to initialize
-   * 
+   * @param selfID
    * @param conn
    * @param queue
    * @param map
    * @param w
-   * @param pool
    * @param commandType
    * @throws Exception
    */
@@ -70,6 +72,9 @@ public class DataMSTBcastReceiver extends
     }
   }
 
+  /**
+   * Defines how to handle the Data
+   */
   @Override
   protected void handleData(
     final ServerConn conn) throws Exception {
@@ -91,13 +96,11 @@ public class DataMSTBcastReceiver extends
     }
   }
 
+ 
   /**
-   * Receive 1. command 2. head and body array
-   * size 3. head array 4. body array
-   * 
-   * @param in
-   * @param out
-   * @return
+   * Receive the Data
+   * @param conn the connnection object
+   * @return the Data received
    * @throws Exception
    */
   private Data receiveData(
@@ -171,6 +174,18 @@ public class DataMSTBcastReceiver extends
     return data;
   }
 
+  /**
+   * Send the data in MST method
+   * @param opBytes the operation array
+   * @param opArrSize the size of the operation array
+   * @param headBytes the head array
+   * @param headArrSize the size of the head array
+   * @param bodyBytes the body array
+   * @param bodyArrSize the size of body array
+   * @param left the left worker
+   * @param right the right worker
+   * @throws IOException
+   */
   private void sendDataInMST(byte[] opBytes,
     int opArrSize, byte[] headBytes,
     int headArrSize, byte[] bodyBytes,
