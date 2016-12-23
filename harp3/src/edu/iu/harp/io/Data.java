@@ -27,7 +27,7 @@ import edu.iu.harp.resource.Transferable;
 
 
 /*******************************************************
- * The wrapper of the data used in communication.
+ * The wrapper of data used in communication.
  * The fields in data must be consistent
  ******************************************************/
 public class Data {

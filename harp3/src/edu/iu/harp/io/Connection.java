@@ -24,12 +24,9 @@ import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.net.SocketAddress;
 
-/**
- * The connection object
- * 
- * @author zhangbj
- *
- */
+/*******************************************************
+ * The connection object as a client
+ ******************************************************/
 public class Connection {
 
   private final String node;
@@ -39,12 +36,14 @@ public class Connection {
   private Socket socket;
   private final boolean useCache;
 
+  
   /**
-   * Connection as a client
-   * 
-   * @param host
-   * @param port
-   * @param timeOutMs
+   * Construct a connection
+   * @param node the host
+   * @param port the port
+   * @param timeOutMs the timeout value to be 
+   * 		used in milliseconds.
+   * @param useCache use cache or not
    * @throws Exception
    */
   Connection(String node, int port,
@@ -69,22 +68,41 @@ public class Connection {
     }
   }
 
+  /**
+   * Get the host
+   * @return the host
+   */
   public String getNode() {
     return this.node;
   }
 
+  /**
+   * Get the port
+   * @return the port
+   */
   public int getPort() {
     return this.port;
   }
 
+  /**
+   * Get the OutputStream
+   * @return the OutputStream
+   */
   public OutputStream getOutputStream() {
     return this.out;
   }
 
+  /**
+   * Get the InputStream
+   * @return the InputStream
+   */
   public InputStream getInputDtream() {
     return this.in;
   }
 
+  /**
+   * Close the connection
+   */
   void close() {
     if (out != null || in != null
       || socket != null) {
@@ -112,12 +130,22 @@ public class Connection {
     }
   }
 
+  /**
+   * Get a connection from the ConnPool
+   * @param host the host
+   * @param port the port
+   * @param useCache use cache or not
+   * @return the connection object
+   */
   public static Connection create(String host,
     int port, boolean useCache) {
     return ConnPool.get().getConn(host,
       port, useCache);
   }
 
+  /**
+   * Release the connection object
+   */
   public void release() {
     if (useCache) {
       ConnPool.get().releaseConn(this);
@@ -127,6 +155,9 @@ public class Connection {
 
   }
 
+  /**
+   * Free the connection object
+   */
   public void free() {
     if (useCache) {
       ConnPool.get().freeConn(this);

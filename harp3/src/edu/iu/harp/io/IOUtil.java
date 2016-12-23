@@ -25,11 +25,22 @@ import java.net.SocketException;
 
 import org.apache.log4j.Logger;
 
+/*******************************************************
+ * Some utils for IO operations
+ ******************************************************/
 public class IOUtil {
-  /** Class logger */
+ 
   private static final Logger LOG = Logger
     .getLogger(IOUtil.class);
 
+  /**
+   * Sent the byte[] to OutputStream
+   * @param out the OutputStream
+   * @param bytes the byte[]
+   * @param start the start index
+   * @param size the size to send
+   * @throws IOException
+   */
   public static void sendBytes(
     final OutputStream out, final byte[] bytes,
     int start, int size) throws IOException {
@@ -37,6 +48,9 @@ public class IOUtil {
     out.flush();
   }
 
+  /**
+   * Get byte[] from the InputStream
+   */
   public static void receiveBytes(InputStream in,
     byte[] bytes, int start, int size)
     throws IOException {
@@ -47,6 +61,11 @@ public class IOUtil {
     }
   }
 
+  /**
+   * Set the options for the Socket
+   * @param socket the Socket
+   * @throws SocketException
+   */
   public static void setSocketOptions(
     Socket socket) throws SocketException {
     socket.setKeepAlive(true);
@@ -67,6 +86,11 @@ public class IOUtil {
     // + " " + recvSize2);
   }
 
+  /**
+   * Set the options for the ServerSocket
+   * @param socket the ServerSocket
+   * @throws SocketException
+   */
   public static void setServerSocketOptions(
     ServerSocket socket) throws SocketException {
     // int recvSize1 =
@@ -83,13 +107,10 @@ public class IOUtil {
   /**
    * Wait and get a data from DataMap for
    * collective communication
-   * 
-   * @param workerData
-   * @param cClass
-   * @param maxTimeOut
-   * @param maxWaitCount
-   * @return
-   * @throws InterruptedException
+   * @param dataMap the DataMap
+   * @param contextName the name of the context
+   * @param operationName the name of the operation
+   * @return the Data got from the DataMap
    */
   public static Data waitAndGet(DataMap dataMap,
     String contextName, String operationName) {

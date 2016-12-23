@@ -25,9 +25,11 @@ import java.util.LinkedList;
 
 import org.apache.log4j.Logger;
 
+/*******************************************************
+ * This class manages connection objects
+ ******************************************************/
 public class ConnPool {
 
-  /** Class logger */
   private static final Logger LOG = Logger
     .getLogger(ConnPool.class);
 
@@ -36,6 +38,9 @@ public class ConnPool {
   private Object2ObjectOpenHashMap<HostPort, Pool> connMap =
     new Object2ObjectOpenHashMap<>();
 
+  /*******************************************************
+   * The class for host and port information
+   ******************************************************/
   private class HostPort {
     private String host;
     private int port;
@@ -45,10 +50,16 @@ public class ConnPool {
       this.port = port;
     }
 
+    /**
+     * The hashCode function
+     */
     public int hashCode() {
       return port;
     }
 
+    /**
+     * The equals function
+     */
     public boolean equals(Object object) {
       HostPort hp = (HostPort) object;
       if (this.host.equals(hp.host)
@@ -60,8 +71,13 @@ public class ConnPool {
     }
   }
 
+  /*******************************************************
+   * This pool of connection objects
+   ******************************************************/
   private class Pool {
+	/**In-use connection objects*/
     private HashSet<Connection> inUseSet;
+    /**Not-in-use connection objects*/
     private LinkedList<Connection> freeQueue;
 
     private Pool() {
@@ -74,6 +90,11 @@ public class ConnPool {
     connMap = new Object2ObjectOpenHashMap<>();
   }
 
+  /**
+   * Singleton pattern.
+   * Get the ConnPool instance
+   * @return the CoonnPool instance
+   */
   public static ConnPool get() {
     if (instance != null) {
       return instance;
@@ -82,6 +103,10 @@ public class ConnPool {
     }
   }
 
+  /**
+   * Create a ConnPool object
+   * @return the ConnPool object
+   */
   private synchronized static ConnPool create() {
     if (instance == null) {
       instance = new ConnPool();
@@ -89,6 +114,13 @@ public class ConnPool {
     return instance;
   }
 
+  /**
+   * Get a connection object by host and port information.
+   * @param host the host
+   * @param port the port
+   * @param useCache use cache or not
+   * @return the connection object
+   */
   synchronized Connection getConn(String host,
     int port, boolean useCache) {
     if (useCache) {
@@ -117,6 +149,13 @@ public class ConnPool {
     }
   }
 
+  /**
+   * Create a new connection for the host and the port
+   * @param host the host 
+   * @param port the port
+   * @param useCache use cache or not
+   * @return the connection object
+   */
   private Connection newConn(String host,
     int port, boolean useCache) {
     Connection conn = null;

@@ -27,7 +27,6 @@ import org.apache.log4j.Logger;
 
 public class DataMap {
 
-  /** Class logger */
   @SuppressWarnings("unused")
   private static final Logger LOG = Logger
     .getLogger(DataMap.class);
