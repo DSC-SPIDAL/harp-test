@@ -15,7 +15,9 @@
  */
 
 package edu.iu.harp.schdynamic;
-
+/*******************************************************
+ * The output class for tasks
+ ******************************************************/
 public class Output<O> {
 
   private O obj;
@@ -26,10 +28,18 @@ public class Output<O> {
     this.error = error;
   }
 
+  /**
+   * Get the output object
+   * @return the output object
+   */
   public O getOutput() {
     return obj;
   }
 
+  /**
+   * Check if it's an error or not
+   * @return true if it's an error, false otherwise
+   */
   public boolean isError() {
     return error;
   }

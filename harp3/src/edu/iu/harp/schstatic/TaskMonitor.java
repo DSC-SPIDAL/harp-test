@@ -162,7 +162,7 @@ public class TaskMonitor<I, O, T extends Task<I, O>>
   }
 
   /**
-   * Relase the barrier
+   * Release the barrier
    */
   void release() {
     barrier2.release();

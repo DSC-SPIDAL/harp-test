@@ -22,7 +22,9 @@ import java.util.concurrent.Semaphore;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
+/*******************************************************
+ * Monitor and manage tasks
+ ******************************************************/
 public class TaskMonitor<I, O, T extends Task<I, O>>
   implements Runnable {
 
@@ -45,10 +47,16 @@ public class TaskMonitor<I, O, T extends Task<I, O>>
     this.barrier2 = new Semaphore(0);
   }
 
+  /**
+   * Release the barrier
+   */
   void release() {
     barrier2.release();
   }
-
+  
+  /**
+   * The main process of monitoring and managing tasks
+   */
   @Override
   public void run() {
     while (true) {

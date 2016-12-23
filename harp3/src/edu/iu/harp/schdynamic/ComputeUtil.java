@@ -21,11 +21,20 @@ import java.util.concurrent.Semaphore;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+/*******************************************************
+ * Some utils including acquiring semaphora and 
+ * joining threads
+ ******************************************************/
 public class ComputeUtil {
 
   protected static final Log LOG = LogFactory
     .getLog(ComputeUtil.class);
 
+  /**
+   * Acquires the given number of permits from this semaphore
+   * @param sem the Semaphore
+   * @param count the number of permits to acquire
+   */
   public static void acquire(Semaphore sem,
     int count) {
     boolean isFailed = false;
@@ -41,6 +50,10 @@ public class ComputeUtil {
     } while (isFailed);
   }
 
+  /**
+   * Acquires a permit from this semaphore
+   * @param sem the Semaphore
+   */
   public static void acquire(Semaphore sem) {
     boolean isFailed = false;
     do {
@@ -55,6 +68,10 @@ public class ComputeUtil {
     } while (isFailed);
   }
 
+  /**
+   * Join the thread
+   * @param thread the thread to be joined
+   */
   public static void joinThread(Thread thread) {
     boolean isFailed = false;
     do {

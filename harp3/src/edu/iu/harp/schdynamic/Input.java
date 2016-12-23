@@ -15,7 +15,9 @@
  */
 
 package edu.iu.harp.schdynamic;
-
+/*******************************************************
+ * The input class for tasks
+ ******************************************************/
 public class Input<I> {
 
   private I object;
@@ -29,14 +31,27 @@ public class Input<I> {
     this.stop = stop;
   }
 
+  /**
+   * Get the input object
+   * @return the input object
+   */
   public I getInput() {
     return object;
   }
 
+  /**
+   * Check if the input is paused or not
+   * @return true if paused, false otherwise
+   */
   public boolean isPause() {
     return pause;
   }
 
+  /**
+   * Check if the input is stopped or not
+   * @return true if the input is stopped,
+   * 	false otherwise
+   */
   public boolean isStop() {
     return stop;
   }

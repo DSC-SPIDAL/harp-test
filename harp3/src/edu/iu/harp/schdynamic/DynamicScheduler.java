@@ -28,7 +28,9 @@ import java.util.concurrent.Semaphore;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
+/*******************************************************
+ * The dynamic scheduler
+ ******************************************************/
 public class DynamicScheduler<I, O, T extends Task<I, O>> {
 
   protected static final Log LOG = LogFactory
@@ -67,10 +69,18 @@ public class DynamicScheduler<I, O, T extends Task<I, O>> {
     }
   }
 
+  /**
+   * Get the list of tasks
+   * @return the list of tasks
+   */
   public List<T> getTasks() {
     return tasks;
   }
 
+  /**
+   * Submit the input  
+   * @param input the input
+   */
   public synchronized void submit(I input) {
     if (input != null) {
       inputQueue.add(new Input<I>(input, false,
@@ -81,6 +91,10 @@ public class DynamicScheduler<I, O, T extends Task<I, O>> {
     }
   }
 
+  /**
+   * Submit a collection of inputs
+   * @param inputs a collection of inputs
+   */
   public synchronized void submitAll(
     Collection<I> inputs) {
     for (I input : inputs) {
@@ -92,6 +106,10 @@ public class DynamicScheduler<I, O, T extends Task<I, O>> {
     }
   }
 
+  /**
+   * Submit an array of inputs
+   * @param inputs an aray of inputs
+   */
   public synchronized void submitAll(I[] inputs) {
     // Submit inputs
     int submitCount = 0;
@@ -107,6 +125,9 @@ public class DynamicScheduler<I, O, T extends Task<I, O>> {
     }
   }
 
+  /**
+   * Start scheduling 
+   */
   public synchronized void start() {
     // Start monitor threads, wait for inputs
     if (!isRunning) {
@@ -129,6 +150,9 @@ public class DynamicScheduler<I, O, T extends Task<I, O>> {
     }
   }
 
+  /**
+   * Pause the task
+   */
   public synchronized void pause() {
     if (isRunning && !isPausing) {
       isRunning = false;
@@ -143,6 +167,9 @@ public class DynamicScheduler<I, O, T extends Task<I, O>> {
     }
   }
 
+  /**
+   * Pause the task immediately 
+   */
   public synchronized void pauseNow() {
     if (isRunning && !isPausing) {
       isRunning = false;
@@ -157,16 +184,22 @@ public class DynamicScheduler<I, O, T extends Task<I, O>> {
     }
   }
 
+  /**
+   * Clean the input queue
+   */
   public synchronized void cleanInputQueue() {
     if (isPausing || !isRunning) {
       inputQueue.clear();
     }
   }
 
+  /**
+   * Stop submission
+   * Send stop signal to the queue
+   * based on the number of tasks
+   */
   public synchronized void stop() {
-    // Stop submission
-    // Send stop signal to the queue
-    // based on the number of tasks
+
     if (isPausing) {
       start();
     }
@@ -184,10 +217,11 @@ public class DynamicScheduler<I, O, T extends Task<I, O>> {
   }
 
   /**
+   * Blocked and wait for outputs
    * Invoke as while(hasOutput()) {
    * waitForOutput(); }
    * 
-   * @return
+   * @return the output
    */
   public synchronized O waitForOutput() {
     // If no output is available, wait for one
@@ -215,14 +249,27 @@ public class DynamicScheduler<I, O, T extends Task<I, O>> {
     }
   }
 
+  /**
+   * Check if has a new output
+   * @return true if has a new output, false otherwise
+   */
+
   public synchronized boolean hasOutput() {
     return hasNext();
   }
 
+  /**
+   * Check if has next output
+   * @return true if has next output, false otherwise
+   */
   private boolean hasNext() {
     return inputCount > outputCount;
   }
 
+  /**
+   * Check if has errors or not
+   * @return true if has errors, false otherwise
+   */
   public synchronized boolean hasError() {
     int count = errorCount;
     errorCount = 0;
