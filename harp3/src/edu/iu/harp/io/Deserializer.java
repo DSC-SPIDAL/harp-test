@@ -29,11 +29,11 @@ import edu.iu.harp.resource.ByteArray;
  ******************************************************/
 public class Deserializer implements DataInput {
 
-  /** Class logger */
   @SuppressWarnings("unused")
   private static final Logger LOG = Logger
     .getLogger(Deserializer.class);
-
+ 
+  /**the input stream*/
   private byte[] bytes;
   private int len;
   private int pos;
@@ -51,14 +51,25 @@ public class Deserializer implements DataInput {
 
   }
 
+  /**
+   * Get the current position
+   * @return the current position
+   */
   public int getPos() {
     return this.pos;
   }
 
+  /**
+   * Get the length 
+   * @return the length
+   */
   public int getLength() {
     return this.len;
   }
 
+  /**
+   * Read from the input stream to the byte[]
+   */
   @Override
   public void readFully(byte[] b)
     throws IOException {
@@ -69,6 +80,9 @@ public class Deserializer implements DataInput {
     pos += b.length;
   }
 
+  /**
+   * Read from the input stream to the byte[]
+   */
   @Override
   public void readFully(byte[] b, int off,
     int length) throws IOException {
@@ -80,12 +94,19 @@ public class Deserializer implements DataInput {
     pos += length;
   }
 
+  /**
+   * Skip n number of bytes
+   */
   @Override
   public int skipBytes(int n) throws IOException {
     pos += n;
     return pos;
   }
 
+
+  /**
+   * Read the boolean value
+   */
   @Override
   public boolean readBoolean() throws IOException {
     if (pos >= len) {
@@ -98,6 +119,10 @@ public class Deserializer implements DataInput {
     return false;
   }
 
+
+  /**
+   * Read the byte value
+   */
   @Override
   public byte readByte() throws IOException {
     if (pos >= len) {
@@ -106,6 +131,10 @@ public class Deserializer implements DataInput {
     return bytes[pos++];
   }
 
+
+  /**
+   * Read the unsigned byte value
+   */
   @Override
   public int readUnsignedByte()
     throws IOException {
@@ -113,6 +142,10 @@ public class Deserializer implements DataInput {
     return i & 0xff;
   }
 
+
+  /**
+   * Read the short value
+   */
   @Override
   public short readShort() throws IOException {
     if ((pos + 2) > len) {
@@ -121,6 +154,10 @@ public class Deserializer implements DataInput {
     return (short) (((bytes[pos++] & 0xff) << 8) | (bytes[pos++] & 0xff));
   }
 
+
+  /**
+   * Read the unsigned short value
+   */
   @Override
   public int readUnsignedShort()
     throws IOException {
@@ -128,6 +165,10 @@ public class Deserializer implements DataInput {
     return s & 0xFFFF;
   }
 
+
+  /**
+   * Read the char value
+   */
   @Override
   public char readChar() throws IOException {
     if ((pos + 2) > len) {
@@ -136,6 +177,10 @@ public class Deserializer implements DataInput {
     return (char) (((bytes[pos++] & 0xff) << 8) | (bytes[pos++] & 0xff));
   }
 
+
+  /**
+   * Read the int value
+   */
   @Override
   public int readInt() throws IOException {
     if ((pos + 4) > len) {
@@ -147,6 +192,10 @@ public class Deserializer implements DataInput {
       | (bytes[pos++] & 0xff);
   }
 
+
+  /**
+   * Read the long value
+   */
   @Override
   public long readLong() throws IOException {
     if ((pos + 8) > len) {
@@ -162,21 +211,34 @@ public class Deserializer implements DataInput {
       | (bytes[pos++] & 0xffL);
   }
 
+
+  /**
+   * Read the float value
+   */
   @Override
   public float readFloat() throws IOException {
     return Float.intBitsToFloat(readInt());
   }
 
+  /**
+   * Read the double value
+   */
   @Override
   public double readDouble() throws IOException {
     return Double.longBitsToDouble(readLong());
   }
 
+  /**
+   * Read the String value
+   */
   @Override
   public String readLine() throws IOException {
     return readUTF();
   }
 
+  /**
+   * Read the String value
+   */
   @Override
   public String readUTF() throws IOException {
     int length = readInt();

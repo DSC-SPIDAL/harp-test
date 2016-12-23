@@ -33,6 +33,7 @@ public class Serializer implements DataOutput {
   private static final Logger LOG = Logger
     .getLogger(Serializer.class);
 
+  /**the output stream*/
   private byte[] bytes;
   private int pos;
   private int len;
@@ -47,9 +48,9 @@ public class Serializer implements DataOutput {
    * to bytes[len - 1], with pos between
    *  0 ~ (len - 1)
    * 
-   * @param bytes
-   * @param len
-   * @param pos
+   * @param bytes the byte[]
+   * @param len the length of the byte[]
+   * @param pos the current position in the byte[]
    */
   public Serializer(byte[] bytes, int pos, int len) {
     this.bytes = bytes;
@@ -57,20 +58,34 @@ public class Serializer implements DataOutput {
     this.len = len;
   }
 
+  /**
+   * Get the current position
+   * @return
+   */
   public int getPos() {
     return this.pos;
   }
 
+  /**
+   * Get the length
+   * @return the length
+   */
   public int getLength() {
     return this.len;
   }
 
+  /**
+   * Write the value to the output stream
+   */
   @Override
   public void write(int b) throws IOException {
     b = b & 0xFF;
     writeByte(b);
   }
 
+  /**
+   * Write the byte[] to the output stream
+   */
   @Override
   public void write(byte[] b) throws IOException {
     if ((pos + b.length) > len) {
@@ -80,6 +95,10 @@ public class Serializer implements DataOutput {
     pos += b.length;
   }
 
+  /**
+   * Write the byte[] of the length 
+   * beginning from the off to the output stream
+   */
   @Override
   public void
     write(byte[] b, int off, int length)
@@ -92,6 +111,9 @@ public class Serializer implements DataOutput {
     pos += length;
   }
 
+  /**
+   * Write the boolean value to the output stream
+   */
   @Override
   public void writeBoolean(boolean v)
     throws IOException {
@@ -105,6 +127,9 @@ public class Serializer implements DataOutput {
     }
   }
 
+  /**
+   * Write the byte value to the output stream
+   */
   @Override
   public void writeByte(int v) throws IOException {
     if (pos >= len) {
@@ -113,6 +138,9 @@ public class Serializer implements DataOutput {
     bytes[pos++] = (byte) (v & 0xFF);
   }
 
+  /**
+   * Write the short value to the output stream
+   */
   @Override
   public void writeShort(int v)
     throws IOException {
@@ -123,6 +151,9 @@ public class Serializer implements DataOutput {
     bytes[pos++] = (byte) ((v >>> 0) & 0xFF);
   }
 
+  /**
+   * Write the char value to the output stream
+   */
   @Override
   public void writeChar(int v) throws IOException {
     if ((pos + 2) > len) {
@@ -132,6 +163,9 @@ public class Serializer implements DataOutput {
     bytes[pos++] = (byte) ((v >>> 0) & 0xFF);
   }
 
+  /**
+   * Write the int value to the output stream
+   */
   @Override
   public void writeInt(int v) throws IOException {
     if ((pos + 4) > len) {
@@ -143,6 +177,9 @@ public class Serializer implements DataOutput {
     bytes[pos++] = (byte) ((v >>> 0) & 0xFF);
   }
 
+  /**
+   * Write the long value to the output stream
+   */
   @Override
   public void writeLong(long v)
     throws IOException {
@@ -159,24 +196,36 @@ public class Serializer implements DataOutput {
     bytes[pos++] = (byte) ((v >>> 0) & 0xffL);
   }
 
+  /**
+   * Write the float value to the output stream
+   */
   @Override
   public void writeFloat(float v)
     throws IOException {
     writeInt(Float.floatToIntBits(v));
   }
 
+  /**
+   * Write the double value to the output stream
+   */
   @Override
   public void writeDouble(double v)
     throws IOException {
     writeLong(Double.doubleToLongBits(v));
   }
 
+  /**
+   * Write the String value to the output stream
+   */
   @Override
   public void writeBytes(String s)
     throws IOException {
     writeChars(s);
   }
 
+  /**
+   * Write the String value to the output stream
+   */
   @Override
   public void writeChars(String s)
     throws IOException {
@@ -190,6 +239,9 @@ public class Serializer implements DataOutput {
     }
   }
 
+  /**
+   * Write the String value to the output stream
+   */
   @Override
   public void writeUTF(String s)
     throws IOException {
