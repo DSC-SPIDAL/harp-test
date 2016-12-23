@@ -171,8 +171,8 @@ public abstract class Sender {
 
   /**
    * Abstract method for handling the data
-   * @param conn
-   * @param data
+   * @param conn the connection object
+   * @param data the Data
    * @throws Exception
    */
   protected abstract void handleData(

@@ -31,8 +31,12 @@ import edu.iu.harp.io.EventQueue;
 import edu.iu.harp.io.IOUtil;
 import edu.iu.harp.resource.ByteArray;
 
+
+/*******************************************************
+ * The actual receiver for receiving the data.
+ ******************************************************/
 public class DataReceiver extends Receiver {
-  /** Class logger */
+
   private static final Logger LOG = Logger
     .getLogger(DataReceiver.class);
 
@@ -45,6 +49,9 @@ public class DataReceiver extends Receiver {
     this.selfID = selfID;
   }
 
+  /**
+   * Defines how to handle the Data
+   */
   @Override
   protected void handleData(
     final ServerConn conn) throws Exception {
@@ -64,6 +71,12 @@ public class DataReceiver extends Receiver {
     }
   }
 
+  /**
+   * Receive the Data
+   * @param in the InputStream
+   * @return the Data received
+   * @throws Exception
+   */
   private Data receiveData(final InputStream in)
     throws Exception {
     // Read head array size and body array size

@@ -20,33 +20,30 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.Socket;
 
-/**
- * The connection object
- * 
- * @author zhangbj
- *
- */
+/*******************************************************
+ * The connection object for Server
+ ******************************************************/
 public class ServerConn {
 
   private InputStream in;
   private Socket socket;
 
-  /**
-   * Connection as a server
-   * 
-   * @param out
-   * @param in
-   * @param socket
-   */
   ServerConn(InputStream in, Socket socket) {
     this.socket = socket;
     this.in = in;
   }
 
+  /**
+   * Get the InputStream
+   * @return the InputStream
+   */
   InputStream getInputDtream() {
     return this.in;
   }
 
+  /**
+   * Close the connection
+   */
   void close() {
     if (in != null || socket != null) {
       try {

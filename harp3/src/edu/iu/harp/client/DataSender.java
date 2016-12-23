@@ -76,10 +76,20 @@ public class DataSender extends Sender {
     }
   }
 
+  /**
+   * Get the size of the head array
+   * @param data the Data
+   * @return the size of the head array of the data
+   */
   protected int getHeadSize(Data data) {
     return data.getHeadArray().size();
   }
 
+  /**
+   * Get the ByteArray storing the size of the head array
+   * @param headArrSize the size of the head array
+   * @return the ByteArray storing the size of the head array
+   */
   protected ByteArray getOPByteArray(
     int headArrSize) {
     ByteArray opArray = ByteArray.create(4, true);
@@ -98,6 +108,14 @@ public class DataSender extends Sender {
     }
   }
 
+  /**
+   * Send the data
+   * @param conn the Connection object
+   * @param opArray the ByteArray storing the size
+   * 		of the head array
+   * @param data the Data to be sent
+   * @throws IOException
+   */
   protected void sendDataBytes(Connection conn,
     final ByteArray opArray, final Data data)
     throws IOException {
@@ -125,6 +143,12 @@ public class DataSender extends Sender {
     }
   }
 
+  /**
+   * Send the data body
+   * @param out the OutputStream
+   * @param data the Data
+   * @throws IOException
+   */
   private void sendBodyBytes(
     final OutputStream out, final Data data)
     throws IOException {

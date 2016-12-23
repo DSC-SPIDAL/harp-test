@@ -36,9 +36,11 @@ import edu.iu.harp.io.IOUtil;
 import edu.iu.harp.schdynamic.ComputeUtil;
 import edu.iu.harp.worker.Workers;
 
+/*******************************************************
+ * The server for communication
+ ******************************************************/
 public class Server implements Runnable {
 
-  /** Class logger */
   private static final Logger LOG = Logger
     .getLogger(Server.class);
 
