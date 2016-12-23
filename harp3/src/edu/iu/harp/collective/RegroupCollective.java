@@ -44,8 +44,11 @@ import edu.iu.harp.server.Server;
 import edu.iu.harp.util.PartitionCount;
 import edu.iu.harp.worker.Workers;
 
+/*******************************************************
+ * Regroup Collective communication
+ ******************************************************/
 public class RegroupCollective {
-  /** Class logger */
+
   protected static final Logger LOG = Logger
     .getLogger(RegroupCollective.class);
 

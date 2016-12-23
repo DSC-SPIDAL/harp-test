@@ -51,6 +51,9 @@ import edu.iu.harp.util.PartitionCount;
 import edu.iu.harp.util.PartitionSet;
 import edu.iu.harp.worker.Workers;
 
+/*******************************************************
+ * Local-Global synchronization Collective communication
+ ******************************************************/
 public class LocalGlobalSyncCollective {
 
   private static final Logger LOG = Logger
@@ -169,6 +172,18 @@ public class LocalGlobalSyncCollective {
     System.exit(0);
   }
 
+  /**
+   * The pull communication operation.
+   * Pull the global data to local
+   * @param contextName the name of the context
+   * @param operationName the name of the operation
+   * @param localTable the local Table
+   * @param globalTable the global Table
+   * @param useBcast use broadcast or not
+   * @param dataMap the DataMap
+   * @param workers the Workers
+   * @return true if succeeded, false otherwise
+   */
   public static <P extends Simple> boolean pull(
     final String contextName,
     final String operationName,
@@ -180,6 +195,18 @@ public class LocalGlobalSyncCollective {
       useBcast, dataMap, workers);
   }
 
+  /**
+   * The push communication operation.
+   * Push the local data to global
+   * @param contextName the name of the context
+   * @param operationName the name of the operation
+   * @param localTable the local Table
+   * @param globalTable the global Table
+   * @param partitioner the Partitioner
+   * @param dataMap the DataMap
+   * @param workers the Workers
+   * @return true if succeeded, false otherwise
+   */
   public static
     <P extends Simple, PT extends Partitioner>
     boolean push(final String contextName,
@@ -192,6 +219,13 @@ public class LocalGlobalSyncCollective {
       partitioner, dataMap, workers);
   }
 
+  /**
+   * The broadcast communication operation
+   * @param contextName the name of the context
+   * @param operationName the name of the operation
+   * @param ownedPartitions the partitions to broadcast
+   * @param workers the Workers
+   */
   static <P extends Simple> void broadcast(
     String contextName, String operationName,
     List<Partition<P>> ownedPartitions,
@@ -231,6 +265,15 @@ public class LocalGlobalSyncCollective {
     }
   }
 
+  /**
+   * The broadcast communication operation
+   * @param contextName the name of the context
+   * @param operationName the name of the operation
+   * @param selfID the self ID
+   * @param bcastPartitions the partitions to broadcast
+   * @param size the size of partitions to broadcast
+   * @param workers the Workers
+   */
   private static void broadcastPartitions(
     String contextName, String operationName,
     int selfID,
@@ -365,6 +408,18 @@ public class LocalGlobalSyncCollective {
     }
   }
 
+  /**
+   * The push communication operation.
+   * Push the local data to global
+   * @param contextName the name of the context
+   * @param operationName the name of the operation
+   * @param localTable the local Table
+   * @param globalTable the global Table
+   * @param partitioner the Partitioner
+   * @param dataMap the DataMap
+   * @param workers the Workers
+   * @return true if succeeded, false otherwise
+   */
   public static
     <P extends Simple, PT extends Partitioner>
     boolean pushLocalToGlobal(String contextName,
@@ -463,6 +518,18 @@ public class LocalGlobalSyncCollective {
       dataMap);
   }
 
+  /**
+   * The pull communication operation.
+   * Pull the global data to local
+   * @param contextName the name of the context
+   * @param operationName the name of the operation
+   * @param localTable the local Table
+   * @param globalTable the global Table
+   * @param useBcast use broadcast or not
+   * @param dataMap the DataMap
+   * @param workers the Workers
+   * @return true if succeeded, false otherwise
+   */
   public static
     <P extends Simple>
     boolean
@@ -602,6 +669,17 @@ public class LocalGlobalSyncCollective {
       dataMap);
   }
 
+  /**
+   * 
+   * @param contextName the name of the context
+   * @param operationName the name of the operation
+   * @param globalTable the global Table
+   * @param rotateMap the map indicating the order of
+   * 	rotation
+   * @param dataMap the DataMap
+   * @param workers the Workers
+   * @return true if succeeded, false otherwise
+   */
   public static <P extends Simple> boolean
     rotate(final String contextName,
       final String operationName,
@@ -625,6 +703,18 @@ public class LocalGlobalSyncCollective {
     }
   }
 
+  /**
+   * Send the local data to the destination,
+   * receive the data from one of other worker
+   * @param contextName the name of the context
+   * @param operationName the name of the operation
+   * @param globalTable the globle Table
+   * @param selfID the self ID
+   * @param destID the destination ID
+   * @param dataMap the DataMap
+   * @param workers the Workers
+   * @return true if succeeded, false otherwise
+   */
   private static
     <P extends Simple>
     boolean
@@ -654,6 +744,16 @@ public class LocalGlobalSyncCollective {
       numRecvPartitions, rmPartitionIDs, dataMap);
   }
 
+  /**
+   * Send the partitions in the local table to 
+   * the detination
+   * @param contextName the name of the context
+   * @param operationName the name of the operation
+   * @param table the data Table
+   * @param selfID the self ID
+   * @param destID the destination ID
+   * @param workers the Workers
+   */
   private static <P extends Simple> void shift(
     String contextName, String operationName,
     Table<P> table, int selfID, int destID,
@@ -693,6 +793,16 @@ public class LocalGlobalSyncCollective {
     }
   }
 
+  /**
+   * Send partitions 
+   * @param contextName the name of the context
+   * @param operationName the name of the operation
+   * @param selfID the self ID
+   * @param destID the destination ID
+   * @param sendPartitions the partitions to send
+   * @param size the size of partitions
+   * @param workers the Workers
+   */
   private static void sendPartitions(
     String contextName, String operationName,
     int selfID, int destID,
