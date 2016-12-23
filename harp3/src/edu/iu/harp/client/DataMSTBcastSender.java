@@ -28,12 +28,14 @@ import edu.iu.harp.resource.ByteArray;
 import edu.iu.harp.worker.WorkerInfo;
 import edu.iu.harp.worker.Workers;
 
-/**
- * We don't allow the worker broadcasts to itself.
- */
+/*******************************************************
+ * The actual sender for broadcasting the data 
+ * using MST method
+ *  We don't allow the worker broadcasts to itself.
+ ******************************************************/
 public class DataMSTBcastSender extends
   DataSender {
-  /** Class logger */
+
   private static final Logger LOG = Logger
     .getLogger(DataMSTBcastSender.class);
 
@@ -44,6 +46,14 @@ public class DataMSTBcastSender extends
       workers.getMaxID()), workers, command);
   }
 
+  /**
+   * Get the ID of the destination
+   * @param selfID the self
+   * @param left the ID of the left worker
+   * @param middle the ID of the middle worker
+   * @param right the ID of the right worker
+   * @return the ID of the destination
+   */
   private static int getDestID(int selfID,
     int left, int middle, int right) {
     int half = middle - left + 1;
@@ -62,6 +72,11 @@ public class DataMSTBcastSender extends
     }
   }
 
+  /**
+   * Get the ByteArray storing the size of the head array
+   * @param headArrSize the size of the head array
+   * @return the ByteArray storing the size of the head array
+   */
   protected ByteArray getOPByteArray(
     int headArrSize) {
     ByteArray opArray =
@@ -81,6 +96,14 @@ public class DataMSTBcastSender extends
     }
   }
 
+  /**
+   * Broadcast the data
+   * @param conn the Connection object
+   * @param opArray the ByteArray storing the size
+   * 		of the head array
+   * @param data the Data to be broadcast
+   * @throws IOException
+   */
   protected void sendDataBytes(Connection conn,
     final ByteArray opArray, final Data data)
     throws IOException {

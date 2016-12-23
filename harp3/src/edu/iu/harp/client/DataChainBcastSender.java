@@ -24,9 +24,12 @@ import edu.iu.harp.io.Serializer;
 import edu.iu.harp.resource.ByteArray;
 import edu.iu.harp.worker.Workers;
 
-/**
- * We don't allow the worker broadcasts to itself.
- */
+
+/*******************************************************
+ * The actual sender for broadcasting the data 
+ * using chain method
+ *  We don't allow the worker broadcasts to itself.
+ ******************************************************/
 public class DataChainBcastSender extends
   DataSender {
   /** Class logger */
@@ -40,6 +43,12 @@ public class DataChainBcastSender extends
       workers.getNextID()), workers, command);
   }
 
+  /**
+   * 
+   * @param selfID the self
+   * @param nextID the ID of the next worker
+   * @return the ID of the destination
+   */
   private static int getDestID(int selfID,
     int nextID) {
     if (selfID == nextID) {
@@ -49,6 +58,12 @@ public class DataChainBcastSender extends
     }
   }
 
+  
+  /**
+   * Get the ByteArray storing the size of the head array
+   * @param headArrSize the size of the head array
+   * @return the ByteArray storing the size of the head array
+   */
   @Override
   protected ByteArray getOPByteArray(
     int headArrSize) {
