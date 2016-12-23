@@ -192,6 +192,16 @@ public class Communication {
     }
   }
 
+  /**
+   * Gather collective communication operation
+   * @param contextName the name of the context
+   * @param operationName the name of the operation
+   * @param objs the list of Transferable objects
+   * @param gatherWorkerID the WorkerID to send
+   * @param dataMap the DataMap
+   * @param workers the Workers
+   * @return true if succeeded, false otherwise
+   */
   public static boolean gather(
     String contextName, String operationName,
     List<Transferable> objs, int gatherWorkerID,
@@ -232,6 +242,15 @@ public class Communication {
     }
   }
 
+  /**
+   * Allgather collective communication operation
+   * @param contextName the name of the context
+   * @param operationName the name of the operation
+   * @param objs the list of Transferable objects
+   * @param dataMap the DataMap
+   * @param workers the Workers
+   * @return true if succeeded, false otherwise
+   */
   public static boolean allgather(
     final String contextName,
     final String operationName,
@@ -280,6 +299,16 @@ public class Communication {
     return true;
   }
 
+  /**
+   * The broadcast communication operation using chain method.
+   * If the self is not the bcastWorkerID, quit.
+   * @param contextName the name of the context
+   * @param bcastWorkerID the worker doing broadcast
+   * @param operationName the name of the operation
+   * @param objs the list of Transferable objects
+   * @param workers the Workers
+   * @return true if succeeded, false otherwise
+   */
   public static boolean chainBcast(
     String contextName, int bcastWorkerID,
     String operationName,
@@ -310,6 +339,17 @@ public class Communication {
     }
   }
 
+  /**
+   * The broadcast communication operation using chain method.
+   * If the self is not the bcastWorkerID, wait for the data.
+   * @param contextName the name of the context
+   * @param bcastWorkerID the worker doing broadcast
+   * @param operationName the name of the operation
+   * @param objs the list of Transferable objects
+   * @param workers the Workers
+   * @param dataMap the DataMap
+   * @return true if succeeded, false otherwise
+   */
   public static boolean chainBcastAndRecv(
     String contextName, int bcastWorkerID,
     String operationName,
@@ -337,6 +377,16 @@ public class Communication {
     }
   }
 
+  /**
+   * The broadcast communication operation using MST method.
+   * If the self is not the bcastWorkerID, quit.
+   * @param contextName the name of the context
+   * @param bcastWorkerID the worker doing broadcast
+   * @param operationName the name of the operation
+   * @param objs the list of Transferable objects
+   * @param workers the Workers
+   * @return true if succeeded, false otherwise
+   */
   public static boolean mstBcast(
     String contextName, int bcastWorkerID,
     String operationName,
@@ -366,6 +416,17 @@ public class Communication {
     }
   }
 
+  /**
+   * The broadcast communication operation using MST method.
+   * If the self is not the bcastWorkerID, wait for the data.
+   * @param contextName the name of the context
+   * @param bcastWorkerID the worker doing broadcast
+   * @param operationName the name of the operation
+   * @param objs the list of Transferable objects
+   * @param workers the Workers
+   * @param dataMap the DataMap
+   * @return true if succeeded, false otherwise
+   */
   public static boolean mstBcastAndRecv(
     String contextName, int bcastWorkerID,
     String operationName,
