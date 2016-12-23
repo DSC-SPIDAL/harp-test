@@ -29,6 +29,9 @@ import edu.iu.harp.resource.Simple;
 import edu.iu.harp.resource.Transferable;
 import edu.iu.harp.worker.Workers;
 
+/*******************************************************
+ * Synchronous queue
+ ******************************************************/
 public class SyncQueue {
 
   protected static final Logger LOG = Logger
@@ -74,6 +77,10 @@ public class SyncQueue {
     return destID;
   }
 
+  /**
+   * Add an element
+   * @param trans
+   */
   synchronized void add(Simple trans) {
     // Only add to the consumer queue if it is
     // taken from the queue
@@ -100,9 +107,12 @@ public class SyncQueue {
     }
   }
 
+  /**
+   * Enter to the consuming state.
+   * If it's in the consumer queue, then it's
+   * only allowed to take, not sending.
+   */
   synchronized void enterConsumeBarrier() {
-    // Only allow to take when the queue in the
-    // consumer queue
     if (inConsumerQueue) {
       inConsumerQueue = false;
       if (!isConsuming) {
@@ -111,6 +121,10 @@ public class SyncQueue {
     }
   }
 
+  /**
+   * Send data.
+   * It should be in the consuming state
+   */
   void send() {
     if (!inConsumeBarrier()) {
       return;
@@ -141,6 +155,11 @@ public class SyncQueue {
     leaveConsumeBarrier();
   }
 
+  /**
+   * Check if it's in consuming state
+   * @return true if it's in consuming state,
+   * 	false otherwise
+   */
   private synchronized boolean inConsumeBarrier() {
     if (!inConsumerQueue && isConsuming) {
       return true;
@@ -149,6 +168,9 @@ public class SyncQueue {
     }
   }
 
+  /**
+   * Exit the consuming state
+   */
   private synchronized void leaveConsumeBarrier() {
     if (!inConsumerQueue && isConsuming) {
       queue.clear();

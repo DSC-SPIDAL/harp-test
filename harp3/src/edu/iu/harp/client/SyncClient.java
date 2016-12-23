@@ -58,6 +58,9 @@ public class SyncClient implements Runnable {
     this.client = new Thread(this);
   }
 
+  /*******************************************************
+   * Task definition for sending
+   ******************************************************/
   private class SendTask extends RecursiveAction {
     /** Generated serial ID */
     private static final long serialVersionUID =
@@ -69,6 +72,9 @@ public class SyncClient implements Runnable {
       this.queue = queue;
     }
 
+    /**
+     * The main computation performed by this task.
+     */
     @Override
     public void compute() {
       try {
@@ -79,14 +85,11 @@ public class SyncClient implements Runnable {
       }
     }
   }
-
+  
   /**
    * Submit a message event
-   * 
-   * @param destWorkerID
-   * @param event
-   * @param hasFuture
-   * @return
+   * @param event the event to submit
+   * @return true if succeeded, false otherwise
    */
   public boolean submitMessageEvent(Event event) {
     // Add event to the queue
@@ -135,9 +138,9 @@ public class SyncClient implements Runnable {
   /**
    * Get or create a sync queue.
    * 
-   * @param destID
-   * @param contextName
-   * @return
+   * @param destID the ID of the destination
+   * @param contextName the name of the context
+   * @return the SyncQueue
    */
   private SyncQueue getSyncQueue(int destID,
     String contextName) {
@@ -166,14 +169,20 @@ public class SyncClient implements Runnable {
     return queue;
   }
 
+  /**
+   * Start the client
+   */
   public void start() {
     client.start();
   }
 
+  /**
+   * Main process by this client
+   * Go through each queue,
+   * drain the queue and send/broadcast
+   */
   @Override
   public void run() {
-    // Go through each queue
-    // drain the queue and send/broadcast
     while (true) {
       SyncQueue queue = null;
       try {
@@ -192,8 +201,10 @@ public class SyncClient implements Runnable {
     }
   }
 
+  /**
+   * Send StopSign to the execution threads
+   */
   public void stop() {
-    // Send StopSign to the execution threads
     SyncQueue queue =
       getSyncQueue(NO_WORKERS, "");
     queue.add(null);
