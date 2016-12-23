@@ -105,7 +105,9 @@ public class BcastCollective {
       TimeUnit.SECONDS);
     System.exit(0);
   }
-
+  /**
+   * Test for broadcasting using chain method
+   */
   public static boolean runChainBcast(
     String contextName, int workerID,
     int numBytes, int numLoops, DataMap dataMap,
@@ -336,6 +338,17 @@ public class BcastCollective {
     return isSuccess;
   }
 
+  /**
+   * The broadcast communication operation
+   * @param contextName the name of the context
+   * @param operationName the name of the operation
+   * @param table the data Table
+   * @param bcastWorkerID the worker which broadcasts
+   * @param useMSTBcast use MST method or not
+   * @param dataMap the DataMap
+   * @param workers the Workers
+   * @return true if succeeded, false otherwise
+   */
   public static <P extends Simple> boolean
     broadcast(String contextName,
       String operationName, Table<P> table,

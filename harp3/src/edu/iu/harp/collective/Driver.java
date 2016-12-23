@@ -45,6 +45,9 @@ import edu.iu.harp.worker.WorkerInfo;
 import edu.iu.harp.worker.Workers;
 import edu.iu.harp.worker.Workers.WorkerInfoList;
 
+/*******************************************************
+ * Test collective communication
+ ******************************************************/
 public class Driver {
   /** Class logger */
   private static final Logger LOG = Logger
