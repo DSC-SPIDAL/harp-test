@@ -24,6 +24,11 @@ import edu.iu.harp.io.DataMap;
 import edu.iu.harp.io.DataUtil;
 import edu.iu.harp.io.EventQueue;
 
+
+/*******************************************************
+ * The recursive resultless Fork-Join task for 
+ * decoding the data.
+ ******************************************************/
 public class Decoder extends RecursiveAction {
   private static final long serialVersionUID = 1L;
 
@@ -43,6 +48,9 @@ public class Decoder extends RecursiveAction {
     this.dataMap = dataMap;
   }
 
+  /**
+   * The main computation performed by this task.
+   */
   @Override
   public void compute() {
     // Decode data array

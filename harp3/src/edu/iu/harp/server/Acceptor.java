@@ -24,10 +24,12 @@ import edu.iu.harp.io.Constant;
 import edu.iu.harp.io.DataMap;
 import edu.iu.harp.io.EventQueue;
 import edu.iu.harp.worker.Workers;
-
+/*******************************************************
+ * The Acceptor for handling the messages received 
+ * from clients
+ ******************************************************/
 public class Acceptor implements Runnable {
 
-  /** Class logger */
   private static final Logger LOG = Logger
     .getLogger(Acceptor.class);
 
@@ -49,6 +51,10 @@ public class Acceptor implements Runnable {
     this.selfID = workers.getSelfID();
   }
 
+  /**
+   * The overridden run function for handling
+   * the messages received from a client
+   */
   @Override
   public void run() {
     // All commands should use positive byte

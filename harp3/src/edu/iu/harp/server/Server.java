@@ -65,6 +65,15 @@ public class Server implements Runnable {
   /** Server socket */
   private final ServerSocket serverSocket;
 
+  /**
+   * Initialization
+   * @param node the host
+   * @param port the port
+   * @param queue the EventQueue
+   * @param map the DataMap
+   * @param workers the Workers
+   * @throws Exception
+   */
   public Server(String node, int port,
     EventQueue queue, DataMap map, Workers workers)
     throws Exception {
@@ -90,12 +99,18 @@ public class Server implements Runnable {
       + this.port + " starts.");
   }
 
+  /**
+   * Start the server
+   */
   public void start() {
     server.start();
   }
 
+  /**
+   * Stop the server.
+   * Close acceptors and the server
+   */
   public void stop() {
-    // Close acceptors and the server
     for (Thread thread : acceptors) {
       ComputeUtil.joinThread(thread);
     }
@@ -110,6 +125,11 @@ public class Server implements Runnable {
       + this.port + " is stopped.");
   }
 
+  /**
+   * Close the server
+   * @param ip
+   * @param port
+   */
   private void closeServer(String ip, int port) {
     Connection conn =
       Connection.create(ip, port, false);
@@ -128,6 +148,10 @@ public class Server implements Runnable {
     }
   }
 
+  /**
+   * The overridden run function for receiving data
+   * from clients
+   */
   @Override
   public void run() {
     // All commands should use positive byte
