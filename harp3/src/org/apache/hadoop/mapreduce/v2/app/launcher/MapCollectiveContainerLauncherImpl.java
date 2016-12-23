@@ -40,7 +40,7 @@ import org.apache.hadoop.yarn.api.records.Container;
 import org.apache.hadoop.yarn.api.records.ContainerLaunchContext;
 import org.apache.hadoop.yarn.util.RackResolver;
 
-/**
+/*******************************************************
  * This class is modified from
  * ContainerLauncherImpl. When launch event is
  * processed, record the location and generate
@@ -51,7 +51,7 @@ import org.apache.hadoop.yarn.util.RackResolver;
  *
  * This class is responsible for launching of
  * containers.
- */
+ ******************************************************/
 public class MapCollectiveContainerLauncherImpl
   extends ContainerLauncherImpl {
 

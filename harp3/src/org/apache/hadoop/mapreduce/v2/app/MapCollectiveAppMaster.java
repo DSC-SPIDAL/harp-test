@@ -47,7 +47,7 @@ import org.apache.hadoop.yarn.api.records.ContainerId;
 import org.apache.hadoop.yarn.conf.YarnConfiguration;
 import org.apache.hadoop.yarn.util.ConverterUtils;
 
-/**
+/*******************************************************
  * The Map-Reduce Application Master. The state
  * machine is encapsulated in the implementation
  * of Job interface. All state changes happens via
@@ -68,7 +68,7 @@ import org.apache.hadoop.yarn.util.ConverterUtils;
  * 
  * The information is shared across different
  * components using AppContext.
- */
+ ******************************************************/
 
 public class MapCollectiveAppMaster extends
   MRAppMaster {

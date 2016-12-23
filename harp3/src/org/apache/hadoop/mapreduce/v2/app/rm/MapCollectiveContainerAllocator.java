@@ -31,13 +31,13 @@ import org.apache.hadoop.yarn.api.records.NodeReport;
 import org.apache.hadoop.yarn.conf.YarnConfiguration;
 import org.apache.hadoop.yarn.exceptions.YarnException;
 
-/**
+/*******************************************************
  * This class is modified from
  * RMContainerAllocator.
  *
  * Allocates the container from the
  * ResourceManager scheduler.
- */
+ ******************************************************/
 public class MapCollectiveContainerAllocator
   extends RMContainerAllocator {
 
