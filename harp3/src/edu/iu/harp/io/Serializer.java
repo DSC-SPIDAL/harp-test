@@ -23,9 +23,12 @@ import org.apache.log4j.Logger;
 
 import edu.iu.harp.resource.ByteArray;
 
+/*******************************************************
+ * A class for serialization implemented 
+ * DataOutput interface
+ ******************************************************/
 public class Serializer implements DataOutput {
 
-  /** Class logger */
   @SuppressWarnings("unused")
   private static final Logger LOG = Logger
     .getLogger(Serializer.class);
@@ -41,8 +44,8 @@ public class Serializer implements DataOutput {
 
   /**
    * Serialize on bytes which starts from bytes[0]
-   * to bytes[len - 1], with pos between 0 ~ len -
-   * 1
+   * to bytes[len - 1], with pos between
+   *  0 ~ (len - 1)
    * 
    * @param bytes
    * @param len

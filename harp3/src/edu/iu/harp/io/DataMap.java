@@ -25,6 +25,15 @@ import java.util.concurrent.TimeUnit;
 
 import org.apache.log4j.Logger;
 
+/*******************************************************
+ * A wrapper for operations on queues associated with 
+ * communication contextName and operationName. 
+ * The main data structure is a map from contextName to a sub-map;
+ * The sub-map is a map from operationName to a 
+ * BlockingQueue. The BlockingQueue is a queue
+ * for the Data.
+ * All operations are conducted on this map.
+ ******************************************************/
 public class DataMap {
 
   @SuppressWarnings("unused")
@@ -40,6 +49,12 @@ public class DataMap {
       new ConcurrentHashMap<>(initialCapacity);
   }
 
+  /**
+   * Create a queue for the operation under the context
+   * @param contextName the name of the context
+   * @param operationName the name of the operation
+   * @return the queue of the data of the operation 
+   */
   private BlockingQueue<Data>
     createOperationDataQueue(String contextName,
       String operationName) {
@@ -69,6 +84,15 @@ public class DataMap {
     return opDataQueue;
   }
 
+  /**
+   * Wait and get the data from the queue
+   * of the operation under the context
+   * @param contextName the name of the context
+   * @param operationName the name of the operation
+   * @param maxWaitTime maximum waiting time
+   * @return the data
+   * @throws InterruptedException
+   */
   public Data waitAndGetData(String contextName,
     String operationName, long maxWaitTime)
     throws InterruptedException {
@@ -79,6 +103,10 @@ public class DataMap {
       TimeUnit.SECONDS);
   }
 
+  /**
+   * Put the Data to the DataMap
+   * @param data the Data to be put
+   */
   public void putData(Data data) {
     BlockingQueue<Data> opDataQueue =
       createOperationDataQueue(
@@ -87,6 +115,11 @@ public class DataMap {
     opDataQueue.add(data);
   }
 
+  /**
+   * Clean the data of the operation under the context
+   * @param contextName the name of the context
+   * @param operationName the name of the operation
+   */
   public void cleanOperationData(
     String contextName, String operationName) {
     ConcurrentMap<String, BlockingQueue<Data>> opDataMap =
@@ -103,11 +136,12 @@ public class DataMap {
     }
   }
 
+  
   /**
-   * Context is the execution context of the
-   * operation. Invoke this when the context is
+   * Clean the Data related to the context
+   * Invoke this when the context is
    * done.
-   * 
+   * @param contextName the name of the context
    */
   public void cleanData(String contextName) {
     ConcurrentMap<String, BlockingQueue<Data>> opDataMap =
@@ -128,8 +162,7 @@ public class DataMap {
   }
 
   /**
-   * If failures happen, the old contexts should
-   * all be trashed.
+   * Clean the DataMap
    */
   public void clean() {
     ConcurrentMap<String, ConcurrentMap<String, BlockingQueue<Data>>> tmpDataMap =

@@ -23,13 +23,10 @@ import org.apache.log4j.Logger;
 
 import edu.iu.harp.resource.ByteArray;
 
-/**
- * Learned from DataInputStream &
- * ByteArrayInputStream
- * 
- * @author zhangbj
- *
- */
+/*******************************************************
+ * A class for Deserialization implemented 
+ * DataInput interface
+ ******************************************************/
 public class Deserializer implements DataInput {
 
   /** Class logger */
