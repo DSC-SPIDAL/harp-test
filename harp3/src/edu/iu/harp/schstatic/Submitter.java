@@ -17,7 +17,9 @@
 package edu.iu.harp.schstatic;
 
 import edu.iu.harp.schdynamic.Input;
-
+/*******************************************************
+ * The Submitter is used for submitting tasks
+ ******************************************************/
 public class Submitter<I> {
 
   private TaskMonitor<I, ?, ? extends Task<I, ?>>[] taskMonitors;
@@ -27,6 +29,11 @@ public class Submitter<I> {
     this.taskMonitors = taskMonitors;
   }
 
+  /**
+   * Submit the task
+   * @param taskID the ID of the task
+   * @param input the input
+   */
   public void submit(int taskID, I input) {
     if (taskID < taskMonitors.length
       && input != null) {

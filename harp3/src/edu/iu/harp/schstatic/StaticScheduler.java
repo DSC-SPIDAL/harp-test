@@ -24,7 +24,9 @@ import org.apache.commons.logging.LogFactory;
 
 import edu.iu.harp.schdynamic.ComputeUtil;
 import edu.iu.harp.schdynamic.Input;
-
+/*******************************************************
+ * The static scheduler
+ ******************************************************/
 public class StaticScheduler<I, O, T extends Task<I, O>> {
   protected static final Log LOG = LogFactory
     .getLog(StaticScheduler.class);
@@ -54,15 +56,28 @@ public class StaticScheduler<I, O, T extends Task<I, O>> {
     }
   }
 
+  /**
+   * Get the Task by its ID
+   * @param taskID the ID of the task
+   * @return the Task
+   */
   public T getTask(int taskID) {
     return taskMonitors[taskID].getTask();
   }
 
+  /**
+   * Submit the input to task
+   * @param taskID the ID of the task
+   * @param input the input
+   */
   public synchronized void submit(int taskID,
     I input) {
     submitter.submit(taskID, input);
   }
 
+  /**
+   * Start to schedule tasks
+   */
   public synchronized void start() {
     if (!isRunning) {
       isRunning = true;
@@ -85,6 +100,9 @@ public class StaticScheduler<I, O, T extends Task<I, O>> {
     }
   }
 
+  /**
+   * Pause the scheduling 
+   */
   public synchronized void pause() {
     if (isRunning && !isPausing) {
       isRunning = false;
@@ -98,6 +116,9 @@ public class StaticScheduler<I, O, T extends Task<I, O>> {
     }
   }
 
+  /**
+   * Clean the queue of input
+   */
   public synchronized void cleanInputQueue() {
     if (isPausing || !isRunning) {
       for (TaskMonitor<I, O, T> taskMonitor : taskMonitors) {
@@ -106,6 +127,9 @@ public class StaticScheduler<I, O, T extends Task<I, O>> {
     }
   }
 
+  /**
+   * Stop scheduling
+   */
   public synchronized void stop() {
     if (isPausing) {
       start();
@@ -124,10 +148,12 @@ public class StaticScheduler<I, O, T extends Task<I, O>> {
   }
 
   /**
+   * 
+   * Blocked and wait for output.
    * Invoke as while(hasOutput()) {
    * waitForOutput(); }
    * 
-   * @return
+   * @return the output
    */
   public O waitForOutput(int taskID) {
     if (taskID < taskMonitors.length) {
@@ -137,6 +163,11 @@ public class StaticScheduler<I, O, T extends Task<I, O>> {
     }
   }
 
+  /**
+   * Check if has a new output
+   * @param taskID the ID of the task
+   * @return true if has a new output, false otherwise
+   */
   public boolean hasOutput(int taskID) {
     if (taskID < taskMonitors.length) {
       return taskMonitors[taskID].hasOutput();
@@ -145,6 +176,11 @@ public class StaticScheduler<I, O, T extends Task<I, O>> {
     }
   }
 
+  /**
+   * Check if has errors on this task
+   * @param taskID the ID of the task
+   * @return true if has errors, false otherwise
+   */
   public boolean hasError(int taskID) {
     if (taskID < taskMonitors.length) {
       return taskMonitors[taskID].hasError();

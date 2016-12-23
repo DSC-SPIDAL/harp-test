@@ -27,13 +27,18 @@ import edu.iu.harp.schdynamic.ComputeUtil;
 import edu.iu.harp.schdynamic.Input;
 import edu.iu.harp.schdynamic.Output;
 
+/*******************************************************
+ * Monitor and manage tasks
+ ******************************************************/
 public class TaskMonitor<I, O, T extends Task<I, O>>
   implements Runnable {
   protected static final Log LOG = LogFactory
     .getLog(TaskMonitor.class);
-
+  /**the task object*/
   private final T taskObject;
+  /**the input queue*/
   private final BlockingQueue<Input<I>> inputQueue;
+  /**the output queue */
   private final BlockingQueue<Output<O>> outputQueue;
   private int inputCount;
   private int outputCount;
@@ -59,10 +64,17 @@ public class TaskMonitor<I, O, T extends Task<I, O>>
     this.barrier2 = new Semaphore(0);
   }
 
+  /**
+   * Get the task object
+   * @return the task object
+   */
   T getTask() {
     return taskObject;
   }
 
+  /**
+   * Start the task
+   */
   synchronized void start() {
     if (!isRunning) {
       isRunning = true;
@@ -70,6 +82,10 @@ public class TaskMonitor<I, O, T extends Task<I, O>>
     }
   }
 
+  /**
+   * Submit the input to the task
+   * @param input the input
+   */
   synchronized void submit(Input<I> input) {
     inputQueue.add(input);
     if (isRunning && !input.isPause()
@@ -78,6 +94,9 @@ public class TaskMonitor<I, O, T extends Task<I, O>>
     }
   }
 
+  /**
+   * Pause or stop the task
+   */
   private synchronized void pauseOrStop() {
     if (isRunning) {
       isRunning = false;
@@ -85,16 +104,27 @@ public class TaskMonitor<I, O, T extends Task<I, O>>
     }
   }
 
+  /**
+   * Clean the input queue
+   */
   synchronized void cleanInputQueue() {
     if (!isRunning) {
       inputQueue.clear();
     }
   }
 
+  /**
+   * Check if has output
+   * @return true if has output, false otherwise
+   */
   synchronized boolean hasOutput() {
     return inputCount > outputCount;
   }
 
+  /**
+   * Blocked and wait for output
+   * @return the output
+   */
   O waitForOutput() {
     // If no output is available, wait for one
     if (hasOutput()) {
@@ -121,16 +151,26 @@ public class TaskMonitor<I, O, T extends Task<I, O>>
     }
   }
 
+  /**
+   * Check if has errors or not
+   * @return true if has erros, false otherwise
+   */
   boolean hasError() {
     int count = errorCount;
     errorCount = 0;
     return count > 0;
   }
 
+  /**
+   * Relase the barrier
+   */
   void release() {
     barrier2.release();
   }
 
+  /**
+   * The main process of monitoring and managing tasks
+   */
   @Override
   public void run() {
     while (true) {

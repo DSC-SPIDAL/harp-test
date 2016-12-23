@@ -16,34 +16,67 @@
 
 package edu.iu.harp.schstatic;
 
+/*******************************************************
+ * The abstract class for task definition
+ ******************************************************/
 public abstract class Task<I, O> {
 
   private int taskID;
   private int numTasks;
   private Submitter<I> submitter;
 
+  /**
+   * The main computation of the task
+   * @param input the input
+   * @return the output
+   * @throws Exception
+   */
   public abstract O run(I input) throws Exception;
 
+  /**
+   * Get the ID of the task
+   * @return
+   */
   public int getTaskID() {
     return taskID;
   }
 
+  /**
+   * Set the ID of the task
+   * @param taskID
+   */
   void setTaskID(int taskID) {
     this.taskID = taskID;
   }
 
+  /**
+   * Get the number of the task
+   * @return
+   */
   public int getNumTasks() {
     return this.numTasks;
   }
 
+  /**
+   * Set the number of the task
+   * @param numTasks
+   */
   void setNumTasks(int numTasks) {
     this.numTasks = numTasks;
   }
 
+  /**
+   * Get the Submitter of this task
+   * @return the Submitter
+   */
   public Submitter<I> getSubmitter() {
     return submitter;
   }
 
+  /**
+   * Set the Submitter for this task
+   * @param submitter the Submitter
+   */
   void setSubmitter(Submitter<I> submitter) {
     this.submitter = submitter;
   }
