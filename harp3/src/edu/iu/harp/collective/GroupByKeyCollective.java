@@ -37,10 +37,11 @@ import edu.iu.harp.partition.Partition;
 import edu.iu.harp.partition.Partitioner;
 import edu.iu.harp.server.Server;
 import edu.iu.harp.worker.Workers;
-
+/*******************************************************
+ * Group By Key Collective communication
+ ******************************************************/
 public class GroupByKeyCollective {
 
-  /** Class logger */
   protected static final Logger LOG = Logger
     .getLogger(GroupByKeyCollective.class);
 

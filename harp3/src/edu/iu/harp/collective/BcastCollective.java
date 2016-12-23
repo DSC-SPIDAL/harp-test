@@ -46,9 +46,11 @@ import edu.iu.harp.resource.Writable;
 import edu.iu.harp.server.Server;
 import edu.iu.harp.util.Ack;
 import edu.iu.harp.worker.Workers;
-
+/*******************************************************
+ * Broadcast Collective communication
+ ******************************************************/
 public class BcastCollective {
-  /** Class logger */
+	
   protected static final Logger LOG = Logger
     .getLogger(BcastCollective.class);
 

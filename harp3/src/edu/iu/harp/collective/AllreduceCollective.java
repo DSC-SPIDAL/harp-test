@@ -43,7 +43,9 @@ import edu.iu.harp.resource.Simple;
 import edu.iu.harp.resource.Transferable;
 import edu.iu.harp.server.Server;
 import edu.iu.harp.worker.Workers;
-
+/*******************************************************
+ * Allreduce Collective communication
+ ******************************************************/
 public class AllreduceCollective {
 
   private static final Logger LOG = Logger
@@ -137,15 +139,13 @@ public class AllreduceCollective {
   }
 
   /**
-   * Table could be modified during allgather
-   * 
-   * @param contextName
-   * @param operationName
-   * @param table
-   * @param dataMap
-   * @param workers
-   * @return
-   * @throws Exception
+   * Allreduce communication operation.
+   * @param contextName the name of the context
+   * @param operationName the name of the operation
+   * @param table the data Table
+   * @param dataMap the DataMap
+   * @param workers the Workers
+   * @return true if succeeded, false otherwise
    */
   public static
     <P extends Simple>

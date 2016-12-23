@@ -54,7 +54,9 @@ import edu.iu.harp.server.Server;
 import edu.iu.harp.util.Join;
 import edu.iu.harp.util.PartitionSet;
 import edu.iu.harp.worker.Workers;
-
+/*******************************************************
+ * Graph Collective communication
+ ******************************************************/
 public class GraphCollective {
 
   private static final Logger LOG = Logger

@@ -42,7 +42,9 @@ import edu.iu.harp.resource.Simple;
 import edu.iu.harp.resource.Transferable;
 import edu.iu.harp.server.Server;
 import edu.iu.harp.worker.Workers;
-
+/*******************************************************
+ * Reduce Collective communication
+ ******************************************************/
 public class ReduceCollective {
 
   private static final Logger LOG = Logger
@@ -136,15 +138,14 @@ public class ReduceCollective {
   }
 
   /**
-   * Table could be modified during allgather
-   * 
-   * @param contextName
-   * @param operationName
-   * @param table
-   * @param dataMap
-   * @param workers
-   * @return
-   * @throws Exception
+   * Reduce communication operation
+   * @param contextName the name of the context
+   * @param operationName the operation of the context
+   * @param table the data Table
+   * @param reduceWorkerID the workerID to send
+   * @param dataMap the DataMap
+   * @param workers the Workers
+   * @return true if succeeded, false otherwise
    */
   public static
     <P extends Simple>

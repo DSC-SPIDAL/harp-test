@@ -42,6 +42,9 @@ import edu.iu.harp.resource.Transferable;
 import edu.iu.harp.server.Server;
 import edu.iu.harp.worker.Workers;
 
+/*******************************************************
+ * Allgather Collective communication
+ ******************************************************/
 public class AllgatherCollective {
 
   private static final Logger LOG = Logger
@@ -135,6 +138,15 @@ public class AllgatherCollective {
     System.exit(0);
   }
 
+  /**
+   * Allgather communication operation
+   * @param contextName the name of the context
+   * @param operationName the name of the operation
+   * @param table the data Table
+   * @param dataMap the DataMap
+   * @param workers the Workers
+   * @return true if succeeded, false otherwise
+   */
   public static
     <P extends Simple>
     boolean
