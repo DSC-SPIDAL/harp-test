@@ -22,6 +22,9 @@ import java.io.IOException;
 
 import edu.iu.harp.resource.Writable;
 
+/*******************************************************
+ * The Barrier class
+ ******************************************************/
 public class Barrier extends Writable {
 
   private boolean status;
@@ -30,31 +33,51 @@ public class Barrier extends Writable {
     status = false;
   }
 
+  /**
+   * Set the status
+   * @param st the status
+   */
   public void setStatus(boolean st) {
     status = st;
   }
 
+  /**
+   * Get the status
+   * @return the status
+   */
   public boolean getStatus() {
     return status;
   }
 
+  /**
+   * Write the status to DataOutput
+   */
   @Override
   public void write(DataOutput out)
     throws IOException {
     out.writeBoolean(status);
   }
 
+  /**
+   * Read the status from DataInput
+   */
   @Override
   public void read(DataInput in)
     throws IOException {
     status = in.readBoolean();
   }
 
+  /**
+   * Get the number of bytes of the encoded data
+   */
   @Override
   public int getNumWriteBytes() {
     return 1;
   }
 
+  /**
+   * Clear the data
+   */
   @Override
   public void clear() {
   }

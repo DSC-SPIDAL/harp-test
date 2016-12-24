@@ -29,14 +29,13 @@ import java.io.IOException;
 
 import edu.iu.harp.resource.Writable;
 
-/**
+/*******************************************************
+ * This class records the destinations of each partition.
  * Each partition could have multi-destinations.
- * 
- * @author zhangbj
- *
- */
+ ******************************************************/
+
 public class Join extends Writable {
-  /** Which worker this partition goes */
+  /** Which workers this partition goes */
   private Int2ObjectOpenHashMap<IntArrayList> parToWorkerMap;
   /**
    * How many Data arrays this worker needs to
@@ -49,29 +48,46 @@ public class Join extends Writable {
     workerParCountMap = null;
   }
 
-  public
-    void
-    setParToWorkerMap(
+  /**
+   * Set the parToWorkerMap
+   * @param partitionToWorkerMap the parToWorkerMap
+   */
+  public void setParToWorkerMap(
       Int2ObjectOpenHashMap<IntArrayList> partitionToWorkerMap) {
     this.parToWorkerMap = partitionToWorkerMap;
   }
 
+  /**
+   * Get the parToWorkerMap
+   * @return the parToWorkerMap
+   */
   public Int2ObjectOpenHashMap<IntArrayList>
     getParToWorkerMap() {
     return parToWorkerMap;
   }
 
+  /**
+   * Set the workerPartitionCountMap
+   * @param workerPartitionCountMap the workerPartitionCountMap
+   */
   public void setWorkerParCountMap(
     Int2IntOpenHashMap workerPartitionCountMap) {
     this.workerParCountMap =
       workerPartitionCountMap;
   }
 
+  /**
+   * Get the workerParCountMap
+   * @return the workerParCountMap
+   */
   public Int2IntOpenHashMap
     getWorkerParCountMap() {
     return workerParCountMap;
   }
 
+  /**
+   * Get the number of bytes of encoded data
+   */
   @Override
   public int getNumWriteBytes() {
     int size = 4;
@@ -92,6 +108,9 @@ public class Join extends Writable {
     return size;
   }
 
+  /**
+   * Write this to DataOutput
+   */
   @Override
   public void write(DataOutput out)
     throws IOException {
@@ -124,6 +143,9 @@ public class Join extends Writable {
     }
   }
 
+  /**
+   * Read this from DataInput
+   */
   @Override
   public void read(DataInput in)
     throws IOException {
@@ -158,6 +180,9 @@ public class Join extends Writable {
     }
   }
 
+  /**
+   * Clear the data
+   */
   @Override
   public void clear() {
     if (parToWorkerMap != null) {
