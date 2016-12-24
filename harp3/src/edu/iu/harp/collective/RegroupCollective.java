@@ -142,6 +142,16 @@ public class RegroupCollective {
     System.exit(0);
   }
 
+  /**
+   * The regroup communication operation
+   * @param contextName the name of the context
+   * @param operationName the name of the operation
+   * @param table the Table
+   * @param partitioner the Partitioner
+   * @param dataMap the DataMap
+   * @param workers the Workers
+   * @return true if succeeded, false otherwise
+   */
   public static <P extends Simple> boolean
     regroupCombine(final String contextName,
       String operationName, Table<P> table,
@@ -216,6 +226,12 @@ public class RegroupCollective {
       numRecvPartitions, rmPartitionIDs, dataMap);
   }
 
+  /**
+   * Apply the function the each partition in the Table
+   * @param table the Table
+   * @param function the function to be applied
+   * @return true if succeeded, false otherwise
+   */
   public static
     <P extends Simple, PF extends PartitionFunction<P>>
     boolean applyPartitionFunction(
