@@ -228,6 +228,10 @@ public class GraphCollective {
     System.exit(0);
   }
 
+  /**
+   * Print the EdgeTable
+   * @param edgeTable the EdgeTable to be printed
+   */
   private static void printEdgeTable(
     EdgeTable edgeTable) {
     for (Partition<EdgePartition> partition : edgeTable
@@ -248,6 +252,10 @@ public class GraphCollective {
     }
   }
 
+  /**
+   * Print the MessageTable
+   * @param msgTable the MessageTable to be printed
+   */
   private static void printMsgTable(
     MessageTable msgTable) {
     for (Partition<MessagePartition> partition : msgTable
@@ -267,6 +275,10 @@ public class GraphCollective {
     }
   }
 
+  /**
+   * Print the VertexTable
+   * @param vtxTable the VertexTable to be printed
+   */
   private static void printVtxTable(
     VertexTable vtxTable) {
     for (Partition<VertexPartition> partition : vtxTable
@@ -286,6 +298,17 @@ public class GraphCollective {
     }
   }
 
+  /**
+   * The Join communication operation
+   * @param contextName the name of the context
+   * @param operationName the name of the operation
+   * @param dynamicTable the dynamic data Table
+   * @param partitioner the Partitioner
+   * @param staticTable the static data Table
+   * @param dataMap the DataMap
+   * @param workers the Workers
+   * @return true if succeeded, false otherwise
+   */
   public static
     <P1 extends Simple, P2 extends Simple>
     boolean join(String contextName,
@@ -423,6 +446,14 @@ public class GraphCollective {
       numRecvPartitions, rmPartitionIDs, dataMap);
   }
 
+  /**
+   * Generate partition and worker mapping 
+   * for join
+   * @param recvStaticPSets
+   * @param recvDynamicPSets
+   * @param partitioner
+   * @return a Join object
+   */
   private static Join createJoin(
     LinkedList<Transferable> recvStaticPSets,
     LinkedList<Transferable> recvDynamicPSets,
