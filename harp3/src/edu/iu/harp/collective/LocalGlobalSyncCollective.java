@@ -294,6 +294,15 @@ public class LocalGlobalSyncCollective {
     }
   }
 
+  /**
+   * Send partitions to destinations according to
+   * the partitionMap
+   * @param contextName the name of the context
+   * @param operationName the name of the operation
+   * @param partitionMap the map records where to 
+   * 	send each partition
+   * @param workers the Workers
+   */
   static <P extends Simple> void dispatch(
     String contextName, String operationName,
     List<Partition<P>>[] partitionMap,
@@ -342,6 +351,14 @@ public class LocalGlobalSyncCollective {
     }
   }
 
+  /**
+   * Copy local data
+   * @param contextName the name of the context
+   * @param operationName the name of the operation
+   * @param ownedPartitions the worker's own partitions
+   * @param workers the Workers
+   * @param dataMap the DataMap
+   */
   private static <P extends Simple> void copy(
     String contextName, String operationName,
     List<Partition<P>> ownedPartitions,
@@ -381,6 +398,16 @@ public class LocalGlobalSyncCollective {
     }
   }
 
+  /**
+   * Copy local partitions
+   * @param contextName the name of the context
+   * @param operationName the name of the operation
+   * @param selfID the self ID
+   * @param localPartitions the local partitions
+   * @param size the size of the local partitions
+   * @param workers the Workers
+   * @param dataMap the DataMap
+   */
   private static void copyPartitions(
     String contextName, String operationName,
     int selfID,
