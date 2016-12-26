@@ -2,7 +2,7 @@ languageCode: en-us
 title: Harp
 author: Bingjing Zhang
 canonifyurls: true
-baseurl: "http://example.org/"
+baseurl: "https://github.iu.edu/pages/IU-Big-Data-Lab/Harp/"
 
 # Site-level config
 metadataformat: yaml
