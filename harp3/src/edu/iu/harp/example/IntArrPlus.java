@@ -23,27 +23,25 @@ import edu.iu.harp.resource.IntArray;
 /*******************************************************
  * Combiner for IntArray
  ******************************************************/
-public class IntArrPlus extends
-  PartitionCombiner<IntArray> {
+public class IntArrPlus extends PartitionCombiner<IntArray> {
 
-  /**
-   * Combine two DoubleArrays
-   */
-  @Override
-  public PartitionStatus combine(IntArray curPar,
-    IntArray newPar) {
-    int[] ints1 = curPar.get();
-    int size1 = curPar.size();
-    int[] ints2 = newPar.get();
-    int size2 = newPar.size();
-    if (size1 != size2) {
-      // throw new Exception("size1: " + size1
-      // + ", size2: " + size2);
-      return PartitionStatus.COMBINE_FAILED;
+    /**
+     * Combine two DoubleArrays
+     */
+    @Override
+    public PartitionStatus combine(IntArray curPar, IntArray newPar) {
+	int[] ints1 = curPar.get();
+	int size1 = curPar.size();
+	int[] ints2 = newPar.get();
+	int size2 = newPar.size();
+	if (size1 != size2) {
+	    // throw new Exception("size1: " + size1
+	    // + ", size2: " + size2);
+	    return PartitionStatus.COMBINE_FAILED;
+	}
+	for (int i = 0; i < size2; i++) {
+	    ints1[i] += ints2[i];
+	}
+	return PartitionStatus.COMBINED;
     }
-    for (int i = 0; i < size2; i++) {
-      ints1[i] += ints2[i];
-    }
-    return PartitionStatus.COMBINED;
-  }
 }

@@ -18,6 +18,5 @@ package edu.iu.harp.example;
 
 import edu.iu.harp.keyval.Int2ValKVPartition;
 
-public class MessagePartition extends
-  Int2ValKVPartition<IntVal> {
+public class MessagePartition extends Int2ValKVPartition<IntVal> {
 }

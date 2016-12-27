@@ -20,69 +20,73 @@ import org.apache.log4j.Logger;
 
 import edu.iu.harp.io.DataMap;
 import edu.iu.harp.io.EventQueue;
+
 /*******************************************************
  * The abstract class for receiving the data
  ******************************************************/
 public abstract class Receiver {
 
-  private static final Logger LOG = Logger
-    .getLogger(Receiver.class);
+    private static final Logger LOG = Logger.getLogger(Receiver.class);
 
-  private final ServerConn conn;
-  private final EventQueue eventQueue;
-  private final DataMap dataMap;
-  private final byte commandType;
+    private final ServerConn conn;
+    private final EventQueue eventQueue;
+    private final DataMap dataMap;
+    private final byte commandType;
 
-  public Receiver(ServerConn conn,
-    EventQueue queue, DataMap map, byte command) {
-    this.conn = conn;
-    this.eventQueue = queue;
-    this.dataMap = map;
-    this.commandType = command;
-  }
-
-  /**
-   * The execution method
-   * @throws Exception
-   */
-  public void run() throws Exception {
-    try {
-      handleData(conn);
-    } catch (Exception e) {
-      LOG.error("Exception in handling data", e);
-      throw e;
+    public Receiver(ServerConn conn, EventQueue queue, DataMap map, byte command) {
+	this.conn = conn;
+	this.eventQueue = queue;
+	this.dataMap = map;
+	this.commandType = command;
     }
-  }
 
-  /**
-   * Get the type of the command
-   * @return the type of the command
-   */
-  protected byte getCommandType() {
-    return this.commandType;
-  }
+    /**
+     * The execution method
+     * 
+     * @throws Exception
+     */
+    public void run() throws Exception {
+	try {
+	    handleData(conn);
+	} catch (Exception e) {
+	    LOG.error("Exception in handling data", e);
+	    throw e;
+	}
+    }
 
-  /**
-   * Get the EventQueue
-   * @return the EventQueue
-   */
-  protected EventQueue getEventQueue() {
-    return this.eventQueue;
-  }
+    /**
+     * Get the type of the command
+     * 
+     * @return the type of the command
+     */
+    protected byte getCommandType() {
+	return this.commandType;
+    }
 
-  /**
-   * Get the DataMap
-   * @return the DataMap
-   */
-  protected DataMap getDataMap() {
-    return this.dataMap;
-  }
+    /**
+     * Get the EventQueue
+     * 
+     * @return the EventQueue
+     */
+    protected EventQueue getEventQueue() {
+	return this.eventQueue;
+    }
 
-  /**
-   * Abstract method for handling the data
-   * @param conn the Connection object
-   * @throws Exception
-   */
-  protected abstract void handleData(
-    final ServerConn conn) throws Exception;
+    /**
+     * Get the DataMap
+     * 
+     * @return the DataMap
+     */
+    protected DataMap getDataMap() {
+	return this.dataMap;
+    }
+
+    /**
+     * Abstract method for handling the data
+     * 
+     * @param conn
+     *            the Connection object
+     * @throws Exception
+     */
+    protected abstract void handleData(final ServerConn conn) throws Exception;
 }

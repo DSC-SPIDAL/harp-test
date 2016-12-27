@@ -20,7 +20,5 @@ package edu.iu.harp.io;
  * The statuses of the Data
  ******************************************************/
 public enum DataStatus {
-  DECODED, ENCODED_ARRAY_DECODED,
-  ENCODE_FAILED_DECODED, ENCODED_ARRAY,
-  ENCODED_ARRAY_DECODE_FAILED, DECODE_FAILED
+    DECODED, ENCODED_ARRAY_DECODED, ENCODE_FAILED_DECODED, ENCODED_ARRAY, ENCODED_ARRAY_DECODE_FAILED, DECODE_FAILED
 }

@@ -21,23 +21,23 @@ package edu.iu.harp.resource;
  ******************************************************/
 public class BytesPool extends ArrayPool<byte[]> {
 
-  public BytesPool() {
-    super();
-  }
-  
-  /**
-   * New a byte array of the size
-   */
-  @Override
-  protected byte[] createNewArray(int size) {
-    return new byte[size];
-  }
+    public BytesPool() {
+	super();
+    }
 
-  /**
-   * Get the length of the array
-   */
-  @Override
-  protected int getLength(byte[] array) {
-    return array.length;
-  }
+    /**
+     * New a byte array of the size
+     */
+    @Override
+    protected byte[] createNewArray(int size) {
+	return new byte[size];
+    }
+
+    /**
+     * Get the length of the array
+     */
+    @Override
+    protected int getLength(byte[] array) {
+	return array.length;
+    }
 }

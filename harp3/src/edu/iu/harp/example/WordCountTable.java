@@ -18,13 +18,9 @@ package edu.iu.harp.example;
 
 import edu.iu.harp.keyval.Key2ValKVTable;
 
-public class WordCountTable
-  extends
-  Key2ValKVTable<StringKey, IntCount, WordCountPartition> {
+public class WordCountTable extends Key2ValKVTable<StringKey, IntCount, WordCountPartition> {
 
-  public WordCountTable(int tableID) {
-    super(tableID, new IntCountPlus(),
-      StringKey.class, IntCount.class,
-      WordCountPartition.class);
-  }
+    public WordCountTable(int tableID) {
+	super(tableID, new IntCountPlus(), StringKey.class, IntCount.class, WordCountPartition.class);
+    }
 }

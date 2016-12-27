@@ -27,61 +27,62 @@ import edu.iu.harp.keyval.Value;
  ******************************************************/
 public class IntVal extends Value {
 
-  private int val;
+    private int val;
 
-  public IntVal() {
-  }
+    public IntVal() {
+    }
 
-  public IntVal(int val) {
-    this.val = val;
-  }
+    public IntVal(int val) {
+	this.val = val;
+    }
 
-  /**
-   * Set the value
-   * @param val the value
-   */
-  public void setInt(int val) {
-    this.val = val;
-  }
+    /**
+     * Set the value
+     * 
+     * @param val
+     *            the value
+     */
+    public void setInt(int val) {
+	this.val = val;
+    }
 
-  /**
-   * Get the value
-   * @return the value
-   */
-  public int getInt() {
-    return this.val;
-  }
+    /**
+     * Get the value
+     * 
+     * @return the value
+     */
+    public int getInt() {
+	return this.val;
+    }
 
-  /**
-   * Write the value to DataOutput
-   */
-  @Override
-  public void write(DataOutput out)
-    throws IOException {
-    out.writeInt(val);
-  }
+    /**
+     * Write the value to DataOutput
+     */
+    @Override
+    public void write(DataOutput out) throws IOException {
+	out.writeInt(val);
+    }
 
-  /**
-   * Read the value from DataInput
-   */
-  @Override
-  public void read(DataInput in)
-    throws IOException {
-    this.val = in.readInt();
-  }
+    /**
+     * Read the value from DataInput
+     */
+    @Override
+    public void read(DataInput in) throws IOException {
+	this.val = in.readInt();
+    }
 
-  /**
-   * Get the number of bytes of the data
-   */
-  @Override
-  public int getNumWriteBytes() {
-    return 4;
-  }
+    /**
+     * Get the number of bytes of the data
+     */
+    @Override
+    public int getNumWriteBytes() {
+	return 4;
+    }
 
-  /**
-   * Clear the value
-   */
-  @Override
-  public void clear() {
-  }
+    /**
+     * Clear the value
+     */
+    @Override
+    public void clear() {
+    }
 }

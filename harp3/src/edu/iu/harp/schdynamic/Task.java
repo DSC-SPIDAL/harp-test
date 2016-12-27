@@ -15,16 +15,19 @@
  */
 
 package edu.iu.harp.schdynamic;
+
 /*******************************************************
  * The abstract class for task definition
  ******************************************************/
 public interface Task<I, O> {
 
-  /**
-   * The main computation of the task
-   * @param input the input
-   * @return the output
-   * @throws Exception
-   */
-  public O run(I input) throws Exception;
+    /**
+     * The main computation of the task
+     * 
+     * @param input
+     *            the input
+     * @return the output
+     * @throws Exception
+     */
+    public O run(I input) throws Exception;
 }

@@ -21,11 +21,9 @@ import edu.iu.harp.keyval.ValStatus;
 
 public class IntPlus extends ValCombiner<IntVal> {
 
-  @Override
-  public ValStatus combine(IntVal curVal,
-    IntVal newVal) {
-    curVal.setInt(curVal.getInt()
-      + newVal.getInt());
-    return ValStatus.COMBINED;
-  }
+    @Override
+    public ValStatus combine(IntVal curVal, IntVal newVal) {
+	curVal.setInt(curVal.getInt() + newVal.getInt());
+	return ValStatus.COMBINED;
+    }
 }

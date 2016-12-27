@@ -19,13 +19,11 @@ package edu.iu.harp.example;
 import edu.iu.harp.keyval.ValCombiner;
 import edu.iu.harp.keyval.ValStatus;
 
-public class EdgeValCombiner extends
-  ValCombiner<EdgeVal> {
+public class EdgeValCombiner extends ValCombiner<EdgeVal> {
 
-  @Override
-  public ValStatus combine(EdgeVal curVal,
-    EdgeVal newVal) {
-    curVal.addEdgeVal(newVal);
-    return ValStatus.COMBINED;
-  }
+    @Override
+    public ValStatus combine(EdgeVal curVal, EdgeVal newVal) {
+	curVal.addEdgeVal(newVal);
+	return ValStatus.COMBINED;
+    }
 }

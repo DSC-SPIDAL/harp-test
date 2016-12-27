@@ -17,28 +17,27 @@
 package edu.iu.harp.partition;
 
 /*******************************************************
- * A Partitioner defines how to distribute the partitions
- * to workers. Currently it uses mode function on 
- * partition IDs.
+ * A Partitioner defines how to distribute the partitions to workers. Currently
+ * it uses mode function on partition IDs.
  ******************************************************/
 public class Partitioner {
 
-  private int numWorkers;
+    private int numWorkers;
 
-  public Partitioner(int numWorkers) {
-    this.numWorkers = numWorkers;
-  }
-
-  protected int getNumWorkers() {
-    return numWorkers;
-  }
-
-  public int getWorkerID(int partitionID) {
-    int workerID = partitionID % numWorkers;
-    if (workerID < 0) {
-      return -workerID;
-    } else {
-      return workerID;
+    public Partitioner(int numWorkers) {
+	this.numWorkers = numWorkers;
     }
-  }
+
+    protected int getNumWorkers() {
+	return numWorkers;
+    }
+
+    public int getWorkerID(int partitionID) {
+	int workerID = partitionID % numWorkers;
+	if (workerID < 0) {
+	    return -workerID;
+	} else {
+	    return workerID;
+	}
+    }
 }

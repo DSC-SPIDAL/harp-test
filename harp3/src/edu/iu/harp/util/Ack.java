@@ -21,42 +21,41 @@ import java.io.DataOutput;
 import java.io.IOException;
 
 import edu.iu.harp.resource.Writable;
+
 /*******************************************************
  * The Ack class
  ******************************************************/
 public class Ack extends Writable {
-  
-  public Ack() {
-  }
 
-  /**
-   * Write this to DataOutput
-   */
-  @Override
-  public void write(DataOutput out)
-    throws IOException {
-  }
-  
-  /**
-   * Read this from DataInput
-   */
-  @Override
-  public void read(DataInput in)
-    throws IOException {
-  }
+    public Ack() {
+    }
 
-  /**
-   * Get the number of bytes of encoded data
-   */
-  @Override
-  public int getNumWriteBytes() {
-    return 0;
-  }
+    /**
+     * Write this to DataOutput
+     */
+    @Override
+    public void write(DataOutput out) throws IOException {
+    }
 
-  /**
-   * Clear the data
-   */
-  @Override
-  public void clear() {
-  }
+    /**
+     * Read this from DataInput
+     */
+    @Override
+    public void read(DataInput in) throws IOException {
+    }
+
+    /**
+     * Get the number of bytes of encoded data
+     */
+    @Override
+    public int getNumWriteBytes() {
+	return 0;
+    }
+
+    /**
+     * Clear the data
+     */
+    @Override
+    public void clear() {
+    }
 }

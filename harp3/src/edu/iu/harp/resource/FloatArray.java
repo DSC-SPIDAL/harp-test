@@ -21,84 +21,74 @@ import java.io.IOException;
 
 import edu.iu.harp.io.DataType;
 import edu.iu.harp.resource.Array;
+
 /*******************************************************
  * ByteArray class for managing float[] data.
  ******************************************************/
-public final class FloatArray extends
-  Array<float[]> {
+public final class FloatArray extends Array<float[]> {
 
-  public FloatArray(float[] arr, int start,
-    int size) {
-    super(arr, start, size);
-  }
-
-  /**
-   * Get the number of Bytes of 
-   * encoded data.
-   * One byte for storing DataType,
-   * four bytes for storing the size,
-   * size*4 bytes for storing the data.
-   */
-  @Override
-  public int getNumEnocdeBytes() {
-    return size * 4 + 5;
-  }
-
-  /**
-   * Encode the array as DataOutput
-   */
-  @Override
-  public void encode(DataOutput out)
-    throws IOException {
-    out.writeByte(DataType.FLOAT_ARRAY);
-    int len = start + size;
-    out.writeInt(size);
-    for (int i = start; i < len; i++) {
-      out.writeFloat(array[i]);
+    public FloatArray(float[] arr, int start, int size) {
+	super(arr, start, size);
     }
-  }
-  
-  /**
-   * Create an array. 
-   * Firstly try to get an array from ResourcePool;
-   * if failed, new an array.
-   * @param len
-   * @param approximate
-   * @return
-   */
-  public static FloatArray create(int len,
-    boolean approximate) {
-    if (len > 0) {
-      float[] floats =
-        ResourcePool.get().getFloatsPool()
-          .getArray(len, approximate);
-      if (floats != null) {
-        return new FloatArray(floats, 0, len);
-      } else {
-        return null;
-      }
-    } else {
-      return null;
+
+    /**
+     * Get the number of Bytes of encoded data. One byte for storing DataType,
+     * four bytes for storing the size, size*4 bytes for storing the data.
+     */
+    @Override
+    public int getNumEnocdeBytes() {
+	return size * 4 + 5;
     }
-  }
 
-  /**
-   * Release the array from the ResourcePool
-   */
-  @Override
-  public void release() {
-    ResourcePool.get().getFloatsPool()
-      .releaseArray(array);
-    this.reset();
-  }
+    /**
+     * Encode the array as DataOutput
+     */
+    @Override
+    public void encode(DataOutput out) throws IOException {
+	out.writeByte(DataType.FLOAT_ARRAY);
+	int len = start + size;
+	out.writeInt(size);
+	for (int i = start; i < len; i++) {
+	    out.writeFloat(array[i]);
+	}
+    }
 
-  /**
-   * Free the array from the ResourcePool
-   */
-  @Override
-  public void free() {
-    ResourcePool.get().getFloatsPool()
-      .freeArray(array);
-    this.reset();
-  }
+    /**
+     * Create an array. Firstly try to get an array from ResourcePool; if
+     * failed, new an array.
+     * 
+     * @param len
+     * @param approximate
+     * @return
+     */
+    public static FloatArray create(int len, boolean approximate) {
+	if (len > 0) {
+	    float[] floats = ResourcePool.get().getFloatsPool().getArray(len, approximate);
+	    if (floats != null) {
+		return new FloatArray(floats, 0, len);
+	    } else {
+		return null;
+	    }
+	} else {
+	    return null;
+	}
+    }
+
+    /**
+     * Release the array from the ResourcePool
+     */
+    @Override
+    public void release() {
+	ResourcePool.get().getFloatsPool().releaseArray(array);
+	this.reset();
+    }
+
+    /**
+     * Free the array from the ResourcePool
+     */
+    @Override
+    public void free() {
+	ResourcePool.get().getFloatsPool().freeArray(array);
+	this.reset();
+    }
 }

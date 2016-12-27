@@ -24,14 +24,14 @@ import edu.iu.harp.resource.Writable;
 
 public abstract class Key extends Writable {
 
-  /**
-   * The equals function to be overridden
-  */
-  @Override
-  public abstract boolean equals(Object obj);
+    /**
+     * The equals function to be overridden
+     */
+    @Override
+    public abstract boolean equals(Object obj);
 
-  /**
-   * The hashCode function to be overridden
-   */
-  public abstract int hashCode();
+    /**
+     * The hashCode function to be overridden
+     */
+    public abstract int hashCode();
 }

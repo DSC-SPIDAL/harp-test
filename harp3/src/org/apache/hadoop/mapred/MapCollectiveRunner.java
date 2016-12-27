@@ -25,45 +25,31 @@ import org.apache.hadoop.security.Credentials;
 import org.apache.hadoop.yarn.api.records.ApplicationSubmissionContext;
 
 /**
- * This class is modified from YARNRunner for
- * submitting map-collective jobs. In
- * createApplicationSubmissionContext, launch
- * MapCollectiveAppMaster
+ * This class is modified from YARNRunner for submitting map-collective jobs. In
+ * createApplicationSubmissionContext, launch MapCollectiveAppMaster
  */
-public class MapCollectiveRunner extends
-  YARNRunner {
+public class MapCollectiveRunner extends YARNRunner {
 
-  public MapCollectiveRunner(Configuration conf) {
-    super(conf);
-  }
-
-  public ApplicationSubmissionContext
-    createApplicationSubmissionContext(
-      Configuration jobConf, String jobSubmitDir,
-      Credentials ts) throws IOException {
-    ApplicationSubmissionContext appContext =
-      super.createApplicationSubmissionContext(
-        jobConf, jobSubmitDir, ts);
-    List<String> commands =
-      appContext.getAMContainerSpec()
-        .getCommands();
-    // There should be only one string in the
-    // commands
-    String command = commands.get(0);
-    if (command
-      .contains(MRJobConfig.APPLICATION_MASTER_CLASS)) {
-      command =
-        command
-          .replace(
-            MRJobConfig.APPLICATION_MASTER_CLASS,
-            "org.apache.hadoop.mapreduce.v2.app.MapCollectiveAppMaster");
-      // Set command back
-      System.out.println("command: " + command);
-      commands.set(0, command);
-    } else {
-      throw new IOException(
-        "Cannot find MRJobConfig.APPLICATION_MASTER_CLASS");
+    public MapCollectiveRunner(Configuration conf) {
+	super(conf);
     }
-    return appContext;
-  }
+
+    public ApplicationSubmissionContext createApplicationSubmissionContext(Configuration jobConf, String jobSubmitDir,
+	    Credentials ts) throws IOException {
+	ApplicationSubmissionContext appContext = super.createApplicationSubmissionContext(jobConf, jobSubmitDir, ts);
+	List<String> commands = appContext.getAMContainerSpec().getCommands();
+	// There should be only one string in the
+	// commands
+	String command = commands.get(0);
+	if (command.contains(MRJobConfig.APPLICATION_MASTER_CLASS)) {
+	    command = command.replace(MRJobConfig.APPLICATION_MASTER_CLASS,
+		    "org.apache.hadoop.mapreduce.v2.app.MapCollectiveAppMaster");
+	    // Set command back
+	    System.out.println("command: " + command);
+	    commands.set(0, command);
+	} else {
+	    throw new IOException("Cannot find MRJobConfig.APPLICATION_MASTER_CLASS");
+	}
+	return appContext;
+    }
 }

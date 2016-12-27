@@ -18,7 +18,6 @@ package edu.iu.harp.example;
 
 import edu.iu.harp.keyval.Key2ValKVPartition;
 
-public class WordCountPartition extends
-  Key2ValKVPartition<StringKey, IntCount> {
+public class WordCountPartition extends Key2ValKVPartition<StringKey, IntCount> {
 
 }

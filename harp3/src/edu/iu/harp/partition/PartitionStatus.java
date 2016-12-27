@@ -20,5 +20,5 @@ package edu.iu.harp.partition;
  * Defines the partition status
  ******************************************************/
 public enum PartitionStatus {
-  ADDED, ADD_FAILED, COMBINED, COMBINE_FAILED
+    ADDED, ADD_FAILED, COMBINED, COMBINE_FAILED
 }

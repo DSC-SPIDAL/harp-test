@@ -22,19 +22,15 @@ import edu.iu.harp.keyval.ValStatus;
 /*******************************************************
  * Combiner for IntCount
  ******************************************************/
-public class IntCountPlus extends
-  ValCombiner<IntCount> {
+public class IntCountPlus extends ValCombiner<IntCount> {
 
-  /**
-   * Combine two IntCountss
-   */
-  @Override
-  public ValStatus combine(IntCount curVal,
-    IntCount newVal) {
-    curVal.setInt(curVal.getInt()
-      + newVal.getInt());
-    curVal.setCount(curVal.getCount()
-      + newVal.getCount());
-    return ValStatus.COMBINED;
-  }
+    /**
+     * Combine two IntCountss
+     */
+    @Override
+    public ValStatus combine(IntCount curVal, IntCount newVal) {
+	curVal.setInt(curVal.getInt() + newVal.getInt());
+	curVal.setCount(curVal.getCount() + newVal.getCount());
+	return ValStatus.COMBINED;
+    }
 }

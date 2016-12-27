@@ -21,83 +21,75 @@ import java.io.IOException;
 
 import edu.iu.harp.io.DataType;
 import edu.iu.harp.resource.Array;
+
 /*******************************************************
  * ByteArray class for managing int[] data.
  ******************************************************/
 public final class IntArray extends Array<int[]> {
 
-  public IntArray(int[] arr, int start, int size) {
-    super(arr, start, size);
-  }
-
-  /**
-   * Get the number of Bytes of 
-   * encoded data.
-   * One byte for storing DataType,
-   * four bytes for storing the size,
-   * size*4 bytes for storing the data.
-   */
-  @Override
-  public int getNumEnocdeBytes() {
-    return this.size * 4 + 5;
-  }
-
-  /**
-   * Encode the array as DataOutput
-   */
-  @Override
-  public void encode(DataOutput out)
-    throws IOException {
-    out.writeByte(DataType.INT_ARRAY);
-    int len = start + size;
-    out.writeInt(size);
-    for (int i = start; i < len; i++) {
-      out.writeInt(array[i]);
+    public IntArray(int[] arr, int start, int size) {
+	super(arr, start, size);
     }
-  }
 
-  /**
-   * Create an array. 
-   * Firstly try to get an array from ResourcePool;
-   * if failed, new an array.
-   * @param len
-   * @param approximate
-   * @return
-   */
-  public static IntArray create(int len,
-    boolean approximate) {
-    if (len > 0) {
-      int[] ints =
-        ResourcePool.get().getIntsPool()
-          .getArray(len, approximate);
-      if (ints != null) {
-        return new IntArray(ints, 0, len);
-      } else {
-        return null;
-      }
-    } else {
-      return null;
+    /**
+     * Get the number of Bytes of encoded data. One byte for storing DataType,
+     * four bytes for storing the size, size*4 bytes for storing the data.
+     */
+    @Override
+    public int getNumEnocdeBytes() {
+	return this.size * 4 + 5;
     }
-  }
 
-  /**
-   * Release the array from the ResourcePool
-   */
-  @Override
-  public void release() {
-    ResourcePool.get().getIntsPool()
-      .releaseArray(array);
-    this.reset();
-  }
+    /**
+     * Encode the array as DataOutput
+     */
+    @Override
+    public void encode(DataOutput out) throws IOException {
+	out.writeByte(DataType.INT_ARRAY);
+	int len = start + size;
+	out.writeInt(size);
+	for (int i = start; i < len; i++) {
+	    out.writeInt(array[i]);
+	}
+    }
 
-  /**
-   * Free the array from the ResourcePool
-   */
-  @Override
-  public void free() {
-    ResourcePool.get().getIntsPool()
-      .freeArray(array);
-    this.reset();
+    /**
+     * Create an array. Firstly try to get an array from ResourcePool; if
+     * failed, new an array.
+     * 
+     * @param len
+     * @param approximate
+     * @return
+     */
+    public static IntArray create(int len, boolean approximate) {
+	if (len > 0) {
+	    int[] ints = ResourcePool.get().getIntsPool().getArray(len, approximate);
+	    if (ints != null) {
+		return new IntArray(ints, 0, len);
+	    } else {
+		return null;
+	    }
+	} else {
+	    return null;
+	}
+    }
 
-  }
+    /**
+     * Release the array from the ResourcePool
+     */
+    @Override
+    public void release() {
+	ResourcePool.get().getIntsPool().releaseArray(array);
+	this.reset();
+    }
+
+    /**
+     * Free the array from the ResourcePool
+     */
+    @Override
+    public void free() {
+	ResourcePool.get().getIntsPool().freeArray(array);
+	this.reset();
+
+    }
 }

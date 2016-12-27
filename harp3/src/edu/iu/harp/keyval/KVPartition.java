@@ -21,6 +21,5 @@ import edu.iu.harp.resource.Writable;
 /*******************************************************
  * KVPartition manage key-value pairs
  ******************************************************/
-public abstract class KVPartition extends
-  Writable {
+public abstract class KVPartition extends Writable {
 }

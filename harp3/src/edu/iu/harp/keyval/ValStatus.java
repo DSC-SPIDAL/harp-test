@@ -20,5 +20,5 @@ package edu.iu.harp.keyval;
  * Defines the status after operating on Values
  */
 public enum ValStatus {
-  ADDED, ADD_FAILED, COMBINED, COMBINE_FAILED
+    ADDED, ADD_FAILED, COMBINED, COMBINE_FAILED
 }

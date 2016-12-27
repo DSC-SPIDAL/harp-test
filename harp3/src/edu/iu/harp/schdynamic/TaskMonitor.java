@@ -22,77 +22,70 @@ import java.util.concurrent.Semaphore;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+
 /*******************************************************
  * Monitor and manage tasks
  ******************************************************/
-public class TaskMonitor<I, O, T extends Task<I, O>>
-  implements Runnable {
+public class TaskMonitor<I, O, T extends Task<I, O>> implements Runnable {
 
-  protected static final Log LOG = LogFactory
-    .getLog(TaskMonitor.class);
+    protected static final Log LOG = LogFactory.getLog(TaskMonitor.class);
 
-  private final BlockingDeque<Input<I>> inputQueue;
-  private final BlockingQueue<Output<O>> outputQueue;
-  private final T taskObject;
-  private final Semaphore barrier1;
-  private final Semaphore barrier2;
+    private final BlockingDeque<Input<I>> inputQueue;
+    private final BlockingQueue<Output<O>> outputQueue;
+    private final T taskObject;
+    private final Semaphore barrier1;
+    private final Semaphore barrier2;
 
-  TaskMonitor(BlockingDeque<Input<I>> inQueue,
-    BlockingQueue<Output<O>> outQueue, T task,
-    Semaphore barrier1) {
-    inputQueue = inQueue;
-    outputQueue = outQueue;
-    taskObject = task;
-    this.barrier1 = barrier1;
-    this.barrier2 = new Semaphore(0);
-  }
-
-  /**
-   * Release the barrier
-   */
-  void release() {
-    barrier2.release();
-  }
-  
-  /**
-   * The main process of monitoring and managing tasks
-   */
-  @Override
-  public void run() {
-    while (true) {
-      try {
-        Input<I> input = inputQueue.take();
-        if (input != null) {
-          if (input.isStop()) {
-            break;
-          } else if (input.isPause()) {
-            barrier1.release();
-            ComputeUtil.acquire(barrier2);
-          } else {
-            O output = null;
-            boolean isFailed = false;
-            try {
-              output =
-                taskObject.run(input.getInput());
-            } catch (Exception e) {
-              output = null;
-              isFailed = true;
-              LOG.error(
-                "Error when processing input", e);
-            }
-            if (isFailed || output == null) {
-              outputQueue.add(new Output<>(null,
-                true));
-            } else {
-              outputQueue.add(new Output<>(
-                output, false));
-            }
-          }
-        }
-      } catch (InterruptedException e) {
-        LOG.error("Fail to run input", e);
-        continue;
-      }
+    TaskMonitor(BlockingDeque<Input<I>> inQueue, BlockingQueue<Output<O>> outQueue, T task, Semaphore barrier1) {
+	inputQueue = inQueue;
+	outputQueue = outQueue;
+	taskObject = task;
+	this.barrier1 = barrier1;
+	this.barrier2 = new Semaphore(0);
     }
-  }
+
+    /**
+     * Release the barrier
+     */
+    void release() {
+	barrier2.release();
+    }
+
+    /**
+     * The main process of monitoring and managing tasks
+     */
+    @Override
+    public void run() {
+	while (true) {
+	    try {
+		Input<I> input = inputQueue.take();
+		if (input != null) {
+		    if (input.isStop()) {
+			break;
+		    } else if (input.isPause()) {
+			barrier1.release();
+			ComputeUtil.acquire(barrier2);
+		    } else {
+			O output = null;
+			boolean isFailed = false;
+			try {
+			    output = taskObject.run(input.getInput());
+			} catch (Exception e) {
+			    output = null;
+			    isFailed = true;
+			    LOG.error("Error when processing input", e);
+			}
+			if (isFailed || output == null) {
+			    outputQueue.add(new Output<>(null, true));
+			} else {
+			    outputQueue.add(new Output<>(output, false));
+			}
+		    }
+		}
+	    } catch (InterruptedException e) {
+		LOG.error("Fail to run input", e);
+		continue;
+	    }
+	}
+    }
 }

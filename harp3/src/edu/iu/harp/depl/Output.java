@@ -18,40 +18,44 @@ package edu.iu.harp.depl;
 
 import java.util.ArrayList;
 import java.util.List;
+
 /*******************************************************
  * The wrapper class of the outputs from command execution
  ******************************************************/
 public class Output {
-  private boolean status;
-  private List<String> output;
+    private boolean status;
+    private List<String> output;
 
-  Output() {
-    status = true;
-    output = new ArrayList<>();
-  }
+    Output() {
+	status = true;
+	output = new ArrayList<>();
+    }
 
-  /**
-   * Set the status of the execution
-   * @param isSuccess the status
-   */
-  void setExeStatus(boolean isSuccess) {
-    status = isSuccess;
-  }
+    /**
+     * Set the status of the execution
+     * 
+     * @param isSuccess
+     *            the status
+     */
+    void setExeStatus(boolean isSuccess) {
+	status = isSuccess;
+    }
 
-  /**
-   * Get the status of the execution
-   * @return true if the execution
-   * 	succeeded, false other wise
-   */
-  public boolean getExeStatus() {
-    return status;
-  }
+    /**
+     * Get the status of the execution
+     * 
+     * @return true if the execution succeeded, false other wise
+     */
+    public boolean getExeStatus() {
+	return status;
+    }
 
-  /**
-   * Get the output from the command execution
-   * @return
-   */
-  public List<String> getExeOutput() {
-    return output;
-  }
+    /**
+     * Get the output from the command execution
+     * 
+     * @return
+     */
+    public List<String> getExeOutput() {
+	return output;
+    }
 }

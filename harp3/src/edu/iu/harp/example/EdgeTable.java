@@ -18,11 +18,9 @@ package edu.iu.harp.example;
 
 import edu.iu.harp.keyval.Int2ValKVTable;
 
-public class EdgeTable extends
-  Int2ValKVTable<EdgeVal, EdgePartition> {
+public class EdgeTable extends Int2ValKVTable<EdgeVal, EdgePartition> {
 
-  public EdgeTable(int tableID) {
-    super(tableID, new EdgeValCombiner(),
-      EdgeVal.class, EdgePartition.class);
-  }
+    public EdgeTable(int tableID) {
+	super(tableID, new EdgeValCombiner(), EdgeVal.class, EdgePartition.class);
+    }
 }

@@ -16,55 +16,57 @@
 
 package edu.iu.harp.worker;
 
-
 /*******************************************************
  * The information of the worker
  ******************************************************/
 public class WorkerInfo {
 
-  private final int id;
-  /** Hostname or IP */
-  private final String node;
-  private final int port;
-  private final int rack;
+    private final int id;
+    /** Hostname or IP */
+    private final String node;
+    private final int port;
+    private final int rack;
 
-  public WorkerInfo(int id, String node,
-    int port, int rack) {
-    this.id = id;
-    this.node = node;
-    this.port = port;
-    this.rack = rack;
-  }
+    public WorkerInfo(int id, String node, int port, int rack) {
+	this.id = id;
+	this.node = node;
+	this.port = port;
+	this.rack = rack;
+    }
 
-  /**
-   * Get the id
-   * @return the id
-   */
-  public int getID() {
-    return id;
-  }
+    /**
+     * Get the id
+     * 
+     * @return the id
+     */
+    public int getID() {
+	return id;
+    }
 
-  /**
-   * Get the hostname or IP
-   * @return the hostname or IP
-   */
-  public String getNode() {
-    return node;
-  }
+    /**
+     * Get the hostname or IP
+     * 
+     * @return the hostname or IP
+     */
+    public String getNode() {
+	return node;
+    }
 
-  /**
-   * Get the port
-   * @return the port
-   */
-  public int getPort() {
-    return port;
-  }
+    /**
+     * Get the port
+     * 
+     * @return the port
+     */
+    public int getPort() {
+	return port;
+    }
 
-  /**
-   * Get the rack id
-   * @return the rack id
-   */
-  public int getRack() {
-    return rack;
-  }
+    /**
+     * Get the rack id
+     * 
+     * @return the rack id
+     */
+    public int getRack() {
+	return rack;
+    }
 }

@@ -18,87 +18,86 @@ package edu.iu.harp.resource;
 
 public class ResourcePool {
 
-  private static ResourcePool instance = null;
+    private static ResourcePool instance = null;
 
-  private final BytesPool byteArrays;
-  private final ShortsPool shortArrays;
-  private final IntsPool intArrays;
-  private final FloatsPool floatArrays;
-  private final LongsPool longArrays;
-  private final DoublesPool doubleArrays;
-  private final WritablePool writables;
+    private final BytesPool byteArrays;
+    private final ShortsPool shortArrays;
+    private final IntsPool intArrays;
+    private final FloatsPool floatArrays;
+    private final LongsPool longArrays;
+    private final DoublesPool doubleArrays;
+    private final WritablePool writables;
 
-  private ResourcePool() {
-    byteArrays = new BytesPool();
-    shortArrays = new ShortsPool();
-    intArrays = new IntsPool();
-    floatArrays = new FloatsPool();
-    longArrays = new LongsPool();
-    doubleArrays = new DoublesPool();
-    writables = new WritablePool();
-  }
-
-  public static ResourcePool get() {
-    if (instance != null) {
-      return instance;
-    } else {
-      return create();
+    private ResourcePool() {
+	byteArrays = new BytesPool();
+	shortArrays = new ShortsPool();
+	intArrays = new IntsPool();
+	floatArrays = new FloatsPool();
+	longArrays = new LongsPool();
+	doubleArrays = new DoublesPool();
+	writables = new WritablePool();
     }
-  }
 
-  private static synchronized ResourcePool
-    create() {
-    if (instance == null) {
-      instance = new ResourcePool();
+    public static ResourcePool get() {
+	if (instance != null) {
+	    return instance;
+	} else {
+	    return create();
+	}
     }
-    return instance;
-  }
 
-  BytesPool getBytesPool() {
-    return byteArrays;
-  }
+    private static synchronized ResourcePool create() {
+	if (instance == null) {
+	    instance = new ResourcePool();
+	}
+	return instance;
+    }
 
-  ShortsPool getShortsPool() {
-    return shortArrays;
-  }
+    BytesPool getBytesPool() {
+	return byteArrays;
+    }
 
-  IntsPool getIntsPool() {
-    return intArrays;
-  }
+    ShortsPool getShortsPool() {
+	return shortArrays;
+    }
 
-  FloatsPool getFloatsPool() {
-    return floatArrays;
-  }
+    IntsPool getIntsPool() {
+	return intArrays;
+    }
 
-  LongsPool getLongsPool() {
-    return longArrays;
-  }
+    FloatsPool getFloatsPool() {
+	return floatArrays;
+    }
 
-  DoublesPool getDoublesPool() {
-    return doubleArrays;
-  }
+    LongsPool getLongsPool() {
+	return longArrays;
+    }
 
-  WritablePool getWritablePool() {
-    return writables;
-  }
+    DoublesPool getDoublesPool() {
+	return doubleArrays;
+    }
 
-  public void clean() {
-    byteArrays.clean();
-    shortArrays.clean();
-    intArrays.clean();
-    floatArrays.clean();
-    longArrays.clean();
-    doubleArrays.clean();
-    writables.clean();
-  }
+    WritablePool getWritablePool() {
+	return writables;
+    }
 
-  public void log() {
-    byteArrays.log();
-    shortArrays.log();
-    intArrays.log();
-    floatArrays.log();
-    longArrays.log();
-    doubleArrays.log();
-    writables.log();
-  }
+    public void clean() {
+	byteArrays.clean();
+	shortArrays.clean();
+	intArrays.clean();
+	floatArrays.clean();
+	longArrays.clean();
+	doubleArrays.clean();
+	writables.clean();
+    }
+
+    public void log() {
+	byteArrays.log();
+	shortArrays.log();
+	intArrays.log();
+	floatArrays.log();
+	longArrays.log();
+	doubleArrays.log();
+	writables.log();
+    }
 }

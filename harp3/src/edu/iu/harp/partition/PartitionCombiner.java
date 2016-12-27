@@ -17,18 +17,20 @@
 package edu.iu.harp.partition;
 
 import edu.iu.harp.resource.Simple;
+
 /*******************************************************
- * A PartitionCombiner defines how to merge 
- * two partitions
+ * A PartitionCombiner defines how to merge two partitions
  ******************************************************/
 public abstract class PartitionCombiner<P extends Simple> {
 
-  /**
-   * Defines how to merge two partitions.
-   * @param curPar current partition
-   * @param newPar new partition
-   * @return partition status
-   */
-  public abstract PartitionStatus combine(
-    P curPar, P newPar);
+    /**
+     * Defines how to merge two partitions.
+     * 
+     * @param curPar
+     *            current partition
+     * @param newPar
+     *            new partition
+     * @return partition status
+     */
+    public abstract PartitionStatus combine(P curPar, P newPar);
 }
