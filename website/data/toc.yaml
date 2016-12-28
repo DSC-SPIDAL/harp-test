@@ -7,6 +7,16 @@ sections:
         url: /docs/upgrade-storm-to-heron
       - name: Troubleshooting Guide
         url: /docs/getting-started-troubleshooting
+  - name: Communication Models
+    sublinks:
+      - name: all-reduce
+        url: /docs/communications/allreduce
+      - name: all-gather
+        url: /docs/communications/allgather
+      - name: push & pull
+        url: /docs/communications/pushandpull
+      - name: rotation
+        url: /docs/communications/rotation
   - name: Heron Concepts
     sublinks:
       - name: Heron Design Goals
