@@ -3,63 +3,49 @@ title: Community
 ---
 
 
-## Contributing to Heron
+## Contributing to Harp
 
-Discussion about Heron happens on GitHub and over mailing list.
+Discussion about Harp happens on GitHub and over mailing list.
 
-* GitHub: [twitter/heron](https://github.com/twitter/heron)
-* Heron User Google Group: [heron-users@googlegroups.com](https://groups.google.com/forum/#!forum/heron-users)
-* Heron on Twitter: [@heronstreaming](https://twitter.com/heronstreaming)
+* GitHub: [IU-Big-Data-Lab/Harp](https://github.iu.edu/IU-Big-Data-Lab/Harp.git)
+* Harp User Google Group: [harp-users@googlegroups.com](https://groups.google.com/forum/#!forum/harp-users)
 
-Community is critical to Heron. Contributions are welcomed!
+Community is critical to Harp. Contributions are welcomed!
 
 
-## How Can I Contribute to Heron?
+## How Can I Contribute to Harp?
 
 You can first read the following pages to have a basic understanding
 of Heron:
 
-* [Heron Architecture](../../concepts/architecture/)
-* [Compiling Heron](../../developers/compiling/compiling/)
-* [Heron Codebase](../codebase/)
+* [Harp Installation](../../getting-started/)
+* [Harp Features](../../concepts/features)
+* [Computation Models](../../concepts/computation-models/)
+* [Data Interfaces and Types](../../data-interface/)
 
-Heron includes a script to bootstrap an IntelliJ IDEA project. The project includes support for Heron
-code styles and copyright headers. To bootstrap an IDEA project run the following:
-
-```bash
-$ ./scripts/setup-intellij.sh
-```
 
 In general, contributions that fix bugs or add features (as opposed to stylistic, refactoring, or
-"cleanup" changes) are preferred. If you're looking for places to contribute, issues with label
-[help-wanted](https://github.com/twitter/heron/issues?q=is%3Aopen+is%3Aissue+label%3Ahelp-wanted)
-are good candidates. Please check with [mailing list](https://groups.google.com/forum/#!forum/heron-users)
+"cleanup" changes) are preferred. Please check with [mailing list](https://groups.google.com/forum/#!forum/heron-users)
 if your patch involves lots of changes.
 
 **If you have any question or issues about troubleshooting,
-you should post on [mailing list](https://groups.google.com/forum/#!forum/heron-users) instead
+you should post on [mailing list](https://groups.google.com/forum/#!forum/harp-users) instead
 of opening GitHub issues.**
 
 ### Submitting a Patch
-1. Read the Heron [governance plan](../governance) and accept the
-[Twitter Contributor License Agreement](https://engineering.twitter.com/opensource/cla) (CLA).
+1. Read and accept the
+[Apache License](http://www.apache.org/licenses/LICENSE-2.0).
 
 2. Discuss your plan and design, and get agreement on
-[mailing list](https://groups.google.com/forum/#!forum/heron-users).
+[mailing list](https://groups.google.com/forum/#!forum/harp-users).
 
 3. Implement proper unit tests along with your change. Verify that all tests can pass.
 
 4. Submit a GitHub pull request that includes your change and test cases.
-Describe clearly your pull request the change. Verify that Travis CI passes.
+Describe clearly your pull request the change.
 
 5. Complete a code review by addressing reviewers's comments.
 
 6. A project committer will merge the patch to the master branch.
 
-<!--
-TODO - post commit process
-TODO: links to sourcecode and dev and user groups
--->
 
-
-Next: Review the [Heron Codebase](../codebase)

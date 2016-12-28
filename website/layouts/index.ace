@@ -17,7 +17,6 @@ html lang={{.Site.LanguageCode}}
               p.hn-tagline {{.Site.Params.tagline}}
             .hn-button-row.row
               a.btn.btn-default href=docs/getting-started Get Started
-              a.btn.btn-default href=docs/upgrade-storm-to-heron Upgrade From Storm
         .row
           .col-xs-12.col-sm-9.col-md-9.col-lg-12
             .landing-feature-2.text-left
@@ -27,43 +26,20 @@ html lang={{.Site.LanguageCode}}
                 .col-sm-6
                   .panel.panel-primary
                     .panel-heading Speed and Performance
-                    .panel-body Heron is built with a wide array of architectural improvements that contribute to high efficiency gains.
+                    .panel-body Harp is built with a wide array of architectural improvements that contribute to high efficiency gains.
                 .col-sm-6
                   .panel.panel-primary
-                    .panel-heading Proven at Twitter Scale
-                    .panel-body Heron has powered all realtime analytics with varied use cases at Twitter since 2014. Incident reports dropped by an order of magnitude demonstrating proven reliability and scalability
+                    .panel-heading Compatibility with Hadoop
+                    .panel-body Harp is a plugin built into <a href="http://hadoop.apache.org">Apache Hadoop</a> and hence no code change of Hadoop is required for migration.
               .row
-                .col-sm-6
-                  .panel.panel-primary
-                    .panel-heading Compatibility with Storm
-                    .panel-body Heron is API compatible with <a href="http://storm.apache.org">Apache Storm</a> and hence no code change is required for migration.
                 .col-sm-6
                   .panel.panel-primary
                     .panel-heading Ease of Development and Troubleshooting
-                    .panel-body Easily debug and identify the issues in <a href="/docs/concepts/topologies">topologies</a>, allowing faster iteration during development.
-              .row
-                .col-sm-6
-                  .panel.panel-primary
-                    .panel-heading Simplified and Responsive UI
-                    .panel-body Heron UI gives a visual overview of each topology to visualize hot spot locations and detailed counters for tracking progress and troubleshooting.
+                    .panel-body Easily debug and identify the issues, allowing faster iteration during development.
                 .col-sm-6
                   .panel.panel-primary
                     .panel-heading Scalability and Reliability
-                    .panel-body Heron is highly scalable both in the ability to execute large number of components for each topology and the ability to launch and track large numbers of topologies.
-            hr
-            .landing-feature-1.text-left
-              h2 Heron is in Beta
-              p Heron is now the de facto stream data processing engine inside Twitter, and we believe Heron is stable enough for production use. The Heron team monitors and responds actively to <a href="{{.Site.Params.github.issues}}">bug reports</a> from users.
-            hr
-            .landing-feature-2.text-left
-              h2 Get Started
-              .row
-                .col-sm-6
-                  h4 Run Topologies using pre-compiled Heron binaries
-                  a.btn.btn-default href=docs/getting-started Get Started
-                .col-sm-6
-                  h4 Upgrade Existing Storm Topologies
-                  a.btn.btn-default href=docs/upgrade-storm-to-heron Upgrade From Storm
+                    .panel-body Harp is highly scalable both in the ability to run on large amount of data and the ability to run on large clusters.
 
           .hn-twitter-feed.hidden-xs.col-sm-3.col-md-3.col-lg-3
             {{partial "index/feed.html" .}}
