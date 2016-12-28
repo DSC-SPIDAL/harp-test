@@ -1,79 +1,200 @@
 ---
 title: Quick Start Guide
-description: Run a single-node Heron cluster on your laptop
+description: Run a single-node Harp on your laptop
 aliases:
   - /docs/install.html
 ---
 
-The easiest way to get started learning Heron is to install and run pre-compiled
-Heron binaries, which are currently available for:
+This instruction is only available for:
 
 * Mac OS X
-* Ubuntu >= 14.04
+* Ubuntu
 
-For other platforms, you need to build from source. Please refer to [Heron Developers]
-(../developers/compiling/compiling).
+If you are using windows, we suggest you to install an Ubuntu system on a virtualization software (e.g. VirtualBox) with at least 4GB memory in it.
 
-## Step 1 --- Download Heron binaries using installation scripts
+## Step 1 --- Install hadoop-2.6.0
 
-Go to the [releases page](https://github.com/twitter/heron/releases) for Heron
-and download two installation scripts for your platform. The names of the
-scripts have this form:
+First of all, make sure your computer can use `ssh` to access `localhost` and install `Java` as well.
 
-* `heron-client-install-{{% heronVersion %}}-PLATFORM.sh`
-* `heron-tools-install-{{% heronVersion %}}-PLATFORM.sh`
+Download and extract the hadoop-2.6.0 binary into your machine. These are available at [hadoop-2.6.0.tar.gz](https://dist.apache.org/repos/dist/release/hadoop/common/hadoop-2.6.0/hadoop-2.6.0.tar.gz).
 
-The installation scripts for Mac OS X (`darwin`), for example, would be named
-`heron-client-install-{{% heronVersion %}}-darwin.sh` and
-`heron-tools-install-{{% heronVersion %}}-darwin.sh`.
-
-Once you've downloaded the scripts, run the Heron client script with the
-`--user` flag set:
+Then set the environment variables in `~/.bashrc`.
 
 ```bash
-$ chmod +x heron-client-install-VERSION-PLATFORM.sh
-$ ./heron-client-install-VERSION-PLATFORM.sh --user
-Heron client installer
-----------------------
+export JAVA_HOME=<where Java locates>
+#e.g. ~/jdk1.8.0_91
+export HADOOP_HOME=<where hadoop-2.6.0 locates>
+#e.g. ~/hadoop-2.6.0
+export YARN_HOME=$HADOOP_HOME
+export HADOOP_CONF_DIR=$HADOOP_HOME/etc/hadoop
+export PATH=$HADOOP_HOME/bin:$JAVA_HOME/bin:$PATH
+```
+Now run
 
-Uncompressing......
-Heron is now installed!
+```bash
+$ source ~/.bashrc
+```
+in order to make sure the changes are applied.
 
-Make sure you have "${HOME}/bin" in your path.
+Check if you can successfully run Hadoop command and get the following output.
+
+```bash
+$ hadoop
+Usage: hadoop [--config confdir] COMMAND
+       where COMMAND is one of:
+  fs                   run a generic filesystem user client
+  version              print the version
+  jar <jar>            run a jar file
+  checknative [-a|-h]  check native hadoop and compression libraries availability
+  distcp <srcurl> <desturl> copy file or directories recursively
+  archive -archiveName NAME -p <parent path> <src>* <dest> create a hadoop archive
+  classpath            prints the class path needed to get the
+  credential           interact with credential providers
+                       Hadoop jar and the required libraries
+  daemonlog            get/set the log level for each daemon
+  trace                view and modify Hadoop tracing settings
+ or
+  CLASSNAME            run the class named CLASSNAME
+
+Most commands print help when invoked w/o parameters.
+```
+
+Modify the following files in Apache Hadoop distribution.
+
+`$HADOOP_HOME/etc/hadoop/core-site.xml`:
+
+```html
+<configuration>
+  <property>
+    <name>fs.default.name</name>
+    <value>hdfs://localhost:9010</value>
+  </property>
+  <property>
+    <name>hadoop.tmp.dir</name>
+    <value>/tmp/hadoop-${user.name}</value>
+    <description>A base for other temporary directories.</description>
+  </property>
+</configuration>
+```
+
+`$HADOOP_HOME/etc/hadoop/hdfs-site.xml`:
+```html
+<configuration>
+  <property>
+    <name>dfs.replication</name>
+    <value>1</value>
+  </property>
+  <property>
+    <name>dfs.namenode.http-address</name>
+    <value>localhost:50070</value>
+  </property>
+  <property>
+    <name>dfs.namenode.secondary.http-address</name>
+    <value>localhost:50190</value>
+  </property>
+</configuration>
+```
+
+`$HADOOP_HOME/etc/hadoop/mapred-site.xml`:
+
+You will be creating this file. It doesn’t exist in the original package.
+```html
+<configuration>
+  <property>
+    <name>mapreduce.framework.name</name>
+    <value>yarn</value>
+  </property>
+  <property>
+    <name>yarn.app.mapreduce.am.resource.mb</name>
+    <value>512</value>
+  </property>
+  <property>
+    <name>yarn.app.mapreduce.am.command-opts</name>
+    <value>-Xmx256m -Xms256m</value>
+  </property>
+</configuration>
+```
+
+`$HADOOP_HOME/etc/hadoop/yarn-site.xml`:
+```html
+<configuration>
+  <property>
+    <name>yarn.resourcemanager.hostname</name>
+    <value>localhost</value>
+  </property>
+  <property>
+    <name>yarn.resourcemanager.address</name>
+    <value>localhost:8132</value>
+  </property>
+  <property>
+    <name>yarn.resourcemanager.scheduler.address</name>
+    <value>localhost:8130</value>
+  </property>
+  <property>
+    <name>yarn.resourcemanager.resource-tracker.address</name>
+    <value>localhost:8131</value>
+  </property>
+  <property>
+    <name>yarn.resourcemanager.admin.address</name>
+    <value>localhost:8133</value>
+  </property>
+  <property>
+    <name>yarn.resourcemanager.webapp.address</name>
+    <value>localhost:8080</value>
+  </property>
+  <property>
+    <name>yarn.nodemanager.aux-services</name>
+    <value>mapreduce_shuffle</value>
+  </property>
+  <property>
+    <name>yarn.nodemanager.resource.memory-mb</name>
+    <value>4096</value>
+  </property>
+  <property>
+    <description>Whether virtual memory limits will be enforced for containers.</description>
+    <name>yarn.nodemanager.vmem-check-enabled</name>
+    <value>false</value>
+  </property>
+  <property>
+    <name>yarn.scheduler.minimum-allocation-mb</name>
+    <value>512</value>
+  </property>
+  <property>
+    <name>yarn.scheduler.maximum-allocation-mb</name>
+    <value>2048</value>
+  </property>
+</configuration>
+```
+
+Next we format the file system and you should be able to see it exits with status 0.
+```bash
+$ hdfs namenode -format
 ...
+xx/xx/xx xx:xx:xx INFO util.ExitUtil: Exiting with status 0
+xx/xx/xx xx:xx:xx INFO namenode.NameNode: SHUTDOWN_MSG:
+/************************************************************
+SHUTDOWN_MSG: Shutting down NameNode at xxx.xxx.xxx.xxx
 ```
 
-To add `~/bin` to your path, run:
+Launch NameNode daemon, DataNode daemon, ResourceManager daemon and NodeManager Daemon.
 
 ```bash
-$ export PATH=$PATH:~/bin
+$ $HADOOP_HOME/sbin/start-dfs.sh
+$ $HADOOP_HOME/sbin/start-yarn.sh
 ```
 
-Now run the script for Heron tools (setting the `--user` flag):
-
+Check if the daemons started successfully with the following output.
 ```bash
-$ chmod +x heron-tools-install-VERSION-PLATFORM.sh
-$ ./heron-tools-install-VERSION-PLATFORM.sh --user
-Heron tools installer
----------------------
-
-Uncompressing......
-Heron Tools is now installed!
-...
+$ jps
+xxxxx NameNode
+xxxxx SecondaryNameNode
+xxxxx DataNode
+xxxxx NodeManager
+xxxxx Jps
+xxxxx ResourceManager
 ```
 
-To check Heron is successfully installed, run:
-
-```bash
-$ heron version
-heron.build.version : {{% heronVersion %}}
-heron.build.time : Sat Aug  6 12:35:47 PDT 2016
-heron.build.timestamp : 1470512147000
-heron.build.host : ${HOSTNAME}
-heron.build.user : ${USERNAME}
-heron.build.git.revision : 26bb4096130a05f9799510bbce6c37a69a7342ef
-heron.build.git.status : Clean
-```
+You can browse the web interface for the NameNode at [http://localhost:50070](http://localhost:50070) and for the ResourceManager at [http://localhost:8080](http://localhost:8080).
 
 ## Step 2 --- Launch an example topology
 
