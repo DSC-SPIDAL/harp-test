@@ -71,6 +71,20 @@ public void findMaxs(){
         Integer out = maxCompute.waitForOutput(1);
         System.out.println(out);
     }
+
+    /* Get results of task 2*/
+    while (maxCompute.hasOutput(2)) {
+        Integer out = maxCompute.waitForOutput(2);
+        System.out.println(out);
+    }
+
+    /* Get results of task 3*/
+    while (maxCompute.hasOutput(3)) {
+        Integer out = maxCompute.waitForOutput(3);
+        System.out.println(out);
+    }
+
+
 }
 
 ```
