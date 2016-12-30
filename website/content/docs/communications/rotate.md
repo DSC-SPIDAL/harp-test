@@ -18,5 +18,5 @@ boolean rotate(final String contextName, final String operationName, Table<P> gl
 
 ## Example
 ```java
-rotate("kmeans", "max-rotate-" + i + "-" + j, cenTable, null, dataMap, workers);
+rotate(contextName, "max-rotate-" + i + "-" + j, cenTable, null, dataMap, workers);
 ```
