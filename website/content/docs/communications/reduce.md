@@ -4,4 +4,19 @@ title: Reduce
 
 ![reduce](/img/reduce.png)
 
+`reduce` aims to collect tables from other workers to this worker. All workers should run it concurrently. The defination of the method is:
+```java
+boolean reduce(final String contextName, final String operationName, final Table<P> table, final int reduceWorkerID, final DataMap dataMap, final Workers workers)
+```
 
+* `contextName` --- the name of the context
+* `operationName` --- the name of the operation
+* `table` --- the name of the data table
+* `reduceWorkerID` --- the ID of the worker which collects other tables
+* `dataMap` --- the data map
+* `workers` --- the workers
+
+## Example
+```java
+reduce(contextName, "reduce", table, workers.getMasterID(), dataMap, workers);
+```

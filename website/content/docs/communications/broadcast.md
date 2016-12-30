@@ -12,7 +12,7 @@ boolean broadcast(String contextName, String operationName, Table<P> table, int 
 
 * `contextName` --- the name of the context
 * `operationName` --- the name of the operation
-* `table` --- the name of the data Table
+* `table` --- the name of the data table
 * `bcastWorkerID` --- the ID of the worker which broadcasts
 * `useMSTBcast` --- whether use MST method or not
 * `dataMap` --- the data map
