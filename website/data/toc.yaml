@@ -37,7 +37,11 @@ sections:
         url: /docs/scheduler/dynamic-scheduler
   - name: Examples
     sublinks:
-      - name: Kmeans
+      - name: k-means
+        url: /docs/examples/kmeans
+      - name: allreduce k-means
+        url: /docs/examples/kmeans
+      - name: allreduce k-means
         url: /docs/examples/kmeans
   - name: Harp Resources
     sublinks:
