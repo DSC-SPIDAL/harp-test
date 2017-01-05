@@ -1,8 +1,8 @@
 ---
-title: Harp broadcast & reduce k-means
+title: Harp push & pull k-means
 ---
 
-Using `broadcast` and `reduce` to calculate k-means algorithm in Harp is quite similar to using `allreduce`. That is because `allreduce` can be treated as first one machine combines others' partition (`reduce`) and then shares with others (`broadcast`). The only difference is in this method, the calculation part is only done by the master machine while `allreduce` method will do on everyone.
+`push` and `pull` methods maintain a global table among machines. Each machine use `push` method in order to use local table to update global table and use `pull` to do the opposite. In k-means algorithm, the global table stores the global centroids and each machine only needs to get information of its own nodes.
 
 Because Harp will use `ant` to compile the whole code base, we ask you to add your file path in `$HARP3_PROJECT_HOME/harp3-app/build.xml`.
 ```xml
@@ -69,33 +69,20 @@ private void runKmeans(List<String> fileNames, Configuration conf, Context conte
         loadCentroids(cenTable, vectorSize, conf.get(KMeansConstants.CFILE), conf);
     broadcastCentroids(cenTable);
     ArrayList<DoubleArray> dataPoints = loadData(fileNames, vectorSize, conf);
-    Table<DoubleArray> previousCenTable =  null;
+    Table<DoubleArray> globalTable = new Table<DoubleArray>(0, new DoubleArrPlus());
+    Table<DoubleArray> previousCenTable = null;
     for (int iter = 0; iter < iteration; iter++) {
-        previousCenTable = cenTable;
+        globalTable.release();  
+        previousCenTable =  cenTable;
         cenTable = new Table<>(0, new DoubleArrPlus());
         computation(cenTable, previousCenTable, dataPoints);
-        reduce("main", "reduce_"+iter, cenTable, this.getMasterID());
-        if (this.isMaster())
-            calculateCentroids(cenTable);
-        broadcast("main", "bcast_"+iter, cenTable, this.getMasterID(), false);  
+        push("main", "push_"+iter, cenTable, globalTable, new Partitioner(this.getNumWorkers()));
+        calculateCentroids(globalTable);
+        pull("main", "pull_"+iter, cenTable, globalTable, true);              
     }
     if (this.isMaster())
         outputCentroids(cenTable, conf, context);
 }
 ```
 
-`broadcast` method is encapsulated into method `bcastCentroids`:
-
-```java
-private void bcastCentroids(Table<DoubleArray> table, int bcastID) throws IOException {
-    boolean isSuccess = false;
-    try
-        isSuccess = this.broadcast("main", "broadcast-centroids", table, bcastID, false);
-    catch (Exception e)
-        e.printStackTrace();
-    if (!isSuccess)
-        throw new IOException("Fail to bcast");
-}
-```
-
-And as mentioned above, the only difference between using `broadcast` & `reduce` and using `allreduce` is how to synchronize the local results. So in this step, load centroids and data, find the nearest centroid and update, and write centroids back to HDFS are all same as in `allreduce` k-means.
+Using `push` and `pull` to calculate k-means is also very similar to using `allreduce`. In `allreduce` k-means algorithm, machines need to maintain centroids table as global table while if using `push` and `pull` we only need to do operations locally. The global table is like a computation container.
