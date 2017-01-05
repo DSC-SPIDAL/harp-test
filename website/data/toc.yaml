@@ -45,6 +45,8 @@ sections:
         url: /docs/examples/bcastreducekmeans
       - name: push & pull k-means
         url: /docs/examples/pushpullkmeans
+      - name: regroup & allgather k-means
+        url: /docs/examples/regroupallgatherkmeans
   - name: Harp Resources
     sublinks:
       - name: Harp Resources

@@ -23,3 +23,5 @@ Harp provides several methods in order to communicates among machines. In the fo
 * [`broadcast` & `reduce` k-means](/docs/examples/bcastreducekmeans/)
 
 * [`push` & `pull` k-means](/docs/examples/pushpullkmeans/)
+
+* [`regroup` & `allgather` k-means](/docs/examples/regroupallgatherkmeans/)
