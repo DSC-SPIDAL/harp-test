@@ -40,9 +40,9 @@ sections:
       - name: k-means
         url: /docs/examples/kmeans
       - name: allreduce k-means
-        url: /docs/examples/kmeans
+        url: /docs/examples/allreducekmeans
       - name: allreduce k-means
-        url: /docs/examples/kmeans
+        url: /docs/examples/allreducekmeans
   - name: Harp Resources
     sublinks:
       - name: Harp Resources
