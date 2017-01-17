@@ -1,0 +1,37 @@
+\begin{thebibliography}{1}
+
+\bibitem{ciresan2010deep}
+D.~C. Ciresan, U.~Meier, L.~M. Gambardella, and J.~Schmidhuber.
+\newblock Deep, big, simple neural nets for handwritten digit recognition.
+\newblock {\em Neural computation}, 22(12):3207--3220, 2010.
+
+\bibitem{dean2012large}
+J.~Dean, G.~Corrado, R.~Monga, K.~Chen, M.~Devin, M.~Mao, A.~Senior, P.~Tucker,
+  K.~Yang, Q.~V. Le, et~al.
+\newblock Large scale distributed deep networks.
+\newblock In {\em Advances in neural information processing systems}, pages
+  1223--1231, 2012.
+
+\bibitem{lecun2012efficient}
+Y.~A. LeCun, L.~Bottou, G.~B. Orr, and K.-R. M{\"u}ller.
+\newblock Efficient backprop.
+\newblock In {\em Neural networks: Tricks of the trade}, pages 9--48. Springer,
+  2012.
+
+\bibitem{seide2011conversational}
+F.~Seide, G.~Li, and D.~Yu.
+\newblock Conversational speech transcription using context-dependent deep
+  neural networks.
+\newblock In {\em Interspeech}, pages 437--440, 2011.
+
+\bibitem{su2015experiments}
+H.~Su and H.~Chen.
+\newblock Experiments on parallel training of deep neural network using model
+  averaging.
+\newblock {\em arXiv preprint arXiv:1507.01239}, 2015.
+
+\bibitem{dvincentNN}
+D.~Vincent.
+\newblock Neural network, 2011.
+
+\end{thebibliography}

@@ -1,0 +1,49 @@
+This is BibTeX, Version 0.99d (TeX Live 2015)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: report.aux
+The style file: abbrv.bst
+Database file #1: references.bib
+Warning--empty journal in page1999pagerank
+Warning--empty journal in weston2000feature
+You've used 24 entries,
+            2118 wiz_defined-function locations,
+            636 strings with 7404 characters,
+and the built_in function-call counts, 8138 in all, are:
+= -- 806
+> -- 397
+< -- 5
++ -- 160
+- -- 132
+* -- 550
+:= -- 1363
+add.period$ -- 75
+call.type$ -- 24
+change.case$ -- 134
+chr.to.int$ -- 0
+cite$ -- 26
+duplicate$ -- 314
+empty$ -- 614
+format.name$ -- 132
+if$ -- 1695
+int.to.chr$ -- 0
+int.to.str$ -- 24
+missing$ -- 26
+newline$ -- 123
+num.names$ -- 48
+pop$ -- 148
+preamble$ -- 1
+purify$ -- 114
+quote$ -- 0
+skip$ -- 225
+stack$ -- 0
+substring$ -- 473
+swap$ -- 68
+text.length$ -- 5
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 88
+warning$ -- 2
+while$ -- 80
+width$ -- 26
+write$ -- 260
+(There were 2 warnings)

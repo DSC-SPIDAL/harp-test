@@ -1,0 +1,19 @@
+Accuracy: 84.46666666666667
+
+Accuracy: 84.33333333333333
+
+Accuracy: 86.2
+
+Accuracy: 84.26666666666667
+
+Accuracy: 81.46666666666667
+
+Accuracy: 88.2
+
+Accuracy: 84.53333333333333
+
+Accuracy: 84.6
+
+Accuracy: 76.4
+
+Accuracy: 86.13333333333334

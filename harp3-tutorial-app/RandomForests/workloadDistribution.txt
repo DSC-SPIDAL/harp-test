@@ -1,0 +1,4 @@
+Workload distribution
+We mostly worked on the project together - pair programming. But each of us were in-charge primarily of the following components:
+	- Rin: Sequential code experiments, Created Random Forest Mapper, Wrote Problem Specification section, Wrote experiments section
+	- Raksha: Wrote Introduction, Wrote Related Work, Created Random Forest Map Collective, Harp experiments

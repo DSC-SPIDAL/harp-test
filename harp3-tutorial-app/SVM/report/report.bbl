@@ -1,0 +1,131 @@
+\begin{thebibliography}{10}
+
+\bibitem{blei2003latent}
+D.~M. Blei, A.~Y. Ng, and M.~I. Jordan.
+\newblock Latent dirichlet allocation.
+\newblock {\em Journal of machine Learning research}, 3(Jan):993--1022, 2003.
+
+\bibitem{chang2011libsvm}
+C.-C. Chang and C.-J. Lin.
+\newblock Libsvm: a library for support vector machines.
+\newblock {\em ACM Transactions on Intelligent Systems and Technology (TIST)},
+  2(3):27, 2011.
+
+\bibitem{dean2008mapreduce}
+J.~Dean and S.~Ghemawat.
+\newblock Mapreduce: simplified data processing on large clusters.
+\newblock {\em Communications of the ACM}, 51(1):107--113, 2008.
+
+\bibitem{dowd1993high}
+K.~Dowd.
+\newblock {\em High performance computing}.
+\newblock O'Reilly \& Associates, Inc., 1993.
+
+\bibitem{ekanayake2010twister}
+J.~Ekanayake, H.~Li, B.~Zhang, T.~Gunarathne, S.-H. Bae, J.~Qiu, and G.~Fox.
+\newblock Twister: a runtime for iterative mapreduce.
+\newblock In {\em Proceedings of the 19th ACM International Symposium on High
+  Performance Distributed Computing}, pages 810--818. ACM, 2010.
+
+\bibitem{foster2003grid}
+I.~Foster and C.~Kesselman.
+\newblock {\em The Grid 2: Blueprint for a new computing infrastructure}.
+\newblock Elsevier, 2003.
+
+\bibitem{graf2004parallel}
+H.~P. Graf, E.~Cosatto, L.~Bottou, I.~Dourdanovic, and V.~Vapnik.
+\newblock Parallel support vector machines: The cascade svm.
+\newblock In {\em Advances in neural information processing systems}, pages
+  521--528, 2004.
+
+\bibitem{gropp1996high}
+W.~Gropp, E.~Lusk, N.~Doss, and A.~Skjellum.
+\newblock A high-performance, portable implementation of the mpi message
+  passing interface standard.
+\newblock {\em Parallel computing}, 22(6):789--828, 1996.
+
+\bibitem{hall1999correlation}
+M.~A. Hall.
+\newblock {\em Correlation-based feature selection for machine learning}.
+\newblock PhD thesis, The University of Waikato, 1999.
+
+\bibitem{haykin2004comprehensive}
+S.~Haykin and N.~Network.
+\newblock A comprehensive foundation.
+\newblock {\em Neural Networks}, 2(2004), 2004.
+
+\bibitem{joachims1999making}
+T.~Joachims.
+\newblock Making large scale svm learning practical.
+\newblock Technical report, Universit{\"a}t Dortmund, 1999.
+
+\bibitem{kullback1951information}
+S.~Kullback and R.~A. Leibler.
+\newblock On information and sufficiency.
+\newblock {\em The annals of mathematical statistics}, 22(1):79--86, 1951.
+
+\bibitem{liaw2002classification}
+A.~Liaw and M.~Wiener.
+\newblock Classification and regression by randomforest.
+\newblock {\em R news}, 2(3):18--22, 2002.
+
+\bibitem{lu2008distributed}
+Y.~Lu, V.~Roychowdhury, and L.~Vandenberghe.
+\newblock Distributed parallel support vector machines in strongly connected
+  networks.
+\newblock {\em IEEE Transactions on Neural Networks}, 19(7):1167--1178, 2008.
+
+\bibitem{meyer2015support}
+D.~Meyer and F.~T. Wien.
+\newblock Support vector machines.
+\newblock {\em The Interface to libsvm in package e1071}, 2015.
+
+\bibitem{page1999pagerank}
+L.~Page, S.~Brin, R.~Motwani, and T.~Winograd.
+\newblock The pagerank citation ranking: bringing order to the web.
+\newblock 1999.
+
+\bibitem{suykens1999least}
+J.~A. Suykens and J.~Vandewalle.
+\newblock Least squares support vector machine classifiers.
+\newblock {\em Neural processing letters}, 9(3):293--300, 1999.
+
+\bibitem{tanenbaum2007distributed}
+A.~S. Tanenbaum and M.~Van~Steen.
+\newblock {\em Distributed systems}.
+\newblock Prentice-Hall, 2007.
+
+\bibitem{weston2000feature}
+J.~Weston, S.~Mukherjee, O.~Chapelle, M.~Pontil, T.~Poggio, and V.~Vapnik.
+\newblock Feature selection for svms.
+\newblock 2000.
+
+\bibitem{white2012hadoop}
+T.~White.
+\newblock {\em Hadoop: The definitive guide}.
+\newblock " O'Reilly Media, Inc.", 2012.
+
+\bibitem{wu2014integrating}
+T.-L. Wu, A.~Koppula, and J.~Qiu.
+\newblock Integrating pig with harp to support iterative applications with fast
+  cache and customized communication.
+\newblock In {\em Proceedings of the 5th International Workshop on
+  Data-Intensive Computing in the Clouds}, pages 33--39. IEEE Press, 2014.
+
+\bibitem{yitzhaki1979relative}
+S.~Yitzhaki.
+\newblock Relative deprivation and the gini coefficient.
+\newblock {\em The quarterly journal of economics}, pages 321--324, 1979.
+
+\bibitem{zaharia2010spark}
+M.~Zaharia, M.~Chowdhury, M.~J. Franklin, S.~Shenker, and I.~Stoica.
+\newblock Spark: cluster computing with working sets.
+\newblock {\em HotCloud}, 10:10--10, 2010.
+
+\bibitem{zhang2015harp}
+B.~Zhang, Y.~Ruan, and J.~Qiu.
+\newblock Harp: Collective communication on hadoop.
+\newblock In {\em Cloud Engineering (IC2E), 2015 IEEE International Conference
+  on}, pages 228--233. IEEE, 2015.
+
+\end{thebibliography}

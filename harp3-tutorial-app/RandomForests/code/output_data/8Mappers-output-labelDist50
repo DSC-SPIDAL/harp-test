@@ -1,0 +1,210 @@
+Random-Forest with Categorical support
+Test data size: 574511
+16/12/01 03:58:39 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+Generate data.
+Directory: /scratch/rakkumar/tmp/8Mappers-randomForestLabelDist50 created
+Loading the training data for 0...
+Unsampled data for: 0; size: 797974
+Loading the training data for 1...
+Unsampled data for: 1; size: 309044
+Loading the training data for 2...
+Unsampled data for: 2; size: 1334145
+Loading the training data for 3...
+Unsampled data for: 3; size: 1157076
+Loading the training data for 4...
+Unsampled data for: 4; size: 1766700
+Loading the training data for 5...
+Unsampled data for: 5; size: 1368787
+Loading the training data for 6...
+Unsampled data for: 6; size: 1256512
+Loading the training data for 7...
+Unsampled data for: 7; size: 1228974
+Starting Job
+Get map collective runner
+16/12/01 03:59:47 INFO client.RMProxy: Connecting to ResourceManager at j-037/172.16.0.37:8132
+16/12/01 03:59:47 INFO input.FileInputFormat: Total input paths to process : 8
+16/12/01 03:59:47 INFO fileformat.MultiFileInputFormat: NUMBER OF FILES: 8
+16/12/01 03:59:47 INFO fileformat.MultiFileInputFormat: NUMBER OF MAPS: 8
+16/12/01 03:59:47 INFO fileformat.MultiFileInputFormat: Split on host: j-037.juliet.futuresystems.org 
+16/12/01 03:59:47 INFO fileformat.MultiFileInputFormat: Split on host: j-037.juliet.futuresystems.org 
+16/12/01 03:59:47 INFO fileformat.MultiFileInputFormat: Split on host: j-037.juliet.futuresystems.org 
+16/12/01 03:59:47 INFO fileformat.MultiFileInputFormat: Split on host: j-037.juliet.futuresystems.org 
+16/12/01 03:59:47 INFO fileformat.MultiFileInputFormat: Split on host: j-037.juliet.futuresystems.org 
+16/12/01 03:59:47 INFO fileformat.MultiFileInputFormat: Split on host: j-037.juliet.futuresystems.org 
+16/12/01 03:59:47 INFO fileformat.MultiFileInputFormat: Split on host: j-037.juliet.futuresystems.org 
+16/12/01 03:59:47 INFO fileformat.MultiFileInputFormat: Split on host: j-037.juliet.futuresystems.org 
+16/12/01 03:59:47 INFO fileformat.MultiFileInputFormat: Total # of splits: 8
+16/12/01 03:59:47 INFO mapreduce.JobSubmitter: number of splits:8
+16/12/01 03:59:47 INFO mapreduce.JobSubmitter: Submitting tokens for job: job_1480575075944_0002
+command: $JAVA_HOME/bin/java -Dlog4j.configuration=container-log4j.properties -Dyarn.app.container.log.dir=<LOG_DIR> -Dyarn.app.container.log.filesize=0 -Dhadoop.root.logger=INFO,CLA  -Xmx1024m org.apache.hadoop.mapreduce.v2.app.MapCollectiveAppMaster 1><LOG_DIR>/stdout 2><LOG_DIR>/stderr 
+16/12/01 03:59:48 INFO impl.YarnClientImpl: Submitted application application_1480575075944_0002
+16/12/01 03:59:48 INFO mapreduce.Job: The url to track the job: http://j-037:8088/proxy/application_1480575075944_0002/
+16/12/01 03:59:48 INFO mapreduce.Job: Running job: job_1480575075944_0002
+16/12/01 03:59:54 INFO mapreduce.Job: Job job_1480575075944_0002 running in uber mode : false
+16/12/01 03:59:54 INFO mapreduce.Job:  map 0% reduce 0%
+16/12/01 04:00:05 INFO mapreduce.Job:  map 25% reduce 0%
+16/12/01 04:00:06 INFO mapreduce.Job:  map 50% reduce 0%
+16/12/01 04:00:07 INFO mapreduce.Job:  map 100% reduce 0%
+16/12/01 05:18:34 INFO mapreduce.Job: Task Id : attempt_1480575075944_0002_m_000006_0, Status : FAILED
+Error: java.util.ConcurrentModificationException
+	at java.util.ArrayList$Itr.checkForComodification(ArrayList.java:901)
+	at java.util.ArrayList$Itr.next(ArrayList.java:851)
+	at edu.iu.harp.server.Server.stop(Server.java:96)
+	at org.apache.hadoop.mapred.CollectiveMapper.run(CollectiveMapper.java:698)
+	at org.apache.hadoop.mapred.MapTask.runNewMapper(MapTask.java:784)
+	at org.apache.hadoop.mapred.MapTask.run(MapTask.java:341)
+	at org.apache.hadoop.mapred.YarnChild$2.run(YarnChild.java:163)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at javax.security.auth.Subject.doAs(Subject.java:422)
+	at org.apache.hadoop.security.UserGroupInformation.doAs(UserGroupInformation.java:1628)
+	at org.apache.hadoop.mapred.YarnChild.main(YarnChild.java:158)
+
+16/12/01 05:18:35 INFO mapreduce.Job:  map 88% reduce 0%
+16/12/01 05:34:00 INFO mapreduce.Job: Task Id : attempt_1480575075944_0002_m_000001_0, Status : FAILED
+Error: java.util.ConcurrentModificationException
+	at java.util.ArrayList$Itr.checkForComodification(ArrayList.java:901)
+	at java.util.ArrayList$Itr.next(ArrayList.java:851)
+	at edu.iu.harp.server.Server.stop(Server.java:96)
+	at org.apache.hadoop.mapred.CollectiveMapper.run(CollectiveMapper.java:698)
+	at org.apache.hadoop.mapred.MapTask.runNewMapper(MapTask.java:784)
+	at org.apache.hadoop.mapred.MapTask.run(MapTask.java:341)
+	at org.apache.hadoop.mapred.YarnChild$2.run(YarnChild.java:163)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at javax.security.auth.Subject.doAs(Subject.java:422)
+	at org.apache.hadoop.security.UserGroupInformation.doAs(UserGroupInformation.java:1628)
+	at org.apache.hadoop.mapred.YarnChild.main(YarnChild.java:158)
+
+16/12/01 05:34:01 INFO mapreduce.Job:  map 75% reduce 0%
+16/12/01 05:49:12 INFO mapreduce.Job: Task Id : attempt_1480575075944_0002_m_000006_1, Status : FAILED
+Error: java.io.IOException: Fail to do master barrier.
+	at org.apache.hadoop.mapred.CollectiveMapper.run(CollectiveMapper.java:681)
+	at org.apache.hadoop.mapred.MapTask.runNewMapper(MapTask.java:784)
+	at org.apache.hadoop.mapred.MapTask.run(MapTask.java:341)
+	at org.apache.hadoop.mapred.YarnChild$2.run(YarnChild.java:163)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at javax.security.auth.Subject.doAs(Subject.java:422)
+	at org.apache.hadoop.security.UserGroupInformation.doAs(UserGroupInformation.java:1628)
+	at org.apache.hadoop.mapred.YarnChild.main(YarnChild.java:158)
+
+16/12/01 06:19:16 INFO mapreduce.Job: Task Id : attempt_1480575075944_0002_m_000006_2, Status : FAILED
+Error: java.io.IOException: Fail to do master barrier.
+	at org.apache.hadoop.mapred.CollectiveMapper.run(CollectiveMapper.java:681)
+	at org.apache.hadoop.mapred.MapTask.runNewMapper(MapTask.java:784)
+	at org.apache.hadoop.mapred.MapTask.run(MapTask.java:341)
+	at org.apache.hadoop.mapred.YarnChild$2.run(YarnChild.java:163)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at javax.security.auth.Subject.doAs(Subject.java:422)
+	at org.apache.hadoop.security.UserGroupInformation.doAs(UserGroupInformation.java:1628)
+	at org.apache.hadoop.mapred.YarnChild.main(YarnChild.java:158)
+
+16/12/01 06:19:20 INFO mapreduce.Job:  map 100% reduce 0%
+16/12/01 06:19:21 INFO mapreduce.Job: Job job_1480575075944_0002 failed with state FAILED due to: Task failed task_1480575075944_0002_m_000006
+Job failed as tasks failed. failedMaps:1 failedReduces:0
+
+16/12/01 06:19:21 INFO mapreduce.Job: Counters: 32
+	File System Counters
+		FILE: Number of bytes read=0
+		FILE: Number of bytes written=472152
+		FILE: Number of read operations=0
+		FILE: Number of large read operations=0
+		FILE: Number of write operations=0
+		HDFS: Number of bytes read=4783067557
+		HDFS: Number of bytes written=0
+		HDFS: Number of read operations=54
+		HDFS: Number of large read operations=0
+		HDFS: Number of write operations=12
+	Job Counters 
+		Failed map tasks=5
+		Killed map tasks=1
+		Launched map tasks=12
+		Other local map tasks=12
+		Total time spent by all maps in occupied slots (ms)=47021764
+		Total time spent by all reduces in occupied slots (ms)=0
+		Total time spent by all map tasks (ms)=47021764
+		Total vcore-seconds taken by all map tasks=47021764
+		Total megabyte-seconds taken by all map tasks=48150286336
+	Map-Reduce Framework
+		Map input records=6
+		Map output records=0
+		Input split bytes=528
+		Spilled Records=0
+		Failed Shuffles=0
+		Merged Map outputs=0
+		GC time elapsed (ms)=26147
+		CPU time spent (ms)=306154250
+		Physical memory (bytes) snapshot=41298001920
+		Virtual memory (bytes) snapshot=129909878784
+		Total committed heap usage (bytes)=105154871296
+	File Input Format Counters 
+		Bytes Read=0
+	File Output Format Counters 
+		Bytes Written=0
+RandomForest Job failed. 
+Get map collective runner
+16/12/01 06:19:21 INFO client.RMProxy: Connecting to ResourceManager at j-037/172.16.0.37:8132
+16/12/01 06:19:21 INFO input.FileInputFormat: Total input paths to process : 8
+16/12/01 06:19:21 INFO fileformat.MultiFileInputFormat: NUMBER OF FILES: 8
+16/12/01 06:19:21 INFO fileformat.MultiFileInputFormat: NUMBER OF MAPS: 8
+16/12/01 06:19:21 INFO fileformat.MultiFileInputFormat: Split on host: j-037.juliet.futuresystems.org 
+16/12/01 06:19:21 INFO fileformat.MultiFileInputFormat: Split on host: j-037.juliet.futuresystems.org 
+16/12/01 06:19:21 INFO fileformat.MultiFileInputFormat: Split on host: j-037.juliet.futuresystems.org 
+16/12/01 06:19:21 INFO fileformat.MultiFileInputFormat: Split on host: j-037.juliet.futuresystems.org 
+16/12/01 06:19:21 INFO fileformat.MultiFileInputFormat: Split on host: j-037.juliet.futuresystems.org 
+16/12/01 06:19:21 INFO fileformat.MultiFileInputFormat: Split on host: j-037.juliet.futuresystems.org 
+16/12/01 06:19:21 INFO fileformat.MultiFileInputFormat: Split on host: j-037.juliet.futuresystems.org 
+16/12/01 06:19:21 INFO fileformat.MultiFileInputFormat: Split on host: j-037.juliet.futuresystems.org 
+16/12/01 06:19:21 INFO fileformat.MultiFileInputFormat: Total # of splits: 8
+16/12/01 06:19:21 INFO mapreduce.JobSubmitter: number of splits:8
+16/12/01 06:19:21 INFO mapreduce.JobSubmitter: Submitting tokens for job: job_1480575075944_0003
+command: $JAVA_HOME/bin/java -Dlog4j.configuration=container-log4j.properties -Dyarn.app.container.log.dir=<LOG_DIR> -Dyarn.app.container.log.filesize=0 -Dhadoop.root.logger=INFO,CLA  -Xmx1024m org.apache.hadoop.mapreduce.v2.app.MapCollectiveAppMaster 1><LOG_DIR>/stdout 2><LOG_DIR>/stderr 
+16/12/01 06:19:21 INFO impl.YarnClientImpl: Submitted application application_1480575075944_0003
+16/12/01 06:19:21 INFO mapreduce.Job: The url to track the job: http://j-037:8088/proxy/application_1480575075944_0003/
+16/12/01 06:19:21 INFO mapreduce.Job: Running job: job_1480575075944_0003
+16/12/01 06:19:27 INFO mapreduce.Job: Job job_1480575075944_0003 running in uber mode : false
+16/12/01 06:19:27 INFO mapreduce.Job:  map 0% reduce 0%
+16/12/01 06:19:38 INFO mapreduce.Job:  map 38% reduce 0%
+16/12/01 06:19:39 INFO mapreduce.Job:  map 50% reduce 0%
+16/12/01 06:19:40 INFO mapreduce.Job:  map 88% reduce 0%
+16/12/01 06:19:41 INFO mapreduce.Job:  map 100% reduce 0%
+16/12/01 08:01:26 INFO mapreduce.Job: Job job_1480575075944_0003 completed successfully
+16/12/01 08:01:26 INFO mapreduce.Job: Counters: 30
+	File System Counters
+		FILE: Number of bytes read=0
+		FILE: Number of bytes written=629536
+		FILE: Number of read operations=0
+		FILE: Number of large read operations=0
+		FILE: Number of write operations=0
+		HDFS: Number of bytes read=6293238877
+		HDFS: Number of bytes written=189
+		HDFS: Number of read operations=92
+		HDFS: Number of large read operations=0
+		HDFS: Number of write operations=16
+	Job Counters 
+		Launched map tasks=8
+		Other local map tasks=8
+		Total time spent by all maps in occupied slots (ms)=47922175
+		Total time spent by all reduces in occupied slots (ms)=0
+		Total time spent by all map tasks (ms)=47922175
+		Total vcore-seconds taken by all map tasks=47922175
+		Total megabyte-seconds taken by all map tasks=49072307200
+	Map-Reduce Framework
+		Map input records=8
+		Map output records=7
+		Input split bytes=704
+		Spilled Records=0
+		Failed Shuffles=0
+		Merged Map outputs=0
+		GC time elapsed (ms)=21054
+		CPU time spent (ms)=371057950
+		Physical memory (bytes) snapshot=53247422464
+		Virtual memory (bytes) snapshot=173198753792
+		Total committed heap usage (bytes)=139794055168
+	File Input Format Counters 
+		Bytes Read=0
+	File Output Format Counters 
+		Bytes Written=189
+Total Harp RandomForest Execution Time: 14499529
+Harp RandomForest Completed
+real 14569.41
+user 1083.31
+sys 33.28
