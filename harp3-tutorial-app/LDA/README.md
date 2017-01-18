@@ -42,7 +42,7 @@ hadoop jar harp3-app-hadoop-2.6.0.jar  edu.iu.lda.LdaMapCollective sample-sparse
 
 Please be noted:
 
-1. if you are running with mode=0 (sequential version), you need data with dense format, and the parameter "<number of threads>" will not be used. If you are running with mode=1, you will need data with sparse format.
+1. if you are running with mode=0 (sequential version), you need data with dense format, and the parameter <number of threads> will not be used. If you are running with mode=1, you will need data with sparse format.
 
 2. metadata is used for indicating the beginning index of documents in partitions.
 
