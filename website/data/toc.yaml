@@ -53,6 +53,10 @@ sections:
         url: /docs/examples/svm
       - name: MLR
         url: /docs/examples/mlr
+  - name: Harp-DAAL
+    sublinks:
+      - name: HARP-DAAL
+        url: /docs/examples/harpdaal  
   - name: Harp Resources
     sublinks:
       - name: Harp Resources
