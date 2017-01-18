@@ -1,0 +1,31 @@
+\begin{thebibliography}{1}
+
+\bibitem{blei2003latent}
+D.~M. Blei, A.~Y. Ng, and M.~I. Jordan.
+\newblock Latent dirichlet allocation.
+\newblock {\em Journal of machine Learning research}, 3(Jan):993--1022, 2003.
+
+\bibitem{cutting2008apache}
+D.~Cutting, M.~Busch, D.~Cohen, O.~Gospodnetic, E.~Hatcher, C.~Hostetter,
+  G.~Ingersoll, M.~McCandless, B.~Messer, D.~Naber, et~al.
+\newblock Apache lucene, 2008.
+
+\bibitem{white2012hadoop}
+T.~White.
+\newblock {\em Hadoop: The definitive guide}.
+\newblock " O'Reilly Media, Inc.", 2012.
+
+\bibitem{zhai2012mr}
+K.~Zhai, J.~Boyd-Graber, N.~Asadi, and M.~L. Alkhouja.
+\newblock Mr. lda: A flexible large scale topic modeling package using
+  variational inference in mapreduce.
+\newblock In {\em Proceedings of the 21st international conference on World
+  Wide Web}, pages 879--888. ACM, 2012.
+
+\bibitem{zhang2015harp}
+B.~Zhang, Y.~Ruan, and J.~Qiu.
+\newblock Harp: Collective communication on hadoop.
+\newblock In {\em Cloud Engineering (IC2E), 2015 IEEE International Conference
+  on}, pages 228--233. IEEE, 2015.
+
+\end{thebibliography}

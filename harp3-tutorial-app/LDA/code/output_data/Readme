@@ -1,0 +1,3 @@
+We ran many experiments. Here we upload one of the results.
+sample-sparse-10k-16-threads-100-topics-output-1 is one of the results from running on sample-sparse-10k with 100 topics using 16 threads per node (two nodes) 
+
