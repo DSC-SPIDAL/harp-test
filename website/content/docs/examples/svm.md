@@ -45,9 +45,12 @@ From the result of our implementation, we can see that support vector machine mo
 
 # REFERENCE
 [1] Suykens, Johan AK, and Joos Vandewalle. “Least squares support vector machine classifiers.” Neural processing letters 9.3 (1999): 293-300.
+
 [2] Zhang, Bingjing, Yang Ruan, and Judy Qiu. “Harp: Collective communication on hadoop.” Cloud Engineering (IC2E), 2015 IEEE International Conference on. IEEE, 2015.
+
 [3] Çatak, Ferhat Özgür, and Mehmet Erdal Balaban. “A MapReduce-based distributed SVM algorithm for binary classification.” Turkish Journal of Electrical Engineering & Computer Sciences 24.3 (2016): 863-873.
+
 [4] LeCun, Yann, Corinna Cortes, and Christopher JC Burges. “The MNIST database of handwritten digits.” (1998).
-[5] docs.opencv.org/doc/tutorials/ml/introduction_to_svm/
-introduction_to_svm.html
+
+[5] docs.opencv.org/doc/tutorials/ml/introduction_to_svm/introduction_to_svm.html
 
