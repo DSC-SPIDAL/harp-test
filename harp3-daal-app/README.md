@@ -1,4 +1,6 @@
 # Harp-DAAL-APP
+@author: Langshi Chen
+
 
 harp3-daal-app includes the application implemented within the Harp-DAAL framework. 
 
