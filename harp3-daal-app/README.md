@@ -26,24 +26,18 @@ Thus, a reasonable solution for Harp is to accomplish the computation tasks by i
 
 # Compile and Run Harp-DAAL 
 
-To compile Harp-DAAL, users shall first install Intel's DAAL repository. The source code is available in their github page[^fn1].
+To compile Harp-DAAL, users shall first install Intel's DAAL repository. The source code is available in their github page
+https://github.com/01org/daal
 After installation, please follow the procedure as below:
 
-1. setup the DAALROOT environment in the .bashrc file
-
+1.setup the DAALROOT environment in the .bashrc file
 ```bash
 export DAALROOT=/path-to-daal-src/
-
 ```
-
-2. Enter the harp3-daal-app directory, and build the apps
-
+2.Enter the harp3-daal-app directory, and build the apps
 ```bash
-
 cd harp3-daal-app
 ant
 ```
+3.Create scripts to run the examples within harp3-daal-app
 
-3. Create scripts to run the examples within harp3-daal-app
-
-[^fn1]: https://github.com/01org/daal
