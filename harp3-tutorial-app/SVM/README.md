@@ -1,4 +1,4 @@
-## Project: Parallel SVM on Harp    
+## SVM on Harp    
 
 ### Usage
 
