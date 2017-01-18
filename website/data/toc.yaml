@@ -55,8 +55,8 @@ sections:
         url: /docs/examples/mlr
   - name: Harp-DAAL
     sublinks:
-      - name: HARP-DAAL
-        url: /docs/examples/harpdaal  
+      - name: Harp-DAAL
+        url: /docs/harpdaal/harpdaal/
   - name: Harp Resources
     sublinks:
       - name: Harp Resources
@@ -65,4 +65,3 @@ sections:
     sublinks: 
       - name: Community
         url: /docs/contributors/community
-   

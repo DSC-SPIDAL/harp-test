@@ -1,8 +1,8 @@
 ---
-Harp-DAAL-APP
+title: Harp-DAAL-APP
 ---
 
-harp3-daal-app includes the application implemented within the Harp-DAAL framework. 
+[harp3-daal-app](https://github.iu.edu/IU-Big-Data-Lab/Harp/tree/master/harp3-daal-app) includes the application implemented within the Harp-DAAL framework. 
 
 ## Introduction of Harp-DAAL 
 
