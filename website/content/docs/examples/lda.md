@@ -1,38 +1,41 @@
 ---
-title: Distributed Machine Learning
+title: Latent Dirichlet Allocation 
 ---
 
-
-# ABSTRACT
 [Harp LDA](https://github.iu.edu/IU-Big-Data-Lab/Harp/tree/master/harp3-tutorial-app/LDA) is a distributed variational bayes inference (VB) algorithm for LDA model which would be able to model a large and continuously expanding dataset using Harp collective communication library. We demonstrate how variational bayes inference converges within Map-Collective jobs provided by Harp. We provide results of the experiments conducted on a corpus of Wikipedia Dataset.
-
-# WORKFLOW
-
-![workflow](/img/lda/workflow.png)
-
-# Algorithm
-
-![algorithm](/img/lda/algorithm.png)
-
-
-# MATERIALS AND METHODS 
 
 Harp[2] is a collective communication library plugged in Hadoop plug-in to accelerate machine learning algorithms.
 
 LDA[3] is a popular topic modeling algorithm. We follow the Mr.LDA[4] to implement distributed variational inference LDA on Harp with it’s dynamic schedueler, allreduce and push-pull communication models.
 
+# ALGORITHM
+
+
+ 
+<img src="/img/lda/algorithm.png" width="60%" height="60%">
+ 
+
+# WORKFLOW
+ 
+<img src="/img/lda/workflow.png" width="60%" height="60%">
+ 
+
 # DATASET
 
-![datasets](/img/lda/datasets.png)
+ 
+<img src="/img/lda/datasets.png" width="60%" height="60%">
+ 
 
 # EXPERIMENTS
-![data1-iterations](/img/lda/data1-iterations.png)
-![data1-time](/img/lda/data1-time.png)
-![data2-iterations](/img/lda/data1-iterations.png)
-![data2-time](/img/lda/data2-time.png)
-![Speedup](/img/lda/Speedup.png)
 
-# CONCLUSION
+ 
+<img src="/img/lda/data1-iterations.png" width="60%" height="60%>
+<img src="/img/lda/data1-time.png" width="60%" height="60%">
+<img src="/img/lda/data2-iterations.png" width="60%" height="60%">
+<img src="/img/lda/data2-time.png" width="60%" height="60%">
+<img src="/img/lda/Speedup.png" width="60%" height="60%">
+ 
+
 Harp-LDA is proposed to provide high scalability achieve better performance with shorter time and memory requirements. A clear evidence of convergence of likelihood after a certain number of iterations is depicted. The results from the speed up chart illustrate high scalability.
 
 

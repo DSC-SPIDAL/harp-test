@@ -47,12 +47,12 @@ sections:
         url: /docs/examples/pushpullkmeans
       - name: regroup & allgather k-means
         url: /docs/examples/regroupallgatherkmeans
-      - name: Distributed Machine Learning
-        url: /docs/examples/distributedMachineLearning
       - name: LDA
         url: /docs/examples/lda
       - name: SVM
         url: /docs/examples/svm
+      - name: MLR
+        url: /docs/examples/mlr
   - name: Harp Resources
     sublinks:
       - name: Harp Resources
