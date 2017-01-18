@@ -51,6 +51,8 @@ sections:
         url: /docs/examples/distributedMachineLearning
       - name: LDA
         url: /docs/examples/lda
+      - name: SVM
+        url: /docs/examples/svm
   - name: Harp Resources
     sublinks:
       - name: Harp Resources
