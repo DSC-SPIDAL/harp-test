@@ -7,30 +7,30 @@ title: Harp-DAAL-SGD
 Matrix Factorization based on Stochastic Gradient Descent (MF-SGD for short) is an algorithm widely used in recommender systems. MF-SGD is one of the implemented algorithm within Harp, however, DAAL current does not have 
 a MF-SGD kernel. We first implement a MF-SGD kernel inside DAAL's framework and then interface it with that of Harp. MF-SGD aims to factorize a sparse matrix into two dense matrices named mode W and model H as follows. 
 
-$$V = W H$$
+![](/img/harpdaal/vWH.png)
 
-Matrix $V$ includes both training data and test data, a machine learning inspired kernel with use the training data to approximate the model matrices $W$ and $H$. A standard SGD procedure will update the model $W$ and $H$
-when it trains each training data, i.e., an entry in matrix $V$ in the following formula. 
+Matrix V includes both training data and test data, a machine learning inspired kernel with use the training data to approximate the model matrices W and H. A standard SGD procedure will update the model W and H
+when it trains each training data, i.e., an entry in matrix V in the following formula. 
 
-$$E_{ij} = V_{ij} - \sum_{k=0}^r W_{ik} H_{kj}$$
+![](/img/harpdaal/error-compute.png)
 
-$$W^t_{i*} = W^{t-1}_{i*} - \eta (E^{t-1}_{ij}\cdot H^{t-1}_{*j} - \lambda \cdot W^{t-1}_{i*})$$
+![](/img/harpdaal/update-W.png)
 
-$$H^t_{*j} = H^{t-1}_{*j} - \eta (E^{t-1}_{ij}\cdot W^{t-1}_{i*} - \lambda \cdot H^{t-1}_{*j})$$
+![](/img/harpdaal/update-H.png)
 
 ## Implementation of SGD within Harp-DAAL Framework
 
-We chose a taskflow based programming model in Harp-DAAL-SGD application. Within this model, a model matrix $W$ is initially 
+We chose a taskflow based programming model in Harp-DAAL-SGD application. Within this model, a model matrix W is initially 
 released into the DAAL's data structures, which is a *HomogenNumericTable*, and stay within DAAL till the end of program's life cycle.  
-The other model data, matrix $H$, is loaded into DAAL's data structure after every occurrence of the model rotation. 
-The training model data, $V$, is stored in Harp's side. 
-Each training point is represented by a $Task$ object. Each $Task$ object consists of three fields:
+The other model data, matrix H, is loaded into DAAL's data structure after every occurrence of the model rotation. 
+The training model data, V, is stored in Harp's side. 
+Each training point is represented by a Task object. Each $Task$ object consists of three fields:
 
-* Position of the associated row in matrix $W$
-* Position of the associated column in matrix $H$
-* The value of the training data $V$
+* Position of the associated row in matrix W
+* Position of the associated column in matrix H
+* The value of the training data V
 
-The taskflow is organized on the Harp side, which then delivers the tasks into DAAL's computation kernels. The DAAL sgd kernel will get the corresponding row and column from the $W$ and $H$ matrices stored in its 
+The taskflow is organized on the Harp side, which then delivers the tasks into DAAL's computation kernels. The DAAL sgd kernel will get the corresponding row and column from the W and H matrices stored in its 
 data structure, and complete the computation and updating work. 
 
 ## TBB versus Java Multithreading
@@ -47,7 +47,7 @@ Compared to the raw Java threads based parallel computing, the use of TBB has th
 
 Although DAAL with TBB could give us faster computation of operations such as vector inner product and matrix-vector multiplication, it still has some additional overhead within the Harp environment. DAAL has a different
 Data structure than Harp, so we need to convert data from Harp to DAAL, from Java side to C++ side. 
-If the computation time is not dominant in the total execution time, which is related to the dimension of $W$ and $H$, then the 
+If the computation time is not dominant in the total execution time, which is related to the dimension of W and H, then the 
 additional overhead of using DAAL will make the codes less competitive than the original pure Java based implementation. 
 Once the dimension rises, the computation becomes more intensive, and the advantages of DAAL and TBB will
 appear and outperform the original implementation on Java threads.   
