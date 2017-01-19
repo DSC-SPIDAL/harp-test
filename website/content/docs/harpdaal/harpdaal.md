@@ -1,5 +1,5 @@
 ---
-title: Harp-DAAL-APP
+title: Harp-DAAL Framework
 ---
 
 [harp3-daal-app](https://github.iu.edu/IU-Big-Data-Lab/Harp/tree/master/harp3-daal-app) includes the application implemented within the Harp-DAAL framework. 
@@ -20,11 +20,15 @@ Harp has the advantages as follows:
 * Harp has MPI-like collective communication operations that are highly optimized for big data problems.
 * Harp has efficient and innovative computation models for different machine learning problems.
 
+![Combination of Harp and DAAL](/img/harpdaal/Harp-DAAL-Structure.png)
+
 The original Harp project has all of its codes written in Java, which is a common choice within the Hadoop ecosystem. 
 The downside of the pure Java implementation is the slow speed of the computation kernels that are limited by Java's data management. 
 Since manycore architectures devices are becoming a mainstream choice for both server and personal computer market, 
 the computation kernels should also fully take advantage of the architecture's new features, which are also beyond the capability of the Java language. 
 Thus, a reasonable solution for Harp is to accomplish the computation tasks by invoking C++ based kernels from libraries such as DAAL. 
+
+![Harp-DAAL within HPC-BigData Stack](/img/harpdaal/Harp-DAAL-Diag.pdf)
 
 # Compile and Run Harp-DAAL 
 
