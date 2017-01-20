@@ -47,6 +47,8 @@ sections:
         url: /docs/examples/pushpullkmeans
       - name: regroup & allgather k-means
         url: /docs/examples/regroupallgatherkmeans
+      - name: latent dirichlet allocation
+        url: /docs/examples/latentdirichletallocation
       - name: LDA
         url: /docs/examples/lda
       - name: SVM
