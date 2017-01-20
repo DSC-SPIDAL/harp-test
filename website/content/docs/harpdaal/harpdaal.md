@@ -30,7 +30,7 @@ Thus, a reasonable solution for Harp is to accomplish the computation tasks by i
 
 ![Harp-DAAL within HPC-BigData Stack](/img/harpdaal/Harp-DAAL-Diag.pdf)
 
-# Compile and Run Harp-DAAL 
+## Compile and Run Harp-DAAL 
 
 To compile Harp-DAAL, users shall first install Intel's DAAL repository. The source code is available in their github page
 https://github.com/01org/daal
@@ -46,4 +46,46 @@ cd harp3-daal-app
 ant
 ```
 3.Create scripts to run the examples within harp3-daal-app
+
+## Interface of Harp-DAAL
+
+Harp-DAAL now provides a group of classes under the path *Harp/harp3-daal-app/src/edu/iu/daal*, which manipulates the data transfer
+between Harp's data structure and that of DAAL.
+
+* RotatorDaal: a rotator which internally converts the H matrix from Harp table to DAAL's NumericTable
+* RotateTaskDaal: the tasks executed by RotatorDaal
+* HomogenTableHarpMap: convert data between DAAL's HomogenNumericTable and Harp's map
+* HomogenTableHarpTable: convert data between DAAL's HomogenNumericTable and Harp's table
+
+Within the *RotatorDaal*, the data transfer between Harp and DAAL is also overlapped by the computation work in another pipeline. Thus, if there is enough computation workload, the 
+overhead of data conversion could be significantly reduced. It is also very straightforward to invoke these conversion tools. 
+
+```java
+
+//create a conversion class between harp map and daal's table
+HomogenTableHarpMap<double[]> convert_wTable = new HomogenTableHarpMap<double[]>(wMap, wMap_index, wMap_daal, wMap_size, r, numThreads);
+convert_wTable.HarpToDaalDouble();
+
+//create a conversion class between a harp table and a daal table
+converter = new HomogenTableHarpTable<I, P, Table<P> >(table, this.daal_table, table.getNumPartitions(), this.rdim, this.numThreads);
+converter.HarpToDaalDouble();
+
+```
+
+More details of the usage of Harp-DAAL interface can be found in examples.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
