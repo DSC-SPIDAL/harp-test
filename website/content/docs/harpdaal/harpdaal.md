@@ -28,7 +28,7 @@ Since manycore architectures devices are becoming a mainstream choice for both s
 the computation kernels should also fully take advantage of the architecture's new features, which are also beyond the capability of the Java language. 
 Thus, a reasonable solution for Harp is to accomplish the computation tasks by invoking C++ based kernels from libraries such as DAAL. 
 
-![Harp-DAAL within HPC-BigData Stack](/img/harpdaal/Harp-DAAL-Diag.pdf)
+![Harp-DAAL within HPC-BigData Stack](/img/harpdaal/Harp-DAAL-Diag.png)
 
 ## Compile and Run Harp-DAAL 
 
