@@ -49,6 +49,8 @@ sections:
         url: /docs/examples/regroupallgatherkmeans
       - name: latent dirichlet allocation
         url: /docs/examples/latentdirichletallocation
+      - name: Multiclass Logistic Regression
+        url: /docs/examples/mlrsgd
       - name: LDA
         url: /docs/examples/lda
       - name: SVM
