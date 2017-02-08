@@ -69,3 +69,5 @@ sections:
     sublinks: 
       - name: Community
         url: /docs/contributors/community
+      - name: Contributors
+        url: /docs/contributors/contributors
