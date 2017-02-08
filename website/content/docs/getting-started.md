@@ -198,7 +198,7 @@ You can browse the web interface for the NameNode at [http://localhost:50070](ht
 
 ## Step 2 --- Install Harp
 
-Download Harp3-Project. It is available at [Harp-github.iu.edu](https://github.iu.edu/IU-Big-Data-Lab/Harp3-Project).
+Download Harp3-Project. It is available at [DSC-SPIDAL/Harp](https://github.com/DSC-SPIDAL/Harp.git).
 
 We will use `ant` with Harp. Make sure you can run ant in your machine.
 

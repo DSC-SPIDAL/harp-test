@@ -55,8 +55,6 @@ sections:
         url: /docs/examples/lda
       - name: SVM
         url: /docs/examples/svm
-      - name: MLR
-        url: /docs/examples/mlr
   - name: Harp-DAAL
     sublinks:
       - name: Harp-DAAL

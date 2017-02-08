@@ -7,7 +7,7 @@ title: Community
 
 Discussion about Harp happens on GitHub and over mailing list.
 
-* GitHub: [IU-Big-Data-Lab/Harp](https://github.iu.edu/IU-Big-Data-Lab/Harp.git)
+* GitHub: [DSC-SPIDAL/Harp](https://github.com/DSC-SPIDAL/Harp.git)
 * Harp User Google Group: [harp-users@googlegroups.com](https://groups.google.com/forum/#!forum/harp-users)
 
 Community is critical to Harp. Contributions are welcomed!
