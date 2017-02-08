@@ -23,7 +23,7 @@ website/public is a submodule pointing to gh-pages branch.
 one time setup: 
 rm -rf public
 
-git submodule add https://github.iu.edu/IU-Big-Data-Lab/Harp.git public
+git submodule add https://github.com/DSC-SPIDAL/Harp.git public
 
 git submodule update --init
 
