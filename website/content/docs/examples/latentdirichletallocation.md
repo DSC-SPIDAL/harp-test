@@ -12,6 +12,4 @@ In LDA, each document may be viewed as a mixture of various topics. Where each d
 
 Harp provides two methods of calculating LDA models. In the following links, you can find the details in using these methods.
 
-* Bingjing lda
-
-* [Ethan lda](/docs/examples/ethanlda/)
+* [CVB LDA](/docs/examples/cvblda/)
