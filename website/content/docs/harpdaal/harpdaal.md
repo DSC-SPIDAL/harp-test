@@ -20,7 +20,7 @@ Compared to contemporary communication libraries, such as Hadoop and Spark, Harp
 However, the original Harp framework only supports development of Java applications, which is a common choice within the Hadoop ecosystem. 
 The downside of the pure Java implementation is the lack of support for emerging new hardware architectures such as Intel's Xeon Phi. 
 By invoking DAAL's native kernels, applications can leverage the huge number of threads on many-core platforms, which is a tremendous 
-advantages for computation-intensive data analytics algorithms. This is also the tendancy of merging HPC and Big Data domain.  
+advantages for computation-intensive data analytics algorithms. This is also the tendancy of merging HPC and Big Data domain. 
 
 ![Harp-DAAL within HPC-BigData Stack](/img/harpdaal/Harp-DAAL-Diag.png)
 
@@ -85,7 +85,7 @@ Harp-DAAL now provides a group of classes under the path *Harp/harp3-daal-app/sr
 between Harp's data structure and that of DAAL.
 
 * RotatorDaal: a rotator which internally converts the H matrix from Harp table to DAAL's NumericTable
-* RotateTaskDaal: the tasks executed by RotatorDaal
+* RotateTaskDaal: the tasks executed by RotatorDaal in the model rotation paradigm.
 * HomogenTableHarpMap: convert data between DAAL's HomogenNumericTable and Harp's map
 * HomogenTableHarpTable: convert data between DAAL's HomogenNumericTable and Harp's table
 
@@ -95,7 +95,7 @@ overhead of data conversion could be significantly reduced. It is also very stra
 ```java
 
 //create a conversion class between harp map and daal's table
-HomogenTableHarpMap<double[]> convert_wTable = new HomogenTableHarpMap<double[]>(wMap, wMap_index, wMap_daal, wMap_size, r, numThreads);
+HomogenTableHarpMap<double[]> converter = new HomogenTableHarpMap<double[]>(wMap, wMap_index, wMap_daal, wMap_size, r, numThreads);
 convert_wTable.HarpToDaalDouble();
 
 //create a conversion class between a harp table and a daal table
@@ -106,20 +106,84 @@ converter.HarpToDaalDouble();
 
 ## How to Compile and Run Harp-DAAL Application ?
 
-To compile Harp-DAAL, users shall first install Intel's DAAL repository. The source code is available in their github page
-https://github.com/01org/daal
-After installation, please follow the procedure as below:
+### Install Intel's DAAL 
 
-1.setup the DAALROOT environment in the .bashrc file
+You can either download Intel's DAAL product with licence from their website https://software.intel.com/en-us/blogs/daal, or build it from source code. DAAL's source code 
+is open-sourced and available on the GitHub. 
+
 ```bash
-export DAALROOT=/path-to-daal-src/
+
+git clone https://github.com/01org/daal.git
+
 ```
-2.Enter the harp3-daal-app directory, and build the apps
+After installation, you can run the bin/daalvars.sh script to set up all the DAAL related environment variables. 
+
 ```bash
-cd harp3-daal-app
-ant
+
+source /path-to-daal/bin/daalvars.sh intel64
+
 ```
-3.Create scripts to run the examples within harp3-daal-app
+The most important environment variable is the *DAALROOT*, which points to the path of daal's source code. You can run the examples of each algorithm within DAAL to test 
+the installation of your DAAL library. 
+
+```bash
+
+cd $DAALROOT/../__release_lnx/daal/examples/cpp
+make {libia32|soia32|libintel64|sointel64|help} [example=name] [compiler=compiler_name] [mode=mode_name] [threading=threading_name]
+
+```
+
+### Setup DAAL within Harp
+
+To use DAAL within Harp, you shall first add DAAL Java API to your Java source code
+
+```java
+
+// packages from Daal
+import com.intel.daal.services.DaalContext;
+import com.intel.daal.algorithms.*;
+import com.intel.daal.data_management.data.NumericTable;
+
+```
+
+To compile your Harp-DAAL codes by ant, add the following lines to your *build.xml*
+
+```xml
+
+<fileset dir="${env.DAALROOT}">
+<include name="**/*.jar" />
+<include name="**/lib/*.jar" />
+</fileset>
+
+```
+
+Since DAAL's Java API will invoke the native DAAL kernels, we need to load the native lib files into Harp's environment in two steps
+
+1.Load these required native libraries in HDFS
+
+```bash
+
+hdfs dfs -put ${DAALROOT}/lib/intel64_lin/libJavaAPI.so /Hadoop/Libraries/
+hdfs dfs -put ${DAALROOT}/../tbb/lib/intel64_lin/gcc4.4/libtbb* /Hadoop/Libraries/
+hdfs dfs -put ${DAALROOT}/../../daal-misc/lib/libiomp5.so /Hadoop/Libraries/
+
+```
+
+2.Load native libraries from HDFS to distributed cache of Harp's program. 
+
+```java
+
+/* Put shared libraries into the distributed cache */
+Configuration conf = this.getConf();
+DistributedCache.createSymlink(conf);
+DistributedCache.addCacheFile(new URI("/Hadoop/Libraries/libJavaAPI.so#libJavaAPI.so"), conf);
+DistributedCache.addCacheFile(new URI("/Hadoop/Libraries/libtbb.so.2#libtbb.so.2"), conf);
+DistributedCache.addCacheFile(new URI("/Hadoop/Libraries/libtbb.so#libtbb.so"), conf);
+DistributedCache.addCacheFile(new URI("/Hadoop/Libraries/libtbbmalloc.so.2#libtbbmalloc.so.2"), conf);
+DistributedCache.addCacheFile(new URI("/Hadoop/Libraries/libtbbmalloc.so#libtbbmalloc.so"), conf);
+DistributedCache.addCacheFile(new URI("/Hadoop/Libraries/libiomp5.so#libiomp5.so"), conf);
+
+```
 
 
 
