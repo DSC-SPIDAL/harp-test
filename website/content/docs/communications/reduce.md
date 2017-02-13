@@ -2,7 +2,7 @@
 title: Reduce
 ---
 
-![reduce](/img/reduce.png)
+![reduce](/img/4-2-1.png)
 
 `reduce` aims to combine tables from other workers to this worker. All workers should run it concurrently. The defination of the method is:
 ```java

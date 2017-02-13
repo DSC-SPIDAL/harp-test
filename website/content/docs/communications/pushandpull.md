@@ -2,7 +2,7 @@
 title: Push and Pull
 ---
 
-![push](/img/push.png)
+![push](/img/4-6-1.png)
 
 `push` aims to collect all workers' partitions and store them in global. All workers should run it concurrently. The defination of the method is:
 ```java
@@ -22,7 +22,7 @@ boolean push(final String contextName, final String operationName, Table<P> loca
 push(contextName, "local-global", localTable, globalTable, new Partitioner(workers.getNumWorkers()), dataMap, workers);
 ```
 
-![pull](/img/pull.png)
+![pull](/img/4-6-2.png)
 
 `pull` aims to distribute the partitions stored in global to all workers. All workers should run it concurrently. The defination of the method is:
 ```java

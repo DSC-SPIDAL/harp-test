@@ -4,7 +4,7 @@ title: Harp Features
 
  
 
-![Harp Features](/img/features.png)
+![Harp Features](/img/2-1-1.png)
  
 
 1. Hadoop 2.6.0 plugin

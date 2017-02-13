@@ -4,7 +4,7 @@ title: Static Scheduler
 
 
 
-![static-scheduler](/img/static-scheduler.png)
+![static-scheduler](/img/5-7-1.png)
 
 
 1. All computation models can use this scheduler.

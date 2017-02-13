@@ -4,7 +4,7 @@ title: Dynamic Scheduler
 
 
 
-![dynamic-scheduler](/img/dynamic-scheduler.png)
+![dynamic-scheduler](/img/5-8-1.png)
 
 
 1. All computation models can use this scheduler.

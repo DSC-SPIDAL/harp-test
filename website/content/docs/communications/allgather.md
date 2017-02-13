@@ -2,7 +2,7 @@
 title: Allgather
 ---   
 
-![allgather](/img/allgather.png)
+![allgather](/img/4-3-1.png)
 
 `allgather` aims to first collect tables from other workers and then broadcast the collection. All workers should run it concurrently. The defination of the method is:
 ```java

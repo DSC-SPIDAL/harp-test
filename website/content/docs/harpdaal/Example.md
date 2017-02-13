@@ -7,22 +7,22 @@ title: Harp-DAAL-SGD
 Matrix Factorization based on Stochastic Gradient Descent (MF-SGD for short) is an algorithm widely used in recommender systems. 
 It aims to factorize a sparse matrix into two low-rank matrices named mode W and model H as follows. 
 
-<img src="/img/harpdaal/vWH.png" width="10%" height="10%"><br>
+<img src="/img/harpdaal/7-2-1.png" width="10%" height="10%"><br>
 
 The rating Matrix V includes both training data and test data. A learning algorithm uses the training data to update matrices W and H. 
 For instance, a standard SGD procedure will update the model W and H
 while iterating over each training data point, i.e., an entry in matrix V in the following formula. 
 
-<img src="/img/harpdaal/error-compute.png" width="25%" height="25%"><br>
+<img src="/img/harpdaal/7-2-2.png" width="25%" height="25%"><br>
 
-<img src="/img/harpdaal/update-W.png" width="40%" height="40%"><br>
+<img src="/img/harpdaal/7-2-3.png" width="40%" height="40%"><br>
 
-<img src="/img/harpdaal/update-H.png" width="40%" height="40%"><br>
+<img src="/img/harpdaal/7-2-4.png" width="40%" height="40%"><br>
 
 After the training process, the test data points in matrix V could be used to verify the effectiveness of the training matrix by computing the RMSE values of 
 the difference 
 
-<img src="/img/harpdaal/error-compute.png" width="25%" height="25%"><br>
+<img src="/img/harpdaal/7-2-2.png" width="25%" height="25%"><br>
 
 ## Implementation of SGD within Harp-DAAL Framework
 

@@ -4,7 +4,7 @@ title: Allreduce
 
 
 
-![allreduce](/img/allreduce.png)
+![allreduce](/img/4-4-1.png)
 
 `allreduce` aims to first combine tables from other workers and then broadcast the accumulated table. All workers should run it concurrently. The defination of the method is:
 ```java

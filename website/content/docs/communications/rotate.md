@@ -2,7 +2,7 @@
 title: Rotate
 ---
 
-![rotate](/img/rotate.png)
+![rotate](/img/4-7-1.png)
 
 `rotate` aims to swap tables among workers. If `rotateMap` isn't specified, the `i`th worker will get `(i + n - 1) % n`th worker's table and send its table to `(i + 1) % n`th worker. All workers should run it concurrently. The defination of the method is:
 ```java

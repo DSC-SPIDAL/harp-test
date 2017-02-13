@@ -2,7 +2,7 @@
 title: Data Interfaces and Types
 ---   
 
-![data-abstraction](/img/data-abstraction.png)
+![data-abstraction](/img/3-1-1.png)
 
 Harp provides three levels of data structures: arrays and objects, partition, and table. Arrays and Serializable objects are the basic data structures, which includes:
 
@@ -26,7 +26,7 @@ Harp provides three levels of data structures: arrays and objects, partition, an
 
 
 # Table and Partitions
-![table-partition](/img/table-partition.png)
+![table-partition](/img/3-1-2.png)
 
 An example of how to construct a table is as follows.
 
@@ -57,7 +57,7 @@ public class DoubleArrPlus extends PartitionCombiner<DoubleArray> {
 
 # Data Abstraction
 
-![data-types](/img/data-types.png)
+![data-types](/img/3-1-3.png)
 
 The data abstraction is shown above. `Transferable` is the highest interface of all data structures and `Simple` is the sub-interface for all primitive data structures. Here is an example of the primitive data strucutres.
 ```java

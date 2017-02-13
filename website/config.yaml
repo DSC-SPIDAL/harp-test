@@ -26,8 +26,8 @@ params:
       small: /img/favicon-16x9.png
       large: /img/favicon-32x18.png
     logo: /img/logo54x54.png #logo.png
-    textlogo: /img/HarpTextLogo.png #logo.png
-    textLogoSmall: /img/HarpTextLogo-small.png #logo.png
+    textlogo: /img/0-1-1.png #logo.png
+    textLogoSmall: /img/0-1-2.png #logo.png
     css:
       - /css/style.min.css
       - /css/font-awesome.min.css
