@@ -1,18 +1,20 @@
 sections:
-  - name: Getting Started
+  - name: Quick Start
     sublinks:
-      - name: Harp Installation
+      - name: Harp Installation (single)
         url: /docs/getting-started
-  - name: Harp Concepts
-    sublinks: 
-      - name: Features
-        url: /docs/concepts/features
-      - name: Computation Models
-        url: /docs/concepts/computation-models
-  - name: Data Interfaces and Types
+      - name: Harp Installation (cluster)
+        url: /docs/getting-started-cluster
+  - name: Programming Guides
     sublinks:
+      - name: Overview
+        url: /docs/programming/overview
       - name: Data Interfaces and Types
-        url: /docs/data-interface
+        url: /docs/programming/data-interface
+      - name: Schedulers
+        url: /docs/programming/scheduler
+      - name: Computation Models
+        url: /docs/programming/computation-models
   - name: Collective Communication
     sublinks:
       - name: broadcast
@@ -29,32 +31,24 @@ sections:
         url: /docs/communications/pushandpull
       - name: rotate
         url: /docs/communications/rotate
-  - name: Schedulers
-    sublinks:
-      - name: Static Scheduler
-        url: /docs/scheduler/static-scheduler
-      - name: Dynamic Scheduler
-        url: /docs/scheduler/dynamic-scheduler
   - name: Examples
     sublinks:
-      - name: k-means
+      - name: K-Means
         url: /docs/examples/kmeans
-      - name: allreduce k-means
-        url: /docs/examples/allreducekmeans
-      - name: broadcast & reduce k-means
-        url: /docs/examples/bcastreducekmeans
-      - name: push & pull k-means
-        url: /docs/examples/pushpullkmeans
-      - name: regroup & allgather k-means
-        url: /docs/examples/regroupallgatherkmeans
-      - name: latent dirichlet allocation
-        url: /docs/examples/latentdirichletallocation
       - name: Multiclass Logistic Regression
         url: /docs/examples/mlrsgd
-      - name: LDA
+      - name: Latent Dirichlet Allocation (CVB)
         url: /docs/examples/lda
-      - name: SVM
+      - name: Support Vector Machine
         url: /docs/examples/svm
+      - name: Random Forests
+        url: /docs/examples/rf
+  - name: Applications
+    sublinks:
+      - name: Latent Dirichlet Allocation (CGS)
+        url: /docs/applications/lda-cgs
+      - name: Matrix Factorization
+        url: /docs/applications/mf
   - name: Harp-DAAL
     sublinks:
       - name: Harp-DAAL
