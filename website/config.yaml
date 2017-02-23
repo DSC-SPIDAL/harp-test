@@ -2,7 +2,7 @@ languageCode: en-us
 title: harp
 author: Bingjing Zhang
 canonifyurls: true
-baseurl: "https://dsc-spidal.github.io/harp/"
+baseurl: "https://dsc-spidal.github.io/harp-test/"
 
 # Site-level config
 metadataformat: yaml
@@ -37,9 +37,9 @@ params:
       - /js/app.min.js
   tagline: A collective communication library plugined into Hadoop from Indiana University
   github:
-    home: https://github.com/DSC-SPIDAL/harp/
-    master: https://github.com/DSC-SPIDAL/harp/tree/master
-    issues: https://github.com/DSC-SPIDAL/harp/issues
+    home: https://github.com/DSC-SPIDAL/harp-test/
+    master: https://github.com/DSC-SPIDAL/harp-test/tree/master
+    issues: https://github.com/DSC-SPIDAL/harp-test/issues
   social:
     googleGroup: https://groups.google.com/forum/#!forum/harp-users
   seo:
