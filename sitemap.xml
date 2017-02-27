@@ -35,10 +35,6 @@
   </url>
   
   <url>
-    <loc>https://dsc-spidal.github.io/harp-test/docs/examples/cvblda/</loc>
-  </url>
-  
-  <url>
     <loc>https://dsc-spidal.github.io/harp-test/docs/examples/mlrsgd/</loc>
   </url>
   
@@ -72,10 +68,6 @@
   
   <url>
     <loc>https://dsc-spidal.github.io/harp-test/docs/examples/kmeans/</loc>
-  </url>
-  
-  <url>
-    <loc>https://dsc-spidal.github.io/harp-test/docs/examples/latentdirichletallocation/</loc>
   </url>
   
   <url>
