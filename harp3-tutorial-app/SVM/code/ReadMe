@@ -1,9 +1,0 @@
-1. put the two folders under /harp3-project/harp3-app/src/
-2. open build.xml and add
-	<include name=“edu/iu/svm/**” />
-	<include name=“libsvm/**” />
-3. use ant to compile harp3-app
-4. use command to run the code
-	hadoop jar build/harp3-app-hadoop-2.6.0.jar edu.iu.svm.IterativeSVM <number of mappers> <number of iteration> <output path in HDFS> <data set path>
-5. use command to download output
-	hdfs dfs -get <output path in HDFS> <path you want to store the output>

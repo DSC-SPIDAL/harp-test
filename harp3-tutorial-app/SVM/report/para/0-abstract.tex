@@ -1,4 +1,0 @@
-\begin{abstract}
-Support vector machines(SVM) are supervised learning models with associated learning algorithms that analyze data used for classification and regression analysis. Harp is good for SVM implementation but it needs to overcome synchronizing the global support vectors. In our experiment, we work on the Iterative SVM version implemented on Hadoop. In each iteration, each machine computes the support vectors and does an all-reduce to collective the whole global support vector set and treat it as the extra training data. From the result we can see that with larger number of mappers, the number of support vectors has greater gradient decent. Less iterations are needed to reach the final result which however remains the same. The speed up time of Hadoop-SVM and Harp-SVM both has an logit-linear acceleration along with the number of mappers. Harp performance is better than Hadoop since it reduces I/Os of communication.
-
-\end{abstract}
