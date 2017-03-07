@@ -43,6 +43,17 @@ html lang={{.Site.LanguageCode}}
 
           .hn-twitter-feed.hidden-xs.col-sm-3.col-md-3.col-lg-3
             {{partial "index/feed.html" .}}
+        .row
+          .col-xs-12.col-sm-9.col-md-9.col-lg-12
+            .landing-feature-2.text-left
+              .row
+                .col-sm-2
+                  h4 test1
+                  a href=docs/programming/overview/ Overview
+                .col-sm-2
+                  h4 test2
+                .col-sm-2
+                  h4 test3
 
       {{partial "footer.html" .}}
    
