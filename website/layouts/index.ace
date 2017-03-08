@@ -10,9 +10,8 @@ html lang={{.Site.LanguageCode}}
       {{partial "navbar.html" .}}
       .container-fluid
         .row
+          img.hn-jumbotron-logo.center-block src={{.Site.Params.assets.textlogo}} width="100%"
           .hn-jumbotron.jumbotron.text-center
-            .row
-              img.hn-jumbotron-logo.center-block src={{.Site.Params.assets.textlogo}}
             .row
               p.hn-tagline {{.Site.Params.tagline}}
             .hn-button-row.row
