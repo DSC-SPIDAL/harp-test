@@ -15,9 +15,9 @@ $gray-light:             lighten($gray-base, 46.7%) !default; // #777
 $gray-lighter:           lighten($gray-base, 93.5%) !default; // #eee
 
 // Heron-specific colors
-$heron-blue-green:      #4F8992;
+$heron-blue-green:      #3976CC;
 $light-gray:            #9d9d9d;
-$heron-blue-gray:       #dddddd;
+$heron-blue-gray:       #F9F9F9;
 
 $brand-primary:         $heron-blue-green !default;
 $brand-success:         #5cb85c !default;
@@ -153,7 +153,7 @@ $table-border-color:            #ddd !default;
 
 $btn-font-weight:                normal !default;
 
-$heron-blue-green: #4F8992;
+$heron-blue-green: #3976CC;
 
 $btn-default-bg:                 $heron-blue-green !default;
 $btn-default-color:              #fff !default;
