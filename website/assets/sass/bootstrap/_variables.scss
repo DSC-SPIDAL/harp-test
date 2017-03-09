@@ -19,6 +19,7 @@ $heron-blue-green:      #3976CC;
 $light-gray:            #9d9d9d;
 $heron-blue-gray:       #F9F9F9;
 $harp-dark-blue:		#03254E;
+$harp-middle-grey:		#f1eff0;
 
 $brand-primary:         $heron-blue-green !default;
 $brand-success:         #5cb85c !default;
@@ -383,7 +384,7 @@ $navbar-default-border:            darken($navbar-default-bg, 6.5%) !default;
 // Navbar links
 $navbar-default-link-color:                #777 !default;
 $navbar-default-link-hover-color:          #333 !default;
-$navbar-default-link-hover-bg:             transparent !default;
+$navbar-default-link-hover-bg:             #222 !default;
 $navbar-default-link-active-color:         #555 !default;
 $navbar-default-link-active-bg:            darken($navbar-default-bg, 6.5%) !default;
 $navbar-default-link-disabled-color:       #ccc !default;
@@ -392,7 +393,7 @@ $navbar-default-link-disabled-bg:          transparent !default;
 // Navbar brand label
 $navbar-default-brand-color:               $navbar-default-link-color !default;
 $navbar-default-brand-hover-color:         darken($navbar-default-brand-color, 10%) !default;
-$navbar-default-brand-hover-bg:            transparent !default;
+$navbar-default-brand-hover-bg:            #222 !default;
 
 // Navbar toggle
 $navbar-default-toggle-hover-bg:           #ddd !default;
@@ -409,7 +410,7 @@ $navbar-inverse-border:                     darken($navbar-inverse-bg, 10%) !def
 // Inverted navbar links
 $navbar-inverse-link-color:                 lighten($gray-light, 15%) !default;
 $navbar-inverse-link-hover-color:           #fff !default;
-$navbar-inverse-link-hover-bg:              transparent !default;
+$navbar-inverse-link-hover-bg:              #222 !default;
 $navbar-inverse-link-active-color:          $navbar-inverse-link-hover-color !default;
 $navbar-inverse-link-active-bg:             darken($navbar-inverse-bg, 10%) !default;
 $navbar-inverse-link-disabled-color:        #444 !default;
@@ -418,7 +419,7 @@ $navbar-inverse-link-disabled-bg:           transparent !default;
 // Inverted navbar brand label
 $navbar-inverse-brand-color:                $navbar-inverse-link-color !default;
 $navbar-inverse-brand-hover-color:          #fff !default;
-$navbar-inverse-brand-hover-bg:             transparent !default;
+$navbar-inverse-brand-hover-bg:             #222 !default;
 
 // Inverted navbar toggle
 $navbar-inverse-toggle-hover-bg:            #333 !default;
@@ -432,7 +433,7 @@ $navbar-inverse-toggle-border-color:        #333 !default;
 
 //=== Shared nav styles
 $nav-link-padding:                          10px 15px !default;
-$nav-link-hover-bg:                         $gray-lighter !default;
+$nav-link-hover-bg:                         $gray-darker !default;
 
 $nav-disabled-link-color:                   $gray-light !default;
 $nav-disabled-link-hover-color:             $gray-light !default;
@@ -440,7 +441,7 @@ $nav-disabled-link-hover-color:             $gray-light !default;
 //== Tabs
 $nav-tabs-border-color:                     #ddd !default;
 
-$nav-tabs-link-hover-border-color:          $gray-lighter !default;
+$nav-tabs-link-hover-border-color:          $gray-darker !default;
 
 $nav-tabs-active-link-hover-bg:             $body-bg !default;
 $nav-tabs-active-link-hover-color:          $gray !default;
@@ -464,7 +465,7 @@ $pagination-bg:                        #fff !default;
 $pagination-border:                    #ddd !default;
 
 $pagination-hover-color:               $link-hover-color !default;
-$pagination-hover-bg:                  $gray-lighter !default;
+$pagination-hover-bg:                  $gray-darker !default;
 $pagination-hover-border:              #ddd !default;
 
 $pagination-active-color:              #fff !default;
@@ -498,7 +499,7 @@ $pager-disabled-color:                 $pagination-disabled-color !default;
 
 $jumbotron-padding:              30px !default;
 $jumbotron-color:                inherit !default;
-$jumbotron-bg:                   $gray-lighter !default;
+$jumbotron-bg:                   $gray-darker !default;
 $jumbotron-heading-color:        inherit !default;
 $jumbotron-font-size:            ceil(($font-size-base * 1.5)) !default;
 $jumbotron-heading-font-size:    ceil(($font-size-base * 4.5)) !default;

@@ -42,15 +42,14 @@ html lang={{.Site.LanguageCode}}
 
           .hn-twitter-feed.hidden-xs.col-sm-3.col-md-3.col-lg-3
             {{partial "index/feed.html" .}}
-
-        .row.hn-jumbotron
+        .row.hp-examples
           .col-xs-12.col-sm-9.col-md-9.col-lg-12
             .landing-narrow.center-block.text-center
               p &nbsp
               br
               h2 Examples
               br
-              .col-sm-4.hn-jumbotron
+              .col-sm-4
                 a href=docs/examples/lda/
                   img src={{.Site.Params.assets.tilelda}} width="85%"
                 br
@@ -61,7 +60,7 @@ html lang={{.Site.LanguageCode}}
                 br
                 p &nbsp
                 br
-              .col-sm-4.hn-jumbotron
+              .col-sm-4
                 a href=docs/examples/kmeans/
                   img src={{.Site.Params.assets.tilekm}} width="85%"
                 br
@@ -69,7 +68,10 @@ html lang={{.Site.LanguageCode}}
                 br
                 a href=docs/examples/svm/
                   img src={{.Site.Params.assets.tilesvm}} width="85%"
-              .col-sm-4.hn-jumbotron
+                br
+                p &nbsp
+                br
+              .col-sm-4
                 a href=docs/examples/mlrsgd/
                   img src={{.Site.Params.assets.tilemlr}} width="85%"
                 br
@@ -77,19 +79,18 @@ html lang={{.Site.LanguageCode}}
                 br
                 a href=docs/examples/nn/
                   img src={{.Site.Params.assets.tilenn}} width="85%"
-
+                br
+                p &nbsp
+                br
+    .hn-footer
+      .container-fluid
         .row
           .col-xs-12.col-sm-9.col-md-9.col-lg-12
-            .landing-feature-2.text-left
+            .landing-narrow.text-left
               p &nbsp
               br
               .row
-                .col-sm-1
-                  h4 Quick Start
-                  a href=docs/getting-started/ Harp Installation (single)
-                  br
-                  a href=docs/getting-started-cluster/ Harp Installation (cluster)
-                .col-sm-1
+                .col-sm-2
                   h4 Programming Guides
                   a href=docs/programming/overview/ Overview
                   br
@@ -98,7 +99,7 @@ html lang={{.Site.LanguageCode}}
                   a href=docs/programming/scheduler/ Schedulers
                   br
                   a href=docs/programming/computation-models/ Computation Models
-                .col-sm-1
+                .col-sm-2
                   h4 Collective Communication
                   a href=docs/communications/broadcast/ broadcast
                   br
@@ -113,7 +114,7 @@ html lang={{.Site.LanguageCode}}
                   a href=docs/communications/pushandpull/ push & pull
                   br
                   a href=docs/communications/rotate/ rotate
-                .col-sm-1
+                .col-sm-2
                   h4 Examples
                   a href=docs/examples/kmeans/ K-Means
                   br
@@ -124,26 +125,24 @@ html lang={{.Site.LanguageCode}}
                   a href=docs/examples/svm/ Support Vector Machine
                   br
                   a href=docs/examples/rf/ Random Forests
-                .col-sm-1
+                .col-sm-2
                   h4 Applications
                   a href=docs/applications/lda-cgs/ Latent Dirichlet Allocation (CGS)
                   br
                   a href=docs/applications/mf/ Matrix Factorization
-                .col-sm-1
+                .col-sm-2
                   h4 Harp-DAAL
                   a href=docs/harpdaal/harpdaal/ Harp-DAAL
                   br
                   a href=docs/harpdaal/Example/ example
-                .col-sm-1
-                  h4 Harp Resources
-                  a href=docs/resources/ Harp Resources
-                .col-sm-1
+                .col-sm-2
                   h4 Contributors
                   a href=docs/contributors/community/ Community
                   br
                   a href=docs/contributors/contributors/ Contributors
+        .row.text-center
+          p {{.Now.Year}} Indiana Universty
 
-      {{partial "footer.html" .}}
    
       {{partial "index/google-analytics.html" .}}
 
