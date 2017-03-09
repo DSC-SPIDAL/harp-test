@@ -15,7 +15,7 @@ html lang={{.Site.LanguageCode}}
             .row
               p.hn-tagline {{.Site.Params.tagline}}
             .hn-button-row.row
-              a.btn.btn-default href=docs/getting-started Get Started
+              a.btn.btn-default href=docs/getting-started Get Started  
         .row
           .col-xs-12.col-sm-9.col-md-9.col-lg-12
             .landing-feature-2.text-center
@@ -43,43 +43,105 @@ html lang={{.Site.LanguageCode}}
           .hn-twitter-feed.hidden-xs.col-sm-3.col-md-3.col-lg-3
             {{partial "index/feed.html" .}}
 
-        .row
+        .row.hn-jumbotron
           .col-xs-12.col-sm-9.col-md-9.col-lg-12
-            .landing-feature-2.text-center
+            .landing-narrow.center-block.text-center
+              p &nbsp
+              br
               h2 Examples
               br
-              .col-sm-4
+              .col-sm-4.hn-jumbotron
                 a href=docs/examples/lda/
-                  img src={{.Site.Params.assets.tilelda}} width="100%"
-              .col-sm-4
-                a href=docs/examples/kmeans/
-                  img src={{.Site.Params.assets.tilekm}} width="100%"
-              .col-sm-4
-                a href=docs/examples/mlrsgd/
-                  img src={{.Site.Params.assets.tilemlr}} width="100%"
-              br
-              .col-sm-4
+                  img src={{.Site.Params.assets.tilelda}} width="85%"
+                br
+                p &nbsp
+                br
                 a href=docs/examples/rf/
-                  img src={{.Site.Params.assets.tilerf}} width="100%"
-              .col-sm-4
+                  img src={{.Site.Params.assets.tilerf}} width="85%"
+                br
+                p &nbsp
+                br
+              .col-sm-4.hn-jumbotron
+                a href=docs/examples/kmeans/
+                  img src={{.Site.Params.assets.tilekm}} width="85%"
+                br
+                p &nbsp
+                br
                 a href=docs/examples/svm/
-                  img src={{.Site.Params.assets.tilesvm}} width="100%"
-              .col-sm-4
+                  img src={{.Site.Params.assets.tilesvm}} width="85%"
+              .col-sm-4.hn-jumbotron
+                a href=docs/examples/mlrsgd/
+                  img src={{.Site.Params.assets.tilemlr}} width="85%"
+                br
+                p &nbsp
+                br
                 a href=docs/examples/nn/
-                  img src={{.Site.Params.assets.tilenn}} width="100%"
-
+                  img src={{.Site.Params.assets.tilenn}} width="85%"
 
         .row
           .col-xs-12.col-sm-9.col-md-9.col-lg-12
             .landing-feature-2.text-left
+              p &nbsp
+              br
               .row
-                .col-sm-2
-                  h4 test1
+                .col-sm-1
+                  h4 Quick Start
+                  a href=docs/getting-started/ Harp Installation (single)
+                  br
+                  a href=docs/getting-started-cluster/ Harp Installation (cluster)
+                .col-sm-1
+                  h4 Programming Guides
                   a href=docs/programming/overview/ Overview
-                .col-sm-2
-                  h4 test2
-                .col-sm-2
-                  h4 test3
+                  br
+                  a href=docs/programming/data-interface/ Data Interfaces and Types
+                  br
+                  a href=docs/programming/scheduler/ Schedulers
+                  br
+                  a href=docs/programming/computation-models/ Computation Models
+                .col-sm-1
+                  h4 Collective Communication
+                  a href=docs/communications/broadcast/ broadcast
+                  br
+                  a href=docs/communications/reduce/ reduce
+                  br
+                  a href=docs/communications/allgather/ allgather
+                  br
+                  a href=docs/communications/allreduce/ allreduce
+                  br
+                  a href=docs/communications/regroup/ regroup
+                  br
+                  a href=docs/communications/pushandpull/ push & pull
+                  br
+                  a href=docs/communications/rotate/ rotate
+                .col-sm-1
+                  h4 Examples
+                  a href=docs/examples/kmeans/ K-Means
+                  br
+                  a href=docs/examples/mlrsgd/ Multiclass Logistic Regression
+                  br
+                  a href=docs/examples/lda/ Latent Dirichlet Allocation (CVB)
+                  br
+                  a href=docs/examples/svm/ Support Vector Machine
+                  br
+                  a href=docs/examples/rf/ Random Forests
+                .col-sm-1
+                  h4 Applications
+                  a href=docs/applications/lda-cgs/ Latent Dirichlet Allocation (CGS)
+                  br
+                  a href=docs/applications/mf/ Matrix Factorization
+                .col-sm-1
+                  h4 Harp-DAAL
+                  a href=docs/harpdaal/harpdaal/ Harp-DAAL
+                  br
+                  a href=docs/harpdaal/Example/ example
+                .col-sm-1
+                  h4 Harp Resources
+                  a href=docs/resources/ Harp Resources
+                .col-sm-1
+                  h4 Contributors
+                  a href=docs/contributors/community/ Community
+                  br
+                  a href=docs/contributors/contributors/ Contributors
 
       {{partial "footer.html" .}}
    
