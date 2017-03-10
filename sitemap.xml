@@ -31,11 +31,19 @@
   </url>
   
   <url>
+    <loc>https://dsc-spidal.github.io/harp-test/docs/examples/overview/</loc>
+  </url>
+  
+  <url>
     <loc>https://dsc-spidal.github.io/harp-test/docs/programming/computation-models/</loc>
   </url>
   
   <url>
     <loc>https://dsc-spidal.github.io/harp-test/docs/examples/mlrsgd/</loc>
+  </url>
+  
+  <url>
+    <loc>https://dsc-spidal.github.io/harp-test/docs/examples/nn/</loc>
   </url>
   
   <url>
