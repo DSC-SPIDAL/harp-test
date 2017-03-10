@@ -19,7 +19,7 @@ html lang={{.Site.LanguageCode}}
         .row
           .col-xs-12.col-sm-12.col-md-12.col-lg-12
             .landing-feature-2.text-center
-              h2 Why Harp?
+              h1 Why Harp?
               br
               .row
                 .col-sm-6
@@ -47,7 +47,7 @@ html lang={{.Site.LanguageCode}}
             .landing-narrow.center-block.text-center
               p &nbsp
               br
-              h2 Examples
+              h1 Examples
               br
               .col-sm-4
                 a href=docs/examples/lda/

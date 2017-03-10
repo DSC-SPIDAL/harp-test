@@ -14,7 +14,7 @@ div[class^="landing-feature"] {
     max-height: 200px;
 
     .panel-heading {
-      font-size: 16px;
+      font-size: 24px;
     }
   }
 }
@@ -85,8 +85,8 @@ a:hover {
   }
 
   p.hn-tagline {
-    font-size: 20px;
-    color: $light-gray;
+    font-size: 24px;
+    color: #333;
   }
 
   .hn-button-row .btn {
