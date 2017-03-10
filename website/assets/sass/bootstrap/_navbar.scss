@@ -417,7 +417,7 @@
 
       &:hover,
       &:focus {
-        color: $navbar-default-link-hover-color;
+        color: #333;
         background-color: $navbar-default-link-hover-bg;
       }
     }
@@ -425,7 +425,7 @@
       &,
       &:hover,
       &:focus {
-        color: $navbar-default-link-active-color;
+        color: #333;
         background-color: $navbar-default-link-active-bg;
       }
     }
@@ -433,7 +433,7 @@
       &,
       &:hover,
       &:focus {
-        color: $navbar-default-link-disabled-color;
+        color: #333;
         background-color: $navbar-default-link-disabled-bg;
       }
     }
@@ -463,7 +463,7 @@
       &:hover,
       &:focus {
         background-color: $navbar-default-link-active-bg;
-        color: $navbar-default-link-active-color;
+        color: #333;
       }
     }
 
