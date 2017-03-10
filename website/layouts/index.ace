@@ -141,7 +141,7 @@ html lang={{.Site.LanguageCode}}
                   br
                   a href=docs/contributors/contributors/ Contributors
         .row.text-center
-          p {{.Now.Year}} Indiana Universty
+          p Copyright © {{.Now.Year}} Indiana Universty
 
    
       {{partial "index/google-analytics.html" .}}
