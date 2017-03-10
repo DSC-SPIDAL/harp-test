@@ -125,6 +125,8 @@ html lang={{.Site.LanguageCode}}
                   a href=docs/examples/svm/ Support Vector Machine
                   br
                   a href=docs/examples/rf/ Random Forests
+                  br
+                  a href=docs/examples/nn/ Neural Network
                 .col-sm-2
                   h4 Applications
                   a href=docs/applications/lda-cgs/ Latent Dirichlet Allocation (CGS)
