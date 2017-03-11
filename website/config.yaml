@@ -12,7 +12,7 @@ taxonomies:
 
 # Pygments syntax highlighting
 pygmentsstyle: monokai
-pygmentsuseclasses: false
+pygmentsuseclasses: true
 pygmentscodefences: true
 
 # Site-level parameters available through .Site.Params.{key}
