@@ -32,12 +32,12 @@ other workers, the code of a parallel machine learning algorithm can be modulari
 <h3 id="data-format">Data Format</h3>
 
 <p>The format for the data should be a list of <code>doc-name  wordid1 wordid2 ...&gt;</code>. For example,</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>doc1   <span style="color: #ae81ff">63</span> <span style="color: #ae81ff">264</span> <span style="color: #ae81ff">374</span> <span style="color: #ae81ff">4695</span> <span style="color: #ae81ff">5441</span>  <span style="color: #ae81ff">1200</span> <span style="color: #ae81ff">1200</span> <span style="color: #ae81ff">25529</span>  1707
-doc2   <span style="color: #ae81ff">545</span> <span style="color: #ae81ff">1939</span> <span style="color: #ae81ff">206863</span> <span style="color: #ae81ff">773279</span> 773279
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span>doc1   <span class="m">63</span> <span class="m">264</span> <span class="m">374</span> <span class="m">4695</span> <span class="m">5441</span>  <span class="m">1200</span> <span class="m">1200</span> <span class="m">25529</span>  <span class="m">1707</span>
+doc2   <span class="m">545</span> <span class="m">1939</span> <span class="m">206863</span> <span class="m">773279</span> <span class="m">773279</span>
 ...
-</pre></div>
+</code></pre></div>
 
 <h2 id="usage">Usage</h2>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>hadoop jar harp-app-1.0-SNAPSHOT.jar  edu.iu.lda.LDALauncher &lt;doc dir&gt; &lt;num of topics&gt; &lt;alpha&gt; &lt;beta&gt; &lt;num of iterations&gt; &lt;num of map tasks&gt; &lt;num of threads per worker&gt; &lt;timer&gt; &lt;num of model slices&gt; &lt;<span style="color: #f8f8f2">enable</span> timer tuning&gt; &lt;work dir&gt; &lt;print model&gt;
-</pre></div>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span>hadoop jar harp-app-1.0-SNAPSHOT.jar  edu.iu.lda.LDALauncher &lt;doc dir&gt; &lt;num of topics&gt; &lt;alpha&gt; &lt;beta&gt; &lt;num of iterations&gt; &lt;num of map tasks&gt; &lt;num of threads per worker&gt; &lt;timer&gt; &lt;num of model slices&gt; &lt;<span class="nb">enable</span> timer tuning&gt; &lt;work dir&gt; &lt;print model&gt;
+</code></pre></div>
 </article></section></div></div></div><script src="https://code.jquery.com/jquery-2.2.1.min.js"></script><script src="https://dsc-spidal.github.io/harp-test/js/app.min.js"></script></body></html>

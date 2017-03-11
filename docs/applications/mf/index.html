@@ -46,20 +46,20 @@ other workers, the code of a parallel machine learning algorithm can be modulari
 <h3 id="data-format">Data Format</h3>
 
 <p>The format for the data should be a list of <code>&lt;number of row, number of column, value&gt;</code>. For example,</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #ae81ff">1</span>    <span style="color: #ae81ff">4026</span>    3.299341
-<span style="color: #ae81ff">1</span>    <span style="color: #ae81ff">5990</span>    7.005311
-<span style="color: #ae81ff">2</span>    <span style="color: #ae81ff">5988</span>    13.235623
-<span style="color: #ae81ff">2</span>    <span style="color: #ae81ff">346</span>    3.518781
-<span style="color: #ae81ff">3</span>    <span style="color: #ae81ff">347</span>    2.846904
-</pre></div>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span><span class="m">1</span>    <span class="m">4026</span>    <span class="m">3</span>.299341
+<span class="m">1</span>    <span class="m">5990</span>    <span class="m">7</span>.005311
+<span class="m">2</span>    <span class="m">5988</span>    <span class="m">13</span>.235623
+<span class="m">2</span>    <span class="m">346</span>    <span class="m">3</span>.518781
+<span class="m">3</span>    <span class="m">347</span>    <span class="m">2</span>.846904
+</code></pre></div>
 
 <h2 id="usage">Usage</h2>
 
 <h3 id="sgd">SGD</h3>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>hadoop jar harp-app-1.0-SNAPSHOT.jar edu.iu.sgd.SGDLauncher &lt;input dir&gt; &lt;r&gt; &lt;lambda&gt; &lt;epsilon&gt; &lt;num of iterations&gt; &lt;num of map tasks&gt; &lt;num of threads per worker&gt; &lt;timer&gt; &lt;num of model slices&gt; &lt;timer tuning&gt; &lt;work dir&gt; &lt;<span style="color: #f8f8f2">test</span> dir&gt;
-</pre></div>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span>hadoop jar harp-app-1.0-SNAPSHOT.jar edu.iu.sgd.SGDLauncher &lt;input dir&gt; &lt;r&gt; &lt;lambda&gt; &lt;epsilon&gt; &lt;num of iterations&gt; &lt;num of map tasks&gt; &lt;num of threads per worker&gt; &lt;timer&gt; &lt;num of model slices&gt; &lt;timer tuning&gt; &lt;work dir&gt; &lt;<span class="nb">test</span> dir&gt;
+</code></pre></div>
 
 <h3 id="ccd">CCD</h3>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>hadoop jar harp-app-1.0-SNAPSHOT.jar edu.iu.ccd.CCDLauncher &lt;input dir&gt; &lt;r&gt; &lt;lambda&gt; &lt;num of iterations&gt; &lt;num of map tasks&gt; &lt;num of threads per worker&gt; &lt;num of model slices&gt; &lt;work dir&gt; &lt;<span style="color: #f8f8f2">test</span> dir&gt;
-</pre></div>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span>hadoop jar harp-app-1.0-SNAPSHOT.jar edu.iu.ccd.CCDLauncher &lt;input dir&gt; &lt;r&gt; &lt;lambda&gt; &lt;num of iterations&gt; &lt;num of map tasks&gt; &lt;num of threads per worker&gt; &lt;num of model slices&gt; &lt;work dir&gt; &lt;<span class="nb">test</span> dir&gt;
+</code></pre></div>
 </article></section></div></div></div><script src="https://code.jquery.com/jquery-2.2.1.min.js"></script><script src="https://dsc-spidal.github.io/harp-test/js/app.min.js"></script></body></html>
