@@ -675,6 +675,8 @@ Usage: NNMapCollective &amp;lt;number of map tasks&amp;gt; &amp;lt;epochs&amp;gt
       <guid>https://dsc-spidal.github.io/harp-test/docs/programming/overview/</guid>
       <description>
 
+&lt;p&gt;&lt;img src=&#34;https://dsc-spidal.github.io/harp-test/img/harp-overview.png&#34; alt=&#34;Overview-0&#34; /&gt;&lt;/p&gt;
+
 &lt;h2 id=&#34;big-model-problems-and-the-limitation-of-existing-tools&#34;&gt;Big Model Problems and The Limitation of Existing Tools:&lt;/h2&gt;
 
 &lt;p&gt;Data analytics is undergoing a revolution in many scientific domains. Machine learning becomes a popular method for analytics for which it allows computers to learn from the existing data and make predictions based off it. They have been widely used in computer vision, text mining, advertising, recommender systems, network analysis and genetics. Unfortunately, analyzing such huge data usually exceeds the capability of a single or even a few machines owing to the incredible volume of data available, and thus requires algorithm parallelization at an unprecedented scale. Scaling up these algorithms is challenging because of their prohibitive computation cost, not only the need to process enormous training data in iterations, but also the requirement to synchronize big model in rounds for algorithm convergence. The problem is simply referred as &amp;ldquo;the big model problem of big data machine learning&amp;rdquo;.&lt;/p&gt;
