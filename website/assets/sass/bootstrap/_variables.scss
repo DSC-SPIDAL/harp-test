@@ -433,7 +433,7 @@ $navbar-inverse-toggle-border-color:        #333 !default;
 
 //=== Shared nav styles
 $nav-link-padding:                          10px 15px !default;
-$nav-link-hover-bg:                         $gray-darker !default;
+$nav-link-hover-bg:                         $gray-lighter !default;
 
 $nav-disabled-link-color:                   $gray-light !default;
 $nav-disabled-link-hover-color:             $gray-light !default;
@@ -441,7 +441,7 @@ $nav-disabled-link-hover-color:             $gray-light !default;
 //== Tabs
 $nav-tabs-border-color:                     #ddd !default;
 
-$nav-tabs-link-hover-border-color:          $gray-darker !default;
+$nav-tabs-link-hover-border-color:          $gray-lighter !default;
 
 $nav-tabs-active-link-hover-bg:             $body-bg !default;
 $nav-tabs-active-link-hover-color:          $gray !default;
@@ -465,7 +465,7 @@ $pagination-bg:                        #fff !default;
 $pagination-border:                    #ddd !default;
 
 $pagination-hover-color:               $link-hover-color !default;
-$pagination-hover-bg:                  $gray-darker !default;
+$pagination-hover-bg:                  $gray-lighter !default;
 $pagination-hover-border:              #ddd !default;
 
 $pagination-active-color:              #fff !default;
@@ -499,7 +499,7 @@ $pager-disabled-color:                 $pagination-disabled-color !default;
 
 $jumbotron-padding:              30px !default;
 $jumbotron-color:                inherit !default;
-$jumbotron-bg:                   $gray-darker !default;
+$jumbotron-bg:                   $gray-lighter !default;
 $jumbotron-heading-color:        inherit !default;
 $jumbotron-font-size:            ceil(($font-size-base * 1.5)) !default;
 $jumbotron-heading-font-size:    ceil(($font-size-base * 4.5)) !default;
