@@ -24,23 +24,19 @@ With the Harp framework, the project focuses on building a machine learning libr
 
 Now several machine learning algorithms are implemented, including K-means Clustering, Multiclass Logistic Regression (MLR), Support Vector Machine (SVM), Latent Dirichlet Allocation (LDA) and Matrix Factorization (MF).  Our experiment results of LDA implementations reveal that the "Rotation" based computation model is faster than the “Allreduce” type computation model. Now three algorithms are built on top of model rotation: Collapsed Gibbs Sampling (CGS) for LDA, Stochastic Gradient Descent (SGD) and Cyclic Coordinate Descent (CCD) for MF. The performance results on an Intel Haswell cluster show that our solution achieves faster model convergence speed and higher scalability compared with other contemporary work.
 
-![Overview-1](/img/2-1-1.png)
-
-![Overview-2](/img/2-1-2.png)
-
 ![Overview-3](/img/2-1-3.png)
 
 ![Overview-4](/img/2-1-4.png)
 
 <table>
 	<tr>
-		<td>
+		<td width="33%">
 			<img src=/harp-test/img/2-1-5.png border=0>
 		</td>
-		<td>
+		<td width="33%">
 			<img src=/harp-test/img/2-1-6.png border=0>
 		</td>
-		<td>
+		<td width="33%">
 			<img src=/harp-test/img/2-1-7.png border=0>
 		</td>
 	</tr>
